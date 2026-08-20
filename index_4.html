@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>tsutae 伝え — Skills shouldn't retire when people do.</title>
+<meta name="description" content="tsutae connects families with older neighbours who come to your home and teach the skills they've spent a lifetime learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..600&family=Lora:ital,wght@0,400..600;1,400..500&family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FDFBF7; --beige:#F7F1E9; --paper:#FFFFFF;
+  --forest:#1B3A2C; --forest-dk:#12291E;
+  --coral:#E8836A; --coral-lt:#F6E2DA; --rust:#B5563A;
+  --gold:#E9BC5C; --sage:#8CAA97; --sage-dk:#6E8F7A;
+  --ink:#33322D; --ink-soft:#6C6A62; --ink-mute:#95928A;
+  --line:#EAE2D6; --line-soft:#F2ECE3;
+  --ghost:#E2DACD;
+  --pink:#EFD8D0; --terr:#C4653F;
+  --ok-bg:#E9F1EA; --ok:#3F7355; --note-bg:#FBF0E9;
+  --r:20px; --shadow:0 1px 2px rgba(27,58,44,.04), 0 14px 40px rgba(27,58,44,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  background:var(--cream); color:var(--ink);
+  font-family:"Inter","Noto Sans JP",-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
+  font-size:16.5px; line-height:1.68; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:"Playfair Display","Noto Serif JP",Georgia,"Hiragino Mincho ProN",serif;
+  font-weight:500;letter-spacing:-.015em;line-height:1.14;
+}
+h1{font-size:clamp(2.6rem,6.2vw,4.5rem)}
+h2{font-size:clamp(2rem,4.2vw,3.05rem)}
+h3{font-size:1.34rem;line-height:1.25}
+h4{font-size:1.06rem;line-height:1.32}
+em{font-style:italic;color:var(--rust)}
+a{color:inherit;text-decoration:none}
+/* Japanese needs a little more air and no negative tracking */
+html[lang="ja"] h1,html[lang="ja"] h2,html[lang="ja"] h3,html[lang="ja"] h4{
+  letter-spacing:.01em;line-height:1.4;font-feature-settings:"palt" 1;
+}
+html[lang="ja"] h1{font-size:clamp(2.1rem,5vw,3.5rem)}
+html[lang="ja"] h2{font-size:clamp(1.7rem,3.5vw,2.5rem)}
+html[lang="ja"] body{font-feature-settings:"palt" 1}
+
+.wrap{max-width:1140px;margin:0 auto;padding:0 26px}
+.sec{padding:104px 0}
+.beige{background:var(--beige)}
+.forest{background:var(--forest);color:#F3EEE4}
+.forest h2,.forest h3,.forest h4{color:#FBF7F0}
+.forest em{color:var(--gold)}
+
+.eyebrow{
+  font-size:.7rem;font-weight:600;letter-spacing:.19em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:20px;display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:22px;height:1.5px;background:var(--coral);display:block;flex:none}
+.forest .eyebrow{color:var(--gold)}
+.forest .eyebrow::before{background:var(--gold)}
+.lead{font-family:"Lora","Noto Serif JP",Georgia,serif;font-size:1.14rem;line-height:1.75;color:var(--ink-soft);max-width:64ch;margin-top:22px}
+html[lang="ja"] .lead{max-width:44em;line-height:2}
+.forest .lead{color:#CFD8CE}
+.sec-head{max-width:780px;margin-bottom:56px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:16px 32px;border-radius:999px;font-weight:600;font-size:.98rem;
+  border:0;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,background .16s ease;
+  font-family:inherit;white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-dark{background:var(--forest);color:#fff;box-shadow:0 8px 22px rgba(27,58,44,.18)}
+.btn-dark:hover{background:var(--forest-dk)}
+.btn-outline{background:transparent;border:1.6px solid var(--forest);color:var(--forest)}
+.btn-outline:hover{background:rgba(27,58,44,.05)}
+.btn-ghost{background:var(--paper);border:1.5px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--ghost)}
+.btn-sm{padding:11px 24px;font-size:.9rem}
+.btn-lg{padding:19px 38px;font-size:1.03rem}
+@media(max-width:520px){
+  .btn{white-space:normal;text-align:center;max-width:100%}
+  .btn-lg{padding:16px 24px;font-size:.95rem}
+  .hero-cta .btn{width:100%}
+}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:60;background:rgba(253,251,247,.9);
+  backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--line-soft);
+}
+.nav-in{max-width:1140px;margin:0 auto;padding:13px 26px;display:flex;align-items:center;gap:26px}
+.brand{display:flex;align-items:baseline;gap:9px;font-family:"Playfair Display",serif;font-size:1.42rem;letter-spacing:-.02em}
+.brand span.k{font-family:"Noto Serif JP",serif;font-size:.92rem;color:var(--rust);letter-spacing:.08em}
+.nav-mid{display:flex;gap:24px;margin-left:auto;font-size:.9rem;color:var(--ink-soft);font-weight:500}
+.nav-mid a{padding:6px 0;border-bottom:1.5px solid transparent;transition:.16s;white-space:nowrap}
+.nav-mid a:hover{color:var(--forest);border-color:var(--coral)}
+.nav-cta{display:flex;align-items:center;gap:11px;margin-left:auto}
+.nav-mid + .nav-cta{margin-left:0}
+@media(max-width:1040px){.nav-mid{display:none}}
+
+/* language switch */
+.langsw{
+  display:inline-flex;background:var(--paper);border:1.4px solid var(--line);
+  border-radius:999px;padding:3px;flex:none;
+}
+.langsw button{
+  border:0;background:transparent;font-family:inherit;cursor:pointer;
+  padding:6px 13px;border-radius:999px;font-size:.79rem;font-weight:600;
+  color:var(--ink-mute);transition:.16s;white-space:nowrap;
+}
+.langsw button:hover{color:var(--forest)}
+.langsw button[aria-pressed="true"]{background:var(--forest);color:#fff}
+
+/* ---------- hero ---------- */
+.hero{padding:78px 0 122px;position:relative;overflow:hidden}
+.hero::after{
+  content:"";position:absolute;right:-160px;top:-140px;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,var(--coral-lt),transparent 68%);opacity:.62;pointer-events:none;
+}
+.hero-grid{display:grid;grid-template-columns:1.07fr .93fr;gap:60px;align-items:center;position:relative;z-index:2}
+.badge{
+  display:inline-flex;align-items:center;gap:9px;background:var(--paper);border:1px solid var(--line);
+  padding:8px 17px;border-radius:999px;font-size:.79rem;font-weight:500;color:var(--ink-soft);margin-bottom:26px;
+}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--sage);flex:none}
+.hero-cta{display:flex;gap:13px;flex-wrap:wrap;margin:34px 0 40px}
+.proof{display:flex;gap:34px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:26px}
+.proof div b{display:block;font-family:"Playfair Display",serif;font-size:1.72rem;font-weight:500;color:var(--forest);line-height:1.1}
+.proof div b small{font-size:1rem}
+.proof div span{font-size:.78rem;color:var(--ink-mute);letter-spacing:.02em}
+
+.hcard{background:var(--paper);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:26px;position:relative}
+.hcard-top{display:flex;gap:15px;align-items:center;margin-bottom:20px}
+.avatar{width:62px;height:62px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:1.75rem;background:var(--coral-lt);border:1px solid var(--line)}
+.hcard-top h4{margin-bottom:3px}
+.hcard-top p{font-size:.83rem;color:var(--ink-mute)}
+.hcard-rows{border-top:1px solid var(--line-soft);padding-top:16px;display:grid;gap:11px}
+.hrow{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:.88rem}
+.hrow span:first-child{color:var(--ink-mute);flex:none}
+.hrow span:last-child{font-weight:600;text-align:right}
+.pt{background:var(--note-bg);color:var(--terr);padding:3px 11px;border-radius:999px;font-size:.78rem;font-weight:600}
+.hcard-foot{margin-top:20px;display:flex;gap:9px}
+.hcard-foot .btn{flex:1}
+.float-note{
+  position:absolute;bottom:-44px;left:-30px;background:var(--forest);color:#F3EEE4;
+  padding:12px 18px;border-radius:16px;font-size:.8rem;box-shadow:var(--shadow);max-width:250px;line-height:1.6;
+}
+.float-note b{color:var(--gold)}
+@media(max-width:880px){
+  .hero-grid{grid-template-columns:1fr;gap:52px}
+  .float-note{position:static;margin-top:18px;max-width:none}
+  .hero{padding-bottom:80px}
+}
+
+/* ---------- cards ---------- */
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr}}
+@media(max-width:620px){.g4,.g2{grid-template-columns:1fr}}
+.card{
+  background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:28px;
+  box-shadow:0 1px 2px rgba(27,58,44,.03);transition:box-shadow .2s ease,transform .2s ease;
+}
+.card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+.card p{font-size:.93rem;color:var(--ink-soft);margin-top:11px}
+.num{width:36px;height:36px;border-radius:50%;background:var(--forest);color:var(--gold);display:grid;place-items:center;font-family:"Playfair Display",serif;font-size:1rem;margin-bottom:18px}
+.ico{font-size:1.6rem;margin-bottom:14px;display:block}
+.forest .card{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.13)}
+.forest .card p{color:#C6D2C6}
+
+/* ---------- skills ---------- */
+.skill{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px;display:flex;gap:16px;align-items:flex-start;transition:.2s}
+.skill:hover{border-color:var(--ghost);transform:translateY(-2px);box-shadow:var(--shadow)}
+.skill .e{font-size:1.5rem;line-height:1;flex:none;margin-top:2px}
+.skill h4{font-size:1.02rem;margin-bottom:7px}
+.skill p{font-size:.86rem;color:var(--ink-soft);line-height:1.65}
+
+/* ---------- timeline ---------- */
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:20px}
+.tl-item{padding:0 22px;border-left:2px solid rgba(255,255,255,.16)}
+.tl-item:first-child{padding-left:0;border-left:0}
+.tl-item .t{font-family:"Playfair Display",serif;font-size:1.5rem;color:var(--gold);margin-bottom:10px;display:block}
+.tl-item h4{margin-bottom:7px}
+.tl-item p{font-size:.88rem;color:#C6D2C6}
+@media(max-width:880px){
+  .tl{grid-template-columns:1fr;gap:26px}
+  .tl-item,.tl-item:first-child{padding:0 0 0 22px;border-left:2px solid rgba(255,255,255,.16)}
+}
+
+/* ---------- quote ---------- */
+.quote{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--coral);border-radius:0 22px 22px 0;padding:30px 34px;max-width:720px;margin-top:46px}
+.quote p{font-family:"Lora","Noto Serif JP",Georgia,serif;font-size:1.18rem;font-style:italic;line-height:1.7;color:var(--ink)}
+html[lang="ja"] .quote p{font-style:normal}
+.quote cite{display:block;margin-top:16px;font-style:normal;font-size:.83rem;color:var(--ink-mute)}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="#top" class="brand">tsutae <span class="k">伝え</span></a>
+    <div class="nav-mid">
+      <a href="#how"     data-en="How it works" data-ja="仕組み"></a>
+      <a href="#skills"  data-en="What you learn" data-ja="学べること"></a>
+      <a href="#browse"  data-en="Near you" data-ja="近くで探す"></a>
+      <a href="#trust"   data-en="Trust" data-ja="安心"></a>
+      <a href="#points"  data-en="Points" data-ja="ポイント"></a>
+      <a href="#mentors" data-en="Teach" data-ja="教える"></a>
+    </div>
+    <div class="nav-cta">
+      <div class="langsw" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+      </div>
+      <a href="#join" class="btn btn-dark btn-sm" data-en="Sign up" data-ja="登録する"></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="badge"><span class="dot"></span><span data-en="Now matching in Setagaya, Tokyo" data-ja="東京・世田谷区でマッチング開始"></span></div>
+      <h1 data-en="Learn what can't be <em>googled.</em>" data-ja="検索では、<br><em>教われない。</em>"></h1>
+      <p class="lead"
+         data-en="tsutae connects you with older neighbours who come to your home and teach what they've spent a lifetime learning — how to fold a gyoza so it holds, why that seam keeps splitting, when the soil is ready. Not a video. Not a class. Someone in your kitchen, showing you with their hands."
+         data-ja="「伝え」は、近所に暮らす人生の先輩をご自宅にお招きし、何十年もかけて身につけた技を教わるサービスです。開かない餃子の包み方。その縫い目がほつれる理由。土が整う時期。動画でも教室でもなく、同じ台所で、手を動かしながら。"></p>
+      <div class="hero-cta">
+        <a href="#browse"  class="btn btn-dark btn-lg"    data-en="Find someone near you" data-ja="近くの先生を探す"></a>
+        <a href="#mentors" class="btn btn-outline btn-lg" data-en="I want to teach" data-ja="教える側になる"></a>
+      </div>
+      <div class="proof">
+        <div><b>42<small data-en=" yrs" data-ja="年"></small></b><span data-en="average experience" data-ja="平均経験年数"></span></div>
+        <div><b>15<small data-en=" min" data-ja="分"></small></b><span data-en="maximum distance" data-ja="片道の上限"></span></div>
+        <div><b>¥0</b><span data-en="to meet first" data-ja="初回の顔合わせ"></span></div>
+      </div>
+    </div>
+
+    <div class="hcard">
+      <div class="hcard-top">
+        <div class="avatar">🥟</div>
+        <div>
+          <h4 data-en="Keiko, 72" data-ja="恵子さん・72歳"></h4>
+          <p data-en="Home cooking — 45 years" data-ja="家庭料理 — 45年"></p>
+        </div>
+      </div>
+      <div class="hcard-rows">
+        <div class="hrow"><span data-en="Teaching" data-ja="教えること"></span><span data-en="Gyoza from scratch" data-ja="皮から作る餃子"></span></div>
+        <div class="hrow"><span data-en="Distance" data-ja="距離"></span><span data-en="8 min walk" data-ja="徒歩8分"></span></div>
+        <div class="hrow"><span data-en="Session" data-ja="所要時間"></span><span data-en="110 min" data-ja="110分"></span></div>
+        <div class="hrow"><span data-en="Price" data-ja="料金"></span><span>¥7,000</span></div>
+        <div class="hrow"><span data-en="You earn" data-ja="獲得"></span><span class="pt">+250 pt</span></div>
+      </div>
+      <div class="hcard-foot">
+        <a href="#trust"  class="btn btn-dark btn-sm"  data-en="Meet first" data-ja="まず会う"></a>
+        <a href="#browse" class="btn btn-ghost btn-sm" data-en="Profile" data-ja="紹介を見る"></a>
+      </div>
+      <div class="float-note"
+           data-en="<b>She lives 8 minutes away.</b><br>That's the whole idea."
+           data-ja="<b>徒歩8分のところに住んでいます。</b><br>それが、いちばん大事なことです。"></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="How it works" data-ja="仕組み"></p>
+      <h2 data-en="Meet first. <em>Then open the door.</em>" data-ja="まず外で会う。<em>それから、扉を開ける。</em>"></h2>
+      <p class="lead"
+         data-en="Every tsutae session starts the same way — with a free thirty minutes somewhere public, so nobody is ever a stranger in your home."
+         data-ja="「伝え」はいつも、公共の場での30分の顔合わせから始まります。ご自宅に迎えるのは、もう知らない人ではありません。"></p>
+    </div>
+    <div class="grid g4">
+      <div class="card">
+        <div class="num">1</div>
+        <h4 data-en="Find someone close" data-ja="近くの先生を見つける"></h4>
+        <p data-en="Browse people within fifteen minutes of your home. See what they teach, how long they've done it, and when they're free."
+           data-ja="ご自宅から15分以内に住む方を探します。教えられること、経験年数、空いている日がひと目でわかります。"></p>
+      </div>
+      <div class="card">
+        <div class="num">2</div>
+        <h4 data-en="Meet on neutral ground" data-ja="まず、外で会う"></h4>
+        <p data-en="Thirty free minutes at a café or community centre. Bring your child. Either side can walk away afterwards — no reason needed."
+           data-ja="カフェや児童館で30分、無料で顔合わせ。お子さまもご一緒に。そのあとは、どちらからでも理由なくお断りできます。"></p>
+      </div>
+      <div class="card">
+        <div class="num">3</div>
+        <h4 data-en="They come to your kitchen" data-ja="ご自宅で、一緒に"></h4>
+        <p data-en="Ninety to a hundred and twenty minutes at home, with a parent there. Not a lecture — you make the thing together, then sit down and eat it."
+           data-ja="ご自宅で90〜120分。保護者の方の同席が必須です。講義ではなく、一緒に作って、一緒に食べます。"></p>
+      </div>
+      <div class="card">
+        <div class="num">4</div>
+        <h4 data-en="Book again, or someone new" data-ja="また会う。別の人に会う。"></h4>
+        <p data-en="Every session stands alone — no subscription, no commitment. Loved Keiko-san? Book her again in one tap. Curious about carpentry? Find someone else."
+           data-ja="毎回が単発です。定額制も回数の縛りもありません。恵子さんをもう一度呼ぶのも、木工の先生を新しく探すのも自由です。"></p>
+      </div>
+    </div>
+
+    <div class="quote">
+      <p data-en="“I'm not being helped. I'm the one teaching.”" data-ja="「助けてもらっているんじゃない。教えているんです。」"></p>
+      <cite data-en="Haruo, 78 — woodwork, 52 years" data-ja="治夫さん・78歳 — 木工、52年"></cite>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="sec beige" id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="What you learn" data-ja="学べること"></p>
+      <h2 data-en="The things nobody <em>writes down.</em>" data-ja="どこにも<em>書かれていないこと。</em>"></h2>
+      <p class="lead"
+         data-en="School teaches what's on the test. Somebody who has done it for forty years teaches the rest — the feel of the dough, the sound of a chain that's about to go, the week the seedlings need moving."
+         data-ja="学校は、試験に出ることを教えてくれます。40年やってきた人は、その先を教えてくれます。生地の手ざわり、切れる前のチェーンの音、苗を植え替える一週間。"></p>
+    </div>
+    <div class="grid g3">
+      <div class="skill"><span class="e">🥟</span><div>
+        <h4 data-en="The kitchen" data-ja="台所のこと"></h4>
+        <p data-en="Gyoza from scratch, dashi that actually tastes of something, knife grip, おせち in December, and everything a recipe leaves out."
+           data-ja="皮から作る餃子、ちゃんと味のする出汁、包丁の持ち方、師走のおせち。レシピが書き落としていることのすべて。"></p></div></div>
+      <div class="skill"><span class="e">🧵</span><div>
+        <h4 data-en="Mending & sewing" data-ja="繕いもの"></h4>
+        <p data-en="Buttons, hems, invisible patches, 刺し子 — and why your grandmother's coat outlasted four of yours."
+           data-ja="ボタン、裾上げ、目立たない当て布、刺し子。祖母のコートが、あなたのコート4着より長持ちした理由。"></p></div></div>
+      <div class="skill"><span class="e">🌱</span><div>
+        <h4 data-en="Growing things" data-ja="育てる"></h4>
+        <p data-en="Balcony vegetables, the first tomato, soil that isn't dead, and what to do in each month of the year."
+           data-ja="ベランダの野菜、はじめてのトマト、死んでいない土。そして、月ごとにやるべきこと。"></p></div></div>
+      <div class="skill"><span class="e">🔨</span><div>
+        <h4 data-en="Fixing things" data-ja="直す"></h4>
+        <p data-en="A dripping tap, a door that sticks, a wobbling shelf, a bicycle chain — and which six tools are actually worth owning."
+           data-ja="水が垂れる蛇口、開きにくい戸、ぐらつく棚、自転車のチェーン。そして、本当に持つ価値のある道具六つ。"></p></div></div>
+      <div class="skill"><span class="e">🎋</span><div>
+        <h4 data-en="Craft & tradition" data-ja="手仕事と伝統"></h4>
+        <p data-en="折り紙, 風呂敷, 書道, 竹細工, and the local festival crafts that leave with the people who know them."
+           data-ja="折り紙、風呂敷、書道、竹細工。そして、知る人とともに消えていく土地のお祭りの手仕事。"></p></div></div>
+      <div class="skill"><span class="e">💰</span><div>
+        <h4 data-en="Money & household" data-ja="お金と暮らし"></h4>
+        <p data-en="家計簿, a real weekly shop, what things cost, and how to run a home without it running you."
+           data-ja="家計簿、一週間分の本当の買い物、ものの値段。暮らしに追われずに、暮らしを回すこと。"></p></div></div>
+      <div class="skill"><span class="e">🎣</span><div>
+        <h4 data-en="Outdoors" data-ja="外に出る"></h4>
+        <p data-en="Fishing, tides, knots, which mushroom is which, and reading tomorrow's weather off this evening's sky."
+           data-ja="釣り、潮の満ち引き、結び方、きのこの見分け方。今夜の空から、明日の天気を読むこと。"></p></div></div>
+      <div class="skill"><span class="e">💼</span><div>
+        <h4 data-en="Work & life stories" data-ja="仕事と人生の話"></h4>
+        <p data-en="Retired engineers, nurses, shopkeepers, teachers, sailors — forty years of a career, told to someone deciding on theirs."
+           data-ja="技術者、看護師、商店主、先生、船乗り。40年の職業人生を、これから進路を決める人へ。"></p></div></div>
+      <div class="skill"><span class="e">🍵</span><div>
+        <h4 data-en="Everything else" data-ja="そのほか"></h4>
+        <p data-en="If someone has done it for decades and wants to pass it on, it belongs here. Mentors propose their own."
+           data-ja="何十年も続けてきて、誰かに伝えたいことなら何でも。先生ご自身から提案していただけます。"></p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ A SESSION ============ -->
+<section class="sec forest" id="session">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="A session" data-ja="ある日の120分"></p>
+      <h2 data-en="Two hours, and <em>everyone eats.</em>" data-ja="2時間。最後は、<em>みんなで食べる。</em>"></h2>
+      <p class="lead"
+         data-en="Nobody sits and listens. The teaching happens while your hands are busy, and the conversation happens by itself once the food is on the table."
+         data-ja="座って聞くだけの時間はありません。手を動かしながら教わり、食卓に並ぶころには、会話は自然に始まっています。"></p>
+    </div>
+    <div class="tl">
+      <div class="tl-item">
+        <span class="t">0:00</span>
+        <h4 data-en="Tea, and what we're making" data-ja="お茶と、今日つくるもの"></h4>
+        <p data-en="She arrives, takes her coat off, has a cup of tea, and lays out what she brought."
+           data-ja="到着して、上着を脱いで、お茶を一杯。持ってきたものを、机に広げます。"></p>
+      </div>
+      <div class="tl-item">
+        <span class="t">0:15</span>
+        <h4 data-en="Hands in" data-ja="手を動かす"></h4>
+        <p data-en="She shows it once, slowly. Then you do it badly, and she fixes your grip without saying much."
+           data-ja="一度だけ、ゆっくり見せてくれます。あとは自分の手で。うまくいかない持ち方を、多くを語らずに直してくれます。"></p>
+      </div>
+      <div class="tl-item">
+        <span class="t">1:15</span>
+        <h4 data-en="Sit down together" data-ja="一緒に座る"></h4>
+        <p data-en="You eat what you made, or you stand back and look at the shelf that no longer wobbles."
+           data-ja="つくったものを食べる。あるいは少し離れて、もう揺れない棚を眺める。"></p>
+      </div>
+      <div class="tl-item">
+        <span class="t">1:45</span>
+        <h4 data-en="What next" data-ja="次のこと"></h4>
+        <p data-en="Points land in your account. She writes one line about what to practise. You decide whether to ask her back."
+           data-ja="ポイントが加算されます。次までの練習を、一行だけ書き残して。また呼ぶかどうかは、あなた次第。"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHO ============ -->
+<section class="sec" id="who">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Who it's for" data-ja="対象"></p>
+      <h2 data-en="There is no <em>upper age limit.</em>" data-ja="学ぶ側に、<em>年齢の上限はありません。</em>"></h2>
+      <p class="lead"
+         data-en="Families with children are where tsutae starts, because that's where the need is loudest. But a 55-year-old learning to fish from a 78-year-old is exactly the same service."
+         data-ja="まずは子育て世帯から始めます。いちばん必要とされている場所だからです。けれど、55歳が78歳に釣りを教わることも、まったく同じサービスです。"></p>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <span class="ico">👧</span>
+        <h4 data-en="Children & parents" data-ja="子どもと親"></h4>
+        <p data-en="Your child learns something real with their hands, you stay in the room the whole time, and the three of you eat what got made. It counts as a weekend, not a chore."
+           data-ja="お子さまは手を使って本物を学び、保護者の方は最初から最後まで同じ部屋に。できたものは三人で食べます。用事ではなく、休日になります。"></p>
+      </div>
+      <div class="card">
+        <span class="ico">🎓</span>
+        <h4 data-en="Students & young adults" data-ja="学生・若い社会人"></h4>
+        <p data-en="Everything you were supposed to pick up at home and somehow didn't — cooking for yourself, fixing instead of replacing, and where the money actually goes."
+           data-ja="家で自然に覚えるはずだったのに、覚えそこねたこと。自炊、買い替えずに直すこと、お金が実際にどこへ消えているのか。"></p>
+      </div>
+      <div class="card">
+        <span class="ico">🧑</span>
+        <h4 data-en="Anyone, any age" data-ja="どなたでも"></h4>
+        <p data-en="People who want to learn one specific thing from someone who has genuinely done it. Book once, book again, or never come back. All fine."
+           data-ja="本当にやってきた人から、ひとつのことを教わりたい方へ。一度きりでも、何度でも、来なくても。どれでも構いません。"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.browse-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;align-items:start}
+@media(max-width:940px){.browse-grid{grid-template-columns:1fr}.panel{position:static !important}}
+.chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px}
+.chip{
+  background:var(--paper);border:1.4px solid var(--line);border-radius:999px;
+  padding:9px 17px;font-size:.85rem;font-weight:500;color:var(--ink-soft);cursor:pointer;
+  font-family:inherit;transition:.16s;display:inline-flex;align-items:center;gap:7px;
+}
+.chip:hover{border-color:var(--ghost)}
+.chip.on{background:var(--forest);border-color:var(--forest);color:#fff}
+.mapbox{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow)}
+.mapbox svg{display:block;width:100%;height:auto}
+.pin{position:absolute;transform:translate(-50%,-100%);border:0;background:transparent;cursor:pointer;padding:0;transition:transform .18s cubic-bezier(.34,1.4,.5,1);z-index:3}
+.pin:hover{transform:translate(-50%,-100%) scale(1.09)}
+.pin-b{width:44px;height:44px;border-radius:50% 50% 50% 6px;transform:rotate(-45deg);background:var(--paper);border:1.6px solid var(--forest);display:grid;place-items:center;box-shadow:0 5px 14px rgba(27,58,44,.16)}
+.pin-b span{transform:rotate(45deg);font-size:1.15rem;line-height:1}
+.pin.sel .pin-b{background:var(--forest);border-color:var(--forest)}
+.pin .lab{display:block;margin-top:9px;font-size:.7rem;font-weight:600;color:var(--forest);background:rgba(253,251,247,.94);padding:2px 9px;border-radius:999px;white-space:nowrap;border:1px solid var(--line)}
+.pin.hidden{display:none}
+.me{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:2;text-align:center;pointer-events:none}
+.me .d{width:16px;height:16px;border-radius:50%;background:var(--coral);border:3px solid var(--paper);box-shadow:0 3px 10px rgba(0,0,0,.16);margin:0 auto}
+.me .l{font-size:.7rem;font-weight:600;color:var(--rust);margin-top:6px;letter-spacing:.04em}
+.maplegend{position:absolute;left:16px;bottom:16px;background:rgba(253,251,247,.93);border:1px solid var(--line);border-radius:14px;padding:10px 13px;font-size:.7rem;color:var(--ink-soft);line-height:1.7;z-index:4;max-width:240px}
+.maplegend b{color:var(--forest)}
+.tap-hint{display:none;font-size:.8rem;color:var(--ink-mute);margin-top:-4px;line-height:1.6}
+@media(max-width:760px){
+  .tap-hint{display:block}
+  .pin .lab{display:none}
+  .pin-b{width:32px;height:32px;border-width:1.3px}
+  .pin-b span{font-size:.86rem}
+  .pin.sel .pin-b{box-shadow:0 0 0 4px rgba(232,131,106,.35),0 5px 14px rgba(27,58,44,.2)}
+  .maplegend{font-size:.62rem;padding:7px 10px;left:10px;bottom:10px;max-width:190px}
+  .me .l{font-size:.6rem}
+  .me .d{width:12px;height:12px;border-width:2px}
+}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:26px;position:sticky;top:100px}
+.panel-top{display:flex;gap:15px;align-items:center;margin-bottom:10px}
+.panel h3{font-size:1.28rem}
+.panel .ptrade{font-size:.86rem;color:var(--rust);font-weight:600;margin-bottom:16px;display:block}
+.panel .pquote{font-family:"Lora","Noto Serif JP",Georgia,serif;font-style:italic;font-size:.95rem;color:var(--ink-soft);background:var(--note-bg);border-radius:16px;padding:15px 17px;line-height:1.7;margin-bottom:18px}
+html[lang="ja"] .panel .pquote{font-style:normal}
+.panel .rows{border-top:1px solid var(--line-soft);padding-top:15px;display:grid;gap:10px;margin-bottom:20px}
+.panel .rows .hrow{font-size:.87rem}
+.avail{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px}
+.slot{border:1.3px solid var(--line);border-radius:12px;padding:7px 11px;font-size:.76rem;color:var(--ink-soft);background:var(--cream)}
+.slot.free{border-color:var(--sage);color:var(--ok);background:var(--ok-bg);font-weight:600}
+.panel-btns{display:grid;gap:9px}
+.verified{display:flex;align-items:center;gap:7px;font-size:.75rem;color:var(--ok);background:var(--ok-bg);padding:7px 12px;border-radius:999px;margin-bottom:16px;font-weight:600;width:fit-content}
+.count{font-size:.85rem;color:var(--ink-mute);margin-bottom:14px}
+.count b{color:var(--forest)}
+</style>
+
+<!-- ============ BROWSE / MAP ============ -->
+<section class="sec beige" id="browse">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Near you" data-ja="近くで探す"></p>
+      <h2 data-en="Everyone you meet <em>lives nearby.</em>" data-ja="出会うのは、いつも<em>ご近所の人。</em>"></h2>
+      <p class="lead"
+         data-en="tsutae only matches within about fifteen minutes' travel. That isn't a limitation — it's the entire point. A short walk means she can come again next month without it being an expedition. It means you might pass each other outside the supermarket. It means this is your neighbourhood, not an app."
+         data-ja="「伝え」は、片道15分以内でしかマッチングしません。制約ではなく、これが本質です。近ければ、来月もまた来られる。スーパーの前ですれ違うこともある。これはアプリではなく、ご近所づきあいです。"></p>
+    </div>
+
+    <div class="chips" id="chips"></div>
+    <p class="count" id="count"></p>
+
+    <div class="browse-grid">
+      <div class="mapbox" id="mapbox">
+        <svg viewBox="0 0 600 460" aria-label="Neighbourhood map">
+          <rect width="600" height="460" fill="#F2ECE3"/>
+          <g fill="#FBF7F0">
+            <rect x="20" y="18" width="150" height="110" rx="10"/>
+            <rect x="190" y="18" width="130" height="90" rx="10"/>
+            <rect x="340" y="18" width="120" height="110" rx="10"/>
+            <rect x="480" y="18" width="100" height="150" rx="10"/>
+            <rect x="20" y="150" width="110" height="130" rx="10"/>
+            <rect x="150" y="130" width="160" height="120" rx="10"/>
+            <rect x="330" y="150" width="130" height="100" rx="10"/>
+            <rect x="20" y="300" width="140" height="140" rx="10"/>
+            <rect x="180" y="272" width="120" height="90" rx="10"/>
+            <rect x="320" y="272" width="150" height="80" rx="10"/>
+            <rect x="490" y="290" width="90" height="150" rx="10"/>
+            <rect x="200" y="382" width="140" height="58" rx="10"/>
+            <rect x="360" y="374" width="110" height="66" rx="10"/>
+          </g>
+          <path d="M478 186 h102 v92 h-102 z" fill="#DCE7DE" opacity=".9"/>
+          <circle cx="512" cy="214" r="12" fill="#C6D8CB"/>
+          <circle cx="546" cy="240" r="16" fill="#C6D8CB"/>
+          <circle cx="508" cy="254" r="10" fill="#C6D8CB"/>
+          <text x="529" y="192" font-size="9" fill="#7C9686" text-anchor="middle" font-family="Inter,sans-serif" letter-spacing="1" data-en="PARK" data-ja="公園"></text>
+          <path d="M0 340 C 90 320, 130 372, 210 366 S 330 400, 420 380 S 540 396, 600 372" stroke="#DAE6E4" stroke-width="20" fill="none" stroke-linecap="round" opacity=".85"/>
+          <g stroke="#FDFBF7" stroke-width="9" stroke-linecap="round">
+            <line x1="0" y1="140" x2="600" y2="140"/>
+            <line x1="0" y1="262" x2="600" y2="262"/>
+            <line x1="175" y1="0" x2="175" y2="460"/>
+            <line x1="322" y1="0" x2="322" y2="460"/>
+            <line x1="472" y1="0" x2="472" y2="460"/>
+          </g>
+          <line x1="0" y1="86" x2="600" y2="86" stroke="#E2DACD" stroke-width="7"/>
+          <line x1="0" y1="86" x2="600" y2="86" stroke="#FBF7F0" stroke-width="3" stroke-dasharray="10 10"/>
+          <rect x="236" y="70" width="46" height="32" rx="7" fill="#FFF" stroke="#E2DACD"/>
+          <text x="259" y="90" font-size="14" text-anchor="middle">🚉</text>
+          <g fill="none" stroke="#8CAA97" stroke-dasharray="5 7" opacity=".55">
+            <circle cx="300" cy="239" r="80"/>
+            <circle cx="300" cy="239" r="142"/>
+            <circle cx="300" cy="239" r="200"/>
+          </g>
+          <text x="245" y="300" font-size="9" fill="#6E8F7A" text-anchor="middle" font-family="Inter,sans-serif" letter-spacing="1.4" data-en="5 MIN" data-ja="5分"></text>
+          <text x="201" y="343" font-size="9" fill="#6E8F7A" text-anchor="middle" font-family="Inter,sans-serif" letter-spacing="1.4" data-en="10 MIN" data-ja="10分"></text>
+          <text x="158" y="385" font-size="9" fill="#6E8F7A" text-anchor="middle" font-family="Inter,sans-serif" letter-spacing="1.4" data-en="15 MIN" data-ja="15分"></text>
+        </svg>
+        <div class="me"><div class="d"></div><div class="l" data-en="YOU" data-ja="自宅"></div></div>
+        <div class="maplegend" data-en="<b>Rings</b> = travel time from your home" data-ja="<b>円</b>は、ご自宅からの所要時間"></div>
+      </div>
+      <p class="tap-hint" data-en="Tap a pin to see who it is." data-ja="ピンをタップすると、その方の紹介が下に出ます。"></p>
+
+      <aside class="panel" id="panel"></aside>
+    </div>
+  </div>
+</section>
+
+<style>
+.trust-col .stage{font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--rust);display:flex;align-items:center;gap:9px;margin-bottom:18px}
+html[lang="ja"] .trust-col .stage{letter-spacing:.06em;font-size:.75rem}
+.trust-col .stage b{width:26px;height:26px;border-radius:50%;background:var(--coral-lt);color:var(--rust);display:grid;place-items:center;font-size:.72rem;flex:none;letter-spacing:0}
+.tlist{display:grid;gap:13px;list-style:none}
+.tlist li{position:relative;padding-left:23px;font-size:.9rem;color:var(--ink-soft);line-height:1.7}
+.tlist li::before{content:"✓";position:absolute;left:0;top:0;color:var(--ok);font-weight:700}
+.bothways{background:var(--note-bg);border:1px solid var(--pink);border-radius:26px;padding:32px;margin-top:34px}
+.bothways h3{margin-bottom:8px}
+
+.loop{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-bottom:40px}
+.loop-step{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:12px 24px;font-weight:600;font-size:.95rem}
+.loop .arw{color:var(--gold);font-size:1.15rem}
+.ptable,.redeem{display:grid;gap:11px}
+.ptrow{display:flex;justify-content:space-between;align-items:center;gap:16px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:15px 20px}
+.ptrow.hi{background:rgba(233,188,92,.14);border-color:rgba(233,188,92,.42)}
+.ptrow .l{font-size:.93rem}
+.ptrow .v{font-family:"Playfair Display",serif;font-size:1.3rem;color:var(--gold);white-space:nowrap}
+.rrow{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:15px 20px;display:flex;gap:14px;align-items:center;font-size:.92rem}
+.rrow b{font-family:"Playfair Display",serif;font-size:1.15rem;color:var(--gold);flex:none;min-width:88px}
+.sub{font-size:.92rem;color:#CFD8CE;line-height:1.8;margin-top:18px}
+
+.reason{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px;text-align:center}
+.reason .e{font-size:1.5rem;display:block;margin-bottom:10px}
+.reason h4{font-size:1rem;margin-bottom:6px}
+.reason p{font-size:.83rem;color:var(--ink-soft);line-height:1.65}
+
+.price-card{background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:30px;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(27,58,44,.03)}
+.price-card.feature{border:1.8px solid var(--forest);box-shadow:var(--shadow);position:relative}
+.price-card .tag{position:absolute;top:-13px;left:30px;background:var(--forest);color:var(--gold);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:999px}
+html[lang="ja"] .price-card .tag{letter-spacing:.06em}
+.price-card h3{margin-bottom:16px}
+.amount{font-family:"Playfair Display",serif;font-size:2.6rem;color:var(--forest);line-height:1;margin-bottom:6px}
+.amount small{font-size:.9rem;color:var(--ink-mute);font-family:"Inter","Noto Sans JP",sans-serif;letter-spacing:0}
+.price-card ul{list-style:none;display:grid;gap:10px;margin:20px 0 24px;font-size:.88rem;color:var(--ink-soft);line-height:1.65}
+.price-card ul li{display:flex;gap:9px}
+.price-card ul li::before{content:"·";color:var(--coral);font-weight:800}
+.price-card .btn{margin-top:auto}
+.fineprint{background:var(--note-bg);border:1px solid var(--pink);border-radius:20px;padding:22px 26px;margin-top:26px;font-size:.88rem;color:var(--ink-soft);line-height:1.8}
+.fineprint b{color:var(--rust)}
+
+.join-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:820px){.join-grid{grid-template-columns:1fr}}
+.role{background:var(--paper);border:1.6px solid var(--line);border-radius:26px;padding:30px;cursor:pointer;transition:.18s}
+.role:hover{border-color:var(--ghost);transform:translateY(-3px);box-shadow:var(--shadow)}
+.role.on{border-color:var(--forest);box-shadow:var(--shadow)}
+.role .e{font-size:2rem;display:block;margin-bottom:14px}
+.role h3{margin-bottom:10px}
+.role p{font-size:.9rem;color:var(--ink-soft)}
+.form{background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:30px;margin-top:24px;box-shadow:var(--shadow)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:620px){.frow{grid-template-columns:1fr}}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--ink-soft);margin-bottom:6px}
+.field input,.field select{width:100%;padding:13px 15px;border:1.4px solid var(--line);border-radius:16px;font-family:inherit;font-size:.93rem;background:var(--cream);color:var(--ink)}
+.field input:focus,.field select:focus{outline:0;border-color:var(--sage)}
+
+.foot{background:var(--forest-dk);color:#A9BCAE;padding:64px 0 44px;font-size:.86rem}
+.foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px}
+.foot .brand{color:#FBF7F0;margin-bottom:12px}
+.foot .brand span.k{color:var(--gold)}
+.foot h5{color:#F3EEE4;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;font-weight:700}
+html[lang="ja"] .foot h5{letter-spacing:.06em}
+.foot ul{list-style:none;display:grid;gap:9px}
+.foot a:hover{color:#F3EEE4}
+.foot-bot{border-top:1px solid rgba(255,255,255,.11);padding-top:22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.78rem;color:#7E9285}
+.tagline{font-family:"Playfair Display","Noto Serif JP",serif;font-size:1.4rem;color:#F3EEE4;line-height:1.4;max-width:340px}
+</style>
+
+<!-- ============ TRUST ============ -->
+<section class="sec" id="trust">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Trust" data-ja="安心のしくみ"></p>
+      <h2 data-en="Nobody arrives as <em>a stranger.</em>" data-ja="<em>知らない人</em>が、玄関に来ることはありません。"></h2>
+      <p class="lead"
+         data-en="Letting someone into your home is a serious thing, and no amount of warm language substitutes for actual checks. Here is every one of them, in order."
+         data-ja="自宅に人を迎えるのは、重い決断です。やさしい言葉は、実際の確認の代わりにはなりません。すべての手続きを、順番どおりにお見せします。"></p>
+    </div>
+
+    <div class="grid g3">
+      <div class="card trust-col">
+        <div class="stage"><b>1</b><span data-en="Before" data-ja="会う前"></span></div>
+        <ul class="tlist">
+          <li data-en="Government ID and address verified" data-ja="公的書類による本人確認・住所確認"></li>
+          <li data-en="Two references contacted by name" data-ja="推薦者2名に、こちらから直接確認"></li>
+          <li data-en="A sixty-minute interview with tsutae staff, in person" data-ja="スタッフによる60分の対面面談"></li>
+          <li data-en="Certified under 日本版DBS — criminal record checked for offences against children" data-ja="こども性暴力防止法にもとづく認定事業者（2026年12月施行）として、性犯罪歴を確認"></li>
+          <li data-en="A free thirty-minute meeting at a café or community centre before any home visit" data-ja="ご自宅訪問の前に、カフェや児童館で30分の無料面談"></li>
+        </ul>
+      </div>
+      <div class="card trust-col">
+        <div class="stage"><b>2</b><span data-en="During" data-ja="訪問中"></span></div>
+        <ul class="tlist">
+          <li data-en="A parent or adult is home for the entire session — always, no exceptions" data-ja="保護者または大人の同席は必須です。例外はありません"></li>
+          <li data-en="A mentor is never alone with a child" data-ja="先生がお子さまと二人きりになることはありません"></li>
+          <li data-en="tsutae staff attend the first visit of every new match" data-ja="新しい組み合わせの初回訪問には、スタッフが同行します"></li>
+          <li data-en="Check-in and check-out by LINE, both sides" data-ja="到着と終了を、LINEで双方が記録します"></li>
+          <li data-en="Insurance covers the household, the mentor and the property" data-ja="保険は、ご家庭・先生・住居のすべてを補償します"></li>
+        </ul>
+      </div>
+      <div class="card trust-col">
+        <div class="stage"><b>3</b><span data-en="After" data-ja="訪問後"></span></div>
+        <ul class="tlist">
+          <li data-en="Both sides rate privately — neither sees the other's answer" data-ja="双方が非公開で評価します。相手の回答は見えません"></li>
+          <li data-en="We telephone after every first session, without exception" data-ja="初回のあとは、必ずお電話します"></li>
+          <li data-en="Either side can decline any future booking with no reason given" data-ja="次回以降のお断りに、理由は要りません"></li>
+          <li data-en="One serious report removes a mentor permanently" data-ja="重大な報告が一件でもあれば、登録を永久に解除します"></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bothways">
+      <h3 data-en="Safety runs <em>both ways.</em>" data-ja="安心は、<em>双方向に。</em>"></h3>
+      <p class="lead" style="margin-top:14px"
+         data-en="We are also asking a seventy-eight-year-old to walk into a household she doesn't know. Her adult children will have opinions about that, and they are right to. So the parent-present rule protects her as much as it protects your child; she is never without a witness, never further than fifteen minutes from her own door, and she can end a match at any point without explaining herself to anyone."
+         data-ja="私たちは78歳の方に、「知らないお宅に入ってください」ともお願いしています。そのご家族が心配されるのは当然のことです。保護者同席のルールは、お子さまと同じくらい先生を守るためのものです。必ず立会いの方がいて、ご自宅から15分以内で、いつでも誰にも説明せずに辞退できます。"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POINTS ============ -->
+<section class="sec forest" id="points">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Points" data-ja="ポイント"></p>
+      <h2 data-en="Rewarded for learning — <em>and for coming back.</em>" data-ja="学ぶこと、<em>そしてまた会うことへ。</em>"></h2>
+      <p class="lead"
+         data-en="Nobody earns points for spending time with an older person. That would be the wrong idea entirely. Points go to learning something, finishing it, and asking the same person back — because the second visit is where this stops being a lesson and starts being a relationship."
+         data-ja="「お年寄りと過ごしたこと」への報酬ではありません。それでは、まったく違う話になってしまいます。ポイントは、学び、やり遂げ、そしてまた同じ人を呼ぶことに対して。二度目の訪問から、これは授業ではなく関係になります。"></p>
+    </div>
+
+    <div class="loop">
+      <div class="loop-step" data-en="Discover" data-ja="見つける"></div><span class="arw">→</span>
+      <div class="loop-step" data-en="Learn" data-ja="学ぶ"></div><span class="arw">→</span>
+      <div class="loop-step" data-en="Earn" data-ja="貯まる"></div><span class="arw">→</span>
+      <div class="loop-step" data-en="Redeem" data-ja="使う"></div><span class="arw">→</span>
+      <div class="loop-step" data-en="Come back" data-ja="また会う"></div>
+    </div>
+
+    <div class="grid g2" style="gap:24px">
+      <div>
+        <h4 style="margin-bottom:16px;color:#FBF7F0" data-en="How you earn" data-ja="貯め方"></h4>
+        <div class="ptable">
+          <div class="ptrow"><div class="l" data-en="Attend a session" data-ja="セッションに参加する"></div><div class="v">+100</div></div>
+          <div class="ptrow"><div class="l" data-en="Finish what you started" data-ja="つくったものを完成させる"></div><div class="v">+50</div></div>
+          <div class="ptrow hi"><div class="l" data-en="Book the same mentor again" data-ja="同じ先生を、もう一度呼ぶ"></div><div class="v">+150</div></div>
+          <div class="ptrow"><div class="l" data-en="Bring a sibling or a friend" data-ja="兄弟や友だちを連れてくる"></div><div class="v">+50</div></div>
+          <div class="ptrow"><div class="l" data-en="Write your mentor a note afterwards" data-ja="先生に、あとで一言書く"></div><div class="v">+25</div></div>
+          <div class="ptrow"><div class="l" data-en="Practise at home and show a photo" data-ja="家で練習して、写真を見せる"></div><div class="v">+25</div></div>
+        </div>
+      </div>
+      <div>
+        <h4 style="margin-bottom:16px;color:#FBF7F0" data-en="What you can use them on" data-ja="使い道"></h4>
+        <div class="redeem">
+          <div class="rrow"><b>1,000 pt</b><div data-en="¥500 off your next session" data-ja="次回セッションが500円引き"></div></div>
+          <div class="rrow"><b>2,500 pt</b><div data-en="A materials kit, delivered — thread, seeds, tools or ingredients" data-ja="学び袋（糸・種・道具・食材）をお届け"></div></div>
+          <div class="rrow"><b>4,000 pt</b><div data-en="One free shared session with a friend's family" data-ja="友だち家族との合同セッションが1回無料"></div></div>
+          <div class="rrow"><b>6,000 pt</b><div data-en="Partner rewards — local cafés, bookshops, 銭湯, aquariums" data-ja="提携先（カフェ・書店・銭湯・水族館）で使えます"></div></div>
+        </div>
+        <p class="sub"
+           data-en="At launch, points redeem only against future sessions. Partner rewards come later — a partner network is a distraction until there are enough people using it."
+           data-ja="開始当初は、次回セッションの割引にのみ使えます。提携先の特典はそのあとです。利用者が増えるまで、提携ネットワークづくりは後回しにします。"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENTORS ============ -->
+<section class="sec beige" id="mentors">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Teach" data-ja="教える側になる"></p>
+      <h2 data-en="Skills shouldn't retire <em>when people do.</em>" data-ja="技は、<em>人と一緒に引退しない。</em>"></h2>
+      <p class="lead"
+         data-en="Retiring can quietly remove the thing that made a day worth getting up for — being needed, being asked, being the person in the room who knows how. tsutae is not a volunteering scheme and it is not care. You are the expert here, and the family is coming to you."
+         data-ja="退職とともに、朝起きる理由が静かになくなっていくことがあります。必要とされること、頼られること、その場で「知っている人」であること。「伝え」はボランティアでも介護でもありません。専門家はあなたで、ご家族のほうが教わりに来ます。"></p>
+    </div>
+
+    <div class="grid g3" style="margin-bottom:34px">
+      <div class="reason"><span class="e">🙋</span><h4 data-en="Purpose" data-ja="必要とされる"></h4><p data-en="Somebody needs a thing that only you know how to do." data-ja="あなたしか知らないことを、必要としている人がいます。"></p></div>
+      <div class="reason"><span class="e">🏅</span><h4 data-en="Recognition" data-ja="認められる"></h4><p data-en="Forty years of doing it properly, treated as expertise." data-ja="きちんと続けてきた40年が、専門性として扱われます。"></p></div>
+      <div class="reason"><span class="e">🙏</span><h4 data-en="Appreciation" data-ja="感謝される"></h4><p data-en="A child says thank you and means it, at your elbow." data-ja="すぐ隣で、子どもが本気で「ありがとう」と言います。"></p></div>
+      <div class="reason"><span class="e">🤝</span><h4 data-en="Connection" data-ja="つながる"></h4><p data-en="Younger neighbours you'd otherwise never have met." data-ja="そうでなければ会うことのなかった、若いご近所さんと。"></p></div>
+      <div class="reason"><span class="e">🌾</span><h4 data-en="Legacy" data-ja="遺す"></h4><p data-en="What you know outlives you, in somebody's hands." data-ja="あなたの知っていることが、誰かの手の中で残ります。"></p></div>
+      <div class="reason"><span class="e">🏘️</span><h4 data-en="Community" data-ja="居場所"></h4><p data-en="A regular reason to be somewhere, close to home." data-ja="家の近くに、定期的に出かける理由ができます。"></p></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:18px" data-en="The practical part" data-ja="実務のこと"></h3>
+      <div class="grid g2" style="gap:14px 34px">
+        <ul class="tlist">
+          <li data-en="¥4,000–5,000 per session, plus travel, paid within three days" data-ja="1回あたり4,000〜5,000円と交通費を、3日以内にお支払いします"></li>
+          <li data-en="Never further than fifteen minutes from your home" data-ja="ご自宅から15分以内でしかマッチングしません"></li>
+          <li data-en="You choose which requests to accept — and decline anything, with no reason" data-ja="お受けする依頼は選べます。理由なくお断りいただけます"></li>
+        </ul>
+        <ul class="tlist">
+          <li data-en="tsutae staff attend your first visit with any new family" data-ja="新しいご家庭の初回訪問には、スタッフが同行します"></li>
+          <li data-en="A parent is always home. You are never alone with a child" data-ja="保護者は必ず在宅です。お子さまと二人きりにはなりません"></li>
+          <li data-en="Fully insured, and no equipment or venue of your own required" data-ja="保険は完備。道具も場所も、ご用意いただく必要はありません"></li>
+        </ul>
+      </div>
+      <div style="margin-top:24px"><a href="#join" class="btn btn-dark" data-en="Register as a mentor" data-ja="教える側で登録する"></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="sec" id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Price" data-ja="料金"></p>
+      <h2 data-en="Pay for the session. <em>Nothing else.</em>" data-ja="払うのは、その回の分だけ。<em>それ以外はありません。</em>"></h2>
+      <p class="lead"
+         data-en="No monthly fee, no membership, no minimum. If you come back it should be because you want to see her again, not because you already paid."
+         data-ja="月額も、会員費も、回数の縛りもありません。また会うのは「もう払ったから」ではなく、「また会いたいから」であってほしいのです。"></p>
+    </div>
+
+    <div class="grid g3">
+      <div class="price-card">
+        <h3 data-en="First meeting" data-ja="はじめまして"></h3>
+        <div class="amount" data-en="Free" data-ja="無料"></div>
+        <ul>
+          <li data-en="Thirty minutes at a café or community centre" data-ja="カフェや児童館で30分"></li>
+          <li data-en="Bring your child; nothing happens at home yet" data-ja="お子さまもご一緒に。ご自宅訪問はまだありません"></li>
+          <li data-en="Either side can say no afterwards, with no reason" data-ja="そのあと、どちらからでも理由なくお断りできます"></li>
+        </ul>
+        <a href="#browse" class="btn btn-ghost" data-en="Find someone" data-ja="先生を探す"></a>
+      </div>
+
+      <div class="price-card feature">
+        <span class="tag" data-en="Most booked" data-ja="いちばん多い"></span>
+        <h3 data-en="One family" data-ja="1家族"></h3>
+        <div class="amount">¥7,000<small data-en=" / session" data-ja="／1回"></small></div>
+        <ul>
+          <li data-en="90–120 minutes at your home" data-ja="ご自宅で90〜120分"></li>
+          <li data-en="Ingredients or materials from your own kitchen" data-ja="食材や材料は、ご自宅のものを使います"></li>
+          <li data-en="Mentor's honorarium and travel included" data-ja="先生への謝礼と交通費は込みです"></li>
+          <li data-en="Earn around +250 points" data-ja="およそ250ポイントが貯まります"></li>
+        </ul>
+        <a href="#browse" class="btn btn-dark" data-en="Book a session" data-ja="予約する"></a>
+      </div>
+
+      <div class="price-card">
+        <h3 data-en="Two or three families" data-ja="2〜3家族で"></h3>
+        <div class="amount">¥3,500<small data-en=" each" data-ja="／1家族"></small></div>
+        <ul>
+          <li data-en="The same session, at one family's home" data-ja="同じ内容を、どこか1軒に集まって"></li>
+          <li data-en="Children work better with a friend beside them" data-ja="子どもは、友だちが隣にいるほうがよく手が動きます"></li>
+          <li data-en="Everyone earns their own points" data-ja="ポイントは、それぞれに貯まります"></li>
+        </ul>
+        <a href="#browse" class="btn btn-ghost" data-en="Share a session" data-ja="分けあう"></a>
+      </div>
+    </div>
+
+    <div class="fineprint"
+         data-en="<b>Where the ¥7,000 goes:</b> roughly ¥4,500 to the mentor, ¥800 travel, and the rest to insurance, background checks, staff attending first visits and the phone call afterwards. <b>These are starting numbers for Setagaya</b> and will move once real families have paid them — which is the only way to find out what they should be."
+         data-ja="<b>7,000円の内訳：</b>先生への謝礼が約4,500円、交通費が800円、残りは保険・身元確認・初回同行・事後のお電話にあてます。<b>これは世田谷区での初期設定です。</b>実際にお支払いいただきながら見直していきます。それが、適正な金額を知る唯一の方法だからです。"></div>
+  </div>
+</section>
+
+<!-- ============ JOIN ============ -->
+<section class="sec beige" id="join">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Join" data-ja="登録"></p>
+      <h2 data-en="Which side of the table <em>are you on?</em>" data-ja="あなたは、<em>どちら側の席ですか。</em>"></h2>
+    </div>
+
+    <div class="join-grid">
+      <div class="role on" data-role="learn">
+        <span class="e">🍚</span>
+        <h3 data-en="I want to learn" data-ja="教わりたい"></h3>
+        <p data-en="For yourself, or for your children. Tell us your neighbourhood and what you'd like to be able to do, and we'll suggest three people within fifteen minutes of you."
+           data-ja="ご自身のためでも、お子さまのためでも。お住まいの地域と、できるようになりたいことを教えてください。15分以内に住む方を3名ご提案します。"></p>
+      </div>
+      <div class="role" data-role="teach">
+        <span class="e">🧑‍🌾</span>
+        <h3 data-en="I want to teach" data-ja="教えたい"></h3>
+        <p data-en="Tell us the one thing you've done for long enough that you've stopped noticing how much you know. We'll come and meet you, and take it from there."
+           data-ja="長く続けすぎて、自分がどれだけ知っているか気づかなくなったこと。それを教えてください。こちらからお会いしにうかがいます。"></p>
+      </div>
+    </div>
+
+    <form class="form" onsubmit="event.preventDefault();this.querySelector('.done').style.display='flex';">
+      <div class="frow">
+        <div class="field"><label data-en="Name" data-ja="お名前"></label><input type="text" placeholder="山田 花子" required></div>
+        <div class="field"><label data-en="Email" data-ja="メールアドレス"></label><input type="email" placeholder="hanako@example.jp" required></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label data-en="Neighbourhood" data-ja="お住まいの地域"></label><input type="text" placeholder="世田谷区 三軒茶屋" required></div>
+        <div class="field" id="thirdField">
+          <label id="thirdLabel" data-en="What would you like to learn?" data-ja="学びたいこと"></label>
+          <select>
+            <option data-en="The kitchen" data-ja="台所のこと"></option>
+            <option data-en="Mending &amp; sewing" data-ja="繕いもの"></option>
+            <option data-en="Growing things" data-ja="育てる"></option>
+            <option data-en="Fixing things" data-ja="直す"></option>
+            <option data-en="Craft &amp; tradition" data-ja="手仕事と伝統"></option>
+            <option data-en="Money &amp; household" data-ja="お金と暮らし"></option>
+            <option data-en="Outdoors" data-ja="外に出る"></option>
+            <option data-en="Work &amp; life stories" data-ja="仕事と人生の話"></option>
+          </select>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:8px">
+        <button type="submit" class="btn btn-dark btn-lg" data-en="Request a first meeting" data-ja="顔合わせを申し込む"></button>
+        <span style="font-size:.82rem;color:var(--ink-mute)" data-en="Free, thirty minutes, somewhere public." data-ja="無料・30分・公共の場で。"></span>
+      </div>
+      <div class="done verified" style="display:none;margin-top:18px" data-en="✓ Thanks — we'll be in touch within two days." data-ja="✓ ありがとうございます。2日以内にご連絡します。"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand">tsutae <span class="k">伝え</span></div>
+        <p class="tagline" data-en="Skills shouldn't retire when people do." data-ja="技は、人と一緒に引退しない。"></p>
+      </div>
+      <div>
+        <h5 data-en="Learn" data-ja="学ぶ"></h5>
+        <ul>
+          <li><a href="#how" data-en="How it works" data-ja="仕組み"></a></li>
+          <li><a href="#skills" data-en="What you learn" data-ja="学べること"></a></li>
+          <li><a href="#browse" data-en="Near you" data-ja="近くで探す"></a></li>
+          <li><a href="#pricing" data-en="Price" data-ja="料金"></a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 data-en="Teach" data-ja="教える"></h5>
+        <ul>
+          <li><a href="#mentors" data-en="Become a mentor" data-ja="先生として登録"></a></li>
+          <li><a href="#trust" data-en="How we check" data-ja="審査について"></a></li>
+          <li><a href="#points" data-en="Points" data-ja="ポイント"></a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 data-en="Company" data-ja="運営"></h5>
+        <ul>
+          <li><a href="#trust" data-en="Safeguarding" data-ja="安全方針"></a></li>
+          <li><a href="#trust" data-en="日本版DBS certified" data-ja="日本版DBS 認定事業者"></a></li>
+          <li><a href="#join" data-en="Contact" data-ja="お問い合わせ"></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span data-en="tsutae ・Setagaya, Tokyo ・Concept prototype" data-ja="伝え ・東京都世田谷区 ・コンセプト試作"></span>
+      <span data-en="Learn → Earn → Come back" data-ja="学ぶ → 貯まる → また会う"></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.role').forEach(r => {
+  r.addEventListener('click', () => {
+    document.querySelectorAll('.role').forEach(x => x.classList.remove('on'));
+    r.classList.add('on');
+    const teach = r.dataset.role === 'teach';
+    const l = document.getElementById('thirdLabel');
+    l.dataset.en = teach ? 'What would you teach?' : 'What would you like to learn?';
+    l.dataset.ja = teach ? '教えられること' : '学びたいこと';
+    applyLang();
+  });
+});
+</script>
+
+<script>
+/* ---------------- mentors + map ---------------- */
+const M = [
+ {id:1,e:"🥟",cat:"kitchen",
+  n:{en:"Keiko, 72",ja:"恵子さん・72歳"}, lab:{en:"Keiko, 72",ja:"恵子・72"},
+  t:{en:"Home cooking",ja:"家庭料理"}, yrs:45, price:7000, pts:250, x:38, y:34,
+  d:{en:"8 min walk",ja:"徒歩8分"},
+  q:{en:"A gyoza that opens in the pan was folded in a hurry. That's all it is.",
+     ja:"鍋で開く餃子は、急いで包んだ餃子。ただそれだけのことです。"},
+  s:[{en:"Sat 10:00",ja:"土 10:00"},{en:"Sat 14:00",ja:"土 14:00"},{en:"Sun 10:00",ja:"日 10:00"},{en:"Wed 15:00",ja:"水 15:00"}], f:[0,2]},
+ {id:2,e:"🔨",cat:"fixing",
+  n:{en:"Haruo, 78",ja:"治夫さん・78歳"}, lab:{en:"Haruo, 78",ja:"治夫・78"},
+  t:{en:"Woodwork & repairs",ja:"木工と修理"}, yrs:52, price:7500, pts:280, x:62, y:29,
+  d:{en:"6 min cycle",ja:"自転車6分"},
+  q:{en:"Six tools. Everything else in the shop is for people who don't have six tools.",
+     ja:"道具は六つで足ります。あとは、六つを持っていない人のためのものです。"},
+  s:[{en:"Sat 09:00",ja:"土 09:00"},{en:"Sun 13:00",ja:"日 13:00"},{en:"Sun 16:00",ja:"日 16:00"},{en:"Tue 10:00",ja:"火 10:00"}], f:[1,3]},
+ {id:3,e:"🧵",cat:"mending",
+  n:{en:"Setsuko, 69",ja:"節子さん・69歳"}, lab:{en:"Setsuko, 69",ja:"節子・69"},
+  t:{en:"Mending & sewing",ja:"繕いもの"}, yrs:40, price:6000, pts:220, x:26, y:62,
+  d:{en:"12 min walk",ja:"徒歩12分"},
+  q:{en:"Nothing is worn out. It's just not mended yet.",
+     ja:"だめになった服なんてありません。まだ直していないだけです。"},
+  s:[{en:"Fri 15:00",ja:"金 15:00"},{en:"Sat 11:00",ja:"土 11:00"},{en:"Sat 15:00",ja:"土 15:00"},{en:"Sun 11:00",ja:"日 11:00"}], f:[0,1,3]},
+ {id:4,e:"🎣",cat:"outdoors",
+  n:{en:"Tadashi, 74",ja:"正さん・74歳"}, lab:{en:"Tadashi, 74",ja:"正・74"},
+  t:{en:"Fishing",ja:"釣り"}, yrs:55, price:8000, pts:300, x:73, y:71,
+  d:{en:"15 min cycle",ja:"自転車15分"},
+  q:{en:"The fish were never the point. Ask anyone who's stood there at five in the morning.",
+     ja:"魚が目的だったことは、一度もありません。朝五時に立っていた人なら、わかります。"},
+  s:[{en:"Sat 06:00",ja:"土 06:00"},{en:"Sun 06:00",ja:"日 06:00"},{en:"Sun 15:00",ja:"日 15:00"}], f:[1]},
+ {id:5,e:"🎋",cat:"craft",
+  n:{en:"Michiko, 81",ja:"美智子さん・81歳"}, lab:{en:"Michiko, 81",ja:"美智子・81"},
+  t:{en:"Origami & calligraphy",ja:"折り紙と書道"}, yrs:60, price:6000, pts:220, x:59, y:43,
+  d:{en:"5 min walk",ja:"徒歩5分"},
+  q:{en:"My teacher was born in 1908. So some of what I show you is a hundred years old.",
+     ja:"私の先生は明治41年の生まれです。だからこれは、百年前の手つきなんです。"},
+  s:[{en:"Mon 14:00",ja:"月 14:00"},{en:"Thu 14:00",ja:"木 14:00"},{en:"Sat 13:00",ja:"土 13:00"},{en:"Sun 14:00",ja:"日 14:00"}], f:[2,3]},
+ {id:6,e:"💰",cat:"money",
+  n:{en:"Yoshio, 70",ja:"義雄さん・70歳"}, lab:{en:"Yoshio, 70",ja:"義雄・70"},
+  t:{en:"Money & household",ja:"お金と暮らし"}, yrs:38, price:7000, pts:250, x:44, y:75,
+  d:{en:"9 min cycle",ja:"自転車9分"},
+  q:{en:"Thirty-eight years in a bank taught me one useful thing, and I can teach it in an afternoon.",
+     ja:"銀行で38年。役に立つことは一つだけで、それは午後一回で教えられます。"},
+  s:[{en:"Wed 18:00",ja:"水 18:00"},{en:"Sat 16:00",ja:"土 16:00"},{en:"Sun 09:00",ja:"日 09:00"}], f:[0,2]},
+ {id:7,e:"🌱",cat:"growing",
+  n:{en:"Fumi, 76",ja:"文さん・76歳"}, lab:{en:"Fumi, 76",ja:"文・76"},
+  t:{en:"Balcony gardening",ja:"ベランダ菜園"}, yrs:44, price:6500, pts:240, x:70, y:57,
+  d:{en:"10 min walk",ja:"徒歩10分"},
+  q:{en:"You don't need a garden. You need six pots and to stop forgetting about them.",
+     ja:"庭はいりません。鉢が六つと、忘れないことだけです。"},
+  s:[{en:"Tue 10:00",ja:"火 10:00"},{en:"Sat 10:00",ja:"土 10:00"},{en:"Sat 14:00",ja:"土 14:00"},{en:"Sun 10:00",ja:"日 10:00"}], f:[1,2,3]},
+ {id:8,e:"🚲",cat:"fixing",
+  n:{en:"Shigeru, 73",ja:"茂さん・73歳"}, lab:{en:"Shigeru, 73",ja:"茂・73"},
+  t:{en:"Bicycle repair",ja:"自転車整備"}, yrs:48, price:6500, pts:240, x:32, y:46,
+  d:{en:"7 min walk",ja:"徒歩7分"},
+  q:{en:"A chain tells you three weeks in advance. Most people just aren't listening.",
+     ja:"チェーンは三週間前から知らせてくれます。みんな、聞いていないだけです。"},
+  s:[{en:"Sat 09:00",ja:"土 09:00"},{en:"Sat 13:00",ja:"土 13:00"},{en:"Sun 09:00",ja:"日 09:00"}], f:[0,1,2]},
+ {id:9,e:"🍡",cat:"kitchen",
+  n:{en:"Yuriko, 77",ja:"百合子さん・77歳"}, lab:{en:"Yuriko, 77",ja:"百合子・77"},
+  t:{en:"Wagashi",ja:"和菓子"}, yrs:50, price:7000, pts:260, x:79, y:39,
+  d:{en:"13 min walk",ja:"徒歩13分"},
+  q:{en:"Sweets are the one recipe where being impatient shows up on the plate.",
+     ja:"和菓子は、せっかちがそのまま形に出てしまうお菓子です。"},
+  s:[{en:"Thu 13:00",ja:"木 13:00"},{en:"Sat 13:00",ja:"土 13:00"},{en:"Sun 13:00",ja:"日 13:00"}], f:[1]},
+ {id:10,e:"💼",cat:"work",
+  n:{en:"Kenji, 79",ja:"健二さん・79歳"}, lab:{en:"Kenji, 79",ja:"健二・79"},
+  t:{en:"Career stories",ja:"仕事の話"}, yrs:41, price:6500, pts:240, x:17, y:24,
+  d:{en:"11 min cycle",ja:"自転車11分"},
+  q:{en:"Forty-one years designing bridges. Ask me about the ones that went wrong — those are the good stories.",
+     ja:"橋を41年、設計しました。失敗した橋の話を聞いてください。面白いのは、そちらです。"},
+  s:[{en:"Fri 17:00",ja:"金 17:00"},{en:"Sat 15:00",ja:"土 15:00"},{en:"Sun 16:00",ja:"日 16:00"}], f:[0,2]}
+];
+
+const CATS = [
+ {k:"all",      e:"◎",  en:"Everyone", ja:"すべて"},
+ {k:"kitchen",  e:"🥟", en:"Kitchen",  ja:"台所"},
+ {k:"mending",  e:"🧵", en:"Mending",  ja:"繕い"},
+ {k:"growing",  e:"🌱", en:"Growing",  ja:"育てる"},
+ {k:"fixing",   e:"🔨", en:"Fixing",   ja:"直す"},
+ {k:"craft",    e:"🎋", en:"Craft",    ja:"手仕事"},
+ {k:"money",    e:"💰", en:"Money",    ja:"お金"},
+ {k:"outdoors", e:"🎣", en:"Outdoors", ja:"外"},
+ {k:"work",     e:"💼", en:"Work",     ja:"仕事"}
+];
+
+let activeCat = "all", selected = 1;
+const mapbox = document.getElementById('mapbox');
+const panel  = document.getElementById('panel');
+const chips  = document.getElementById('chips');
+const countEl= document.getElementById('count');
+
+chips.innerHTML = CATS.map(c =>
+  `<button class="chip" data-cat="${c.k}"><span>${c.e}</span><span data-en="${c.en}" data-ja="${c.ja}"></span></button>`).join('');
+
+M.forEach(m => {
+  const b = document.createElement('button');
+  b.className = 'pin';
+  b.dataset.id = m.id; b.dataset.cat = m.cat;
+  b.style.left = m.x + '%'; b.style.top = m.y + '%';
+  b.innerHTML = `<div class="pin-b"><span>${m.e}</span></div>
+                 <span class="lab" data-en="${m.lab.en}" data-ja="${m.lab.ja}"></span>`;
+  b.addEventListener('click', () => { selected = m.id; renderBrowse(); });
+  mapbox.appendChild(b);
+});
+
+function renderBrowse(){
+  const shown = M.filter(m => activeCat === 'all' || m.cat === activeCat);
+  if(!shown.some(m => m.id === selected)) selected = shown.length ? shown[0].id : null;
+
+  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c.dataset.cat === activeCat));
+  document.querySelectorAll('.pin').forEach(p => {
+    p.classList.toggle('hidden', !(activeCat === 'all' || p.dataset.cat === activeCat));
+    p.classList.toggle('sel', +p.dataset.id === selected);
+  });
+
+  countEl.innerHTML = `<b>${shown.length}</b> <span
+      data-en="mentors within 15 minutes of your home"
+      data-ja="名が、ご自宅から15分以内にいます"></span>`;
+
+  const m = M.find(x => x.id === selected);
+  panel.innerHTML = !m
+    ? `<p class="lead" style="margin:0" data-en="Nobody nearby teaches this yet." data-ja="この分野の先生は、まだ近くにいません。"></p>`
+    : `<div class="verified"><span data-en="✓ Verified &amp; DBS-checked" data-ja="✓ 本人確認・DBS確認済み"></span></div>
+       <div class="panel-top">
+         <div class="avatar">${m.e}</div>
+         <h3 data-en="${m.n.en}" data-ja="${m.n.ja}"></h3>
+       </div>
+       <span class="ptrade" data-en="${m.t.en}" data-ja="${m.t.ja}"></span>
+       <div class="pquote" data-en="“${m.q.en}”" data-ja="「${m.q.ja}」"></div>
+       <div class="rows">
+         <div class="hrow"><span data-en="Experience" data-ja="経験"></span><span data-en="${m.yrs} years" data-ja="${m.yrs}年"></span></div>
+         <div class="hrow"><span data-en="Distance" data-ja="距離"></span><span data-en="${m.d.en}" data-ja="${m.d.ja}"></span></div>
+         <div class="hrow"><span data-en="Session" data-ja="料金"></span><span>¥${m.price.toLocaleString()}</span></div>
+         <div class="hrow"><span data-en="You earn" data-ja="獲得"></span><span class="pt">+${m.pts} pt</span></div>
+       </div>
+       <div class="avail">${m.s.map((s,i)=>`<span class="slot${m.f.includes(i)?' free':''}" data-en="${s.en}" data-ja="${s.ja}"></span>`).join('')}</div>
+       <div class="panel-btns">
+         <a href="#join" class="btn btn-dark btn-sm" data-en="Request a first meeting" data-ja="顔合わせを申し込む"></a>
+         <a href="#trust" class="btn btn-ghost btn-sm" data-en="How we check mentors" data-ja="審査について"></a>
+       </div>`;
+  applyLang();
+}
+
+chips.addEventListener('click', e => {
+  const c = e.target.closest('.chip');
+  if(!c) return;
+  activeCat = c.dataset.cat;
+  renderBrowse();
+});
+
+/* ---------------- language switch ---------------- */
+let LANG = 'en';
+
+function applyLang(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const v = el.dataset[LANG];
+    if(v === undefined) return;
+    el.innerHTML = v;
+  });
+  document.querySelectorAll('.langsw button').forEach(b =>
+    b.setAttribute('aria-pressed', String(b.dataset.lang === LANG)));
+  document.title = LANG === 'ja'
+    ? '伝え tsutae — 技は、人と一緒に引退しない。'
+    : "tsutae 伝え — Skills shouldn't retire when people do.";
+}
+
+document.querySelectorAll('.langsw button').forEach(b => {
+  b.addEventListener('click', () => {
+    LANG = b.dataset.lang;
+    try { localStorage.setItem('tsutae-lang', LANG); } catch(e){}
+    applyLang();
+  });
+});
+
+try {
+  const saved = localStorage.getItem('tsutae-lang');
+  if(saved === 'en' || saved === 'ja') LANG = saved;
+  else if((navigator.language || '').toLowerCase().startsWith('ja')) LANG = 'ja';
+} catch(e){}
+
+renderBrowse();
+applyLang();
+</script>
+
+
+</body>
+</html>
