@@ -1,0 +1,3620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Musubi — A good meal is better shared.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..600&family=Lora:ital,wght@0,400..600;1,400..500&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&family=Noto+Serif+KR:wght@400;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FDFBF7; --beige:#F7F1E9; --paper:#FFFFFF;
+  --forest:#1B3A2C; --forest-dk:#12291E;
+  --coral:#E8836A; --coral-lt:#F6E2DA; --rust:#B5563A;
+  --gold:#E9BC5C; --sage:#8CAA97; --sage-dk:#6E8F7A;
+  --ink:#33322D; --ink-soft:#6C6A62; --ink-mute:#95928A;
+  --line:#EAE2D6; --line-soft:#F2ECE3;
+  --ghost:#E2DACD;
+  --pink:#EFD8D0; --terr:#C4653F;
+  --ok-bg:#E9F1EA; --ok:#3F7355; --note-bg:#FBF0E9;
+  --r:20px; --shadow:0 1px 2px rgba(27,58,44,.04), 0 14px 40px rgba(27,58,44,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;font-size:16px}
+h1,h2,h3{font-family:"Playfair Display",Georgia,"Hiragino Mincho ProN",serif;
+  line-height:1.12;margin:0 0 .5em;font-weight:500;color:var(--forest);letter-spacing:-.015em}
+h4{font-family:"Playfair Display",serif;font-weight:500;color:var(--forest);margin:0 0 .4em}
+p{margin:0 0 1em}
+a{color:var(--forest)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+@media(max-width:600px){.wrap{padding:0 20px}}
+.kicker{font-size:.74rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--rust)}
+.serif{font-family:"Lora",Georgia,serif}
+
+/* ---------- NAV ---------- */
+.nav{position:sticky;top:0;z-index:60;background:rgba(253,251,247,.92);
+  backdrop-filter:blur(14px);border-bottom:1px solid rgba(234,226,214,.7)}
+.nav-in{max-width:1200px;margin:0 auto;padding:16px 32px;display:flex;
+  align-items:center;justify-content:space-between;gap:20px}
+@media(max-width:600px){.nav-in{padding:14px 20px}}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0}
+.brand .mark{width:40px;height:40px;border-radius:50%;background:var(--coral);
+  display:grid;place-items:center;flex-shrink:0}
+.brand .wm{font-family:"Playfair Display",serif;font-size:1.62rem;font-weight:600;
+  color:var(--forest);letter-spacing:-.02em;line-height:1}
+.nav-mid{display:flex;gap:34px}
+.nav-mid a{color:var(--ink);text-decoration:none;font-size:.93rem;font-weight:500}
+.nav-mid a:hover{color:var(--coral)}
+.nav-end{display:flex;align-items:center;gap:20px}
+.nav-end .lg{color:var(--ink);text-decoration:none;font-size:.93rem;font-weight:500}
+.nav-end .lg:hover{color:var(--coral)}
+@media(max-width:960px){.nav-mid{display:none}}
+@media(max-width:520px){.nav-end .lg{display:none}}
+
+/* ---------- BUTTONS ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  padding:16px 32px;border-radius:999px;font-weight:600;font-size:.98rem;
+  text-decoration:none;border:none;cursor:pointer;font-family:inherit;
+  transition:background .18s,transform .1s,border-color .18s,color .18s,box-shadow .18s}
+.btn:active{transform:scale(.985)}
+.btn-dark{background:var(--forest);color:#fff}
+.btn-dark:hover{background:var(--forest-dk);box-shadow:0 8px 22px rgba(27,58,44,.22)}
+.btn-outline{background:transparent;color:var(--forest);border:1.6px solid var(--forest)}
+.btn-outline:hover{background:var(--forest);color:#fff}
+.btn-ghost{background:var(--paper);color:var(--forest);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--forest)}
+.btn-sm{padding:11px 24px;font-size:.9rem}
+.btn-lg{padding:19px 38px;font-size:1.03rem}
+.ar{font-size:1.05em;line-height:1}
+
+/* ---------- HERO ---------- */
+.hero{padding:64px 0 92px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.06fr 1fr;gap:56px;align-items:center}
+@media(max-width:1000px){.hero-grid{grid-template-columns:1fr;gap:48px}}
+.badge{display:inline-flex;align-items:center;gap:11px;background:var(--coral-lt);
+  border-radius:999px;padding:9px 22px;font-size:.76rem;font-weight:700;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--rust);margin-bottom:30px}
+.badge .dot{width:6px;height:6px;border-radius:50%;background:var(--coral)}
+.hero h1{font-size:clamp(2.6rem,5.6vw,4.2rem);margin:0 0 26px;max-width:14ch}
+.hero h1 em{font-style:italic;color:var(--coral);font-weight:400}
+.hero .lead{font-family:"Lora",Georgia,serif;font-size:clamp(1.06rem,2.1vw,1.28rem);
+  color:var(--ink-soft);max-width:44ch;margin:0 0 38px;line-height:1.65}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
+.hero-cta .btn{padding:17px 28px;font-size:.99rem;white-space:nowrap}
+.proof{display:flex;align-items:center;gap:16px}
+.stack{display:flex}
+.stack span{width:44px;height:44px;border-radius:50%;border:3px solid var(--cream);
+  display:grid;place-items:center;color:#fff;font-size:1rem;margin-right:-13px;
+  font-family:"Hiragino Sans","Yu Gothic",sans-serif}
+.proof .rate{display:flex;align-items:center;gap:9px;font-weight:700;font-size:.94rem}
+.proof .stars{color:var(--gold);letter-spacing:1px;font-size:.92rem}
+.proof .sub{font-size:.87rem;color:var(--ink-soft);margin:2px 0 0}
+
+/* illustration */
+.illo{position:relative}
+.illo svg{width:100%;height:auto;display:block;border-radius:0}
+.toast{position:absolute;right:-22px;bottom:-14px;background:#fff;border-radius:16px;
+  padding:14px 20px;box-shadow:0 10px 32px rgba(27,58,44,.16);display:flex;
+  align-items:center;gap:13px;max-width:268px}
+@media(max-width:1000px){.toast{right:8px;bottom:8px}}
+.toast .h{width:30px;height:30px;flex-shrink:0}
+.toast b{display:block;font-size:.92rem;color:var(--forest)}
+.toast span{font-size:.86rem;color:var(--ink-soft)}
+
+/* ---------- SECTIONS ---------- */
+section{padding:100px 0}
+.sec-beige{background:var(--beige)}
+.sec-paper{background:var(--paper);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.sec-head{text-align:center;max-width:760px;margin:0 auto 64px}
+.sec-head .kicker{margin-bottom:20px}
+.sec-head h2{font-size:clamp(1.95rem,4.4vw,3rem)}
+.sec-head p{color:var(--ink-soft);margin:0;font-size:1.04rem;max-width:56ch;
+  margin-left:auto;margin-right:auto}
+
+/* ---------- STEPS ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:34px}
+@media(max-width:940px){.steps{grid-template-columns:repeat(2,1fr);gap:44px}}
+@media(max-width:540px){.steps{grid-template-columns:1fr}}
+.step{text-align:center}
+.step .top{position:relative;display:inline-flex;align-items:flex-start;margin-bottom:26px}
+.step .circ{width:112px;height:112px;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+.step .no{font-family:"Playfair Display",serif;font-style:italic;font-size:2.5rem;
+  color:var(--ghost);line-height:1;margin-left:6px;margin-top:2px;font-weight:400}
+.step h3{font-size:1.4rem;margin-bottom:10px}
+.step p{font-size:.93rem;color:var(--ink-soft);margin:0;max-width:30ch;
+  margin-left:auto;margin-right:auto;line-height:1.6}
+
+/* ---------- MEALS ---------- */
+.mealgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:900px){.mealgrid{grid-template-columns:1fr}}
+.picker{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:28px;
+  box-shadow:var(--shadow)}
+@media(max-width:600px){.picker{padding:20px}}
+.pk-head{display:flex;align-items:center;gap:13px;margin-bottom:20px}
+.pk-head .av{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  color:#fff;font-size:1.1rem;flex-shrink:0;font-family:"Hiragino Sans","Yu Gothic",sans-serif}
+.pk-head b{display:block;font-size:1.05rem;color:var(--forest);font-family:"Playfair Display",serif;
+  font-weight:600}
+.pk-head span{font-size:.84rem;color:var(--ink-soft)}
+.cui{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+.cui button{border:1.4px solid var(--line);background:var(--cream);border-radius:999px;
+  padding:8px 15px;font-family:inherit;font-size:.83rem;font-weight:600;color:var(--ink-soft);
+  cursor:pointer;transition:all .15s;display:flex;gap:6px;align-items:baseline}
+.cui button .jp{font-size:.9rem}
+.cui button:hover{border-color:var(--forest)}
+.cui button.on{background:var(--forest);border-color:var(--forest);color:#fff}
+.dish{display:flex;gap:13px;align-items:flex-start;border:1.5px solid var(--line);
+  border-radius:14px;padding:13px 15px;cursor:pointer;margin-bottom:9px;transition:all .15s;
+  background:var(--cream);width:100%;text-align:left;font-family:inherit}
+.dish:hover{border-color:var(--forest)}
+.dish.on{border-color:var(--forest);background:#F0F4F0;box-shadow:0 0 0 3px rgba(27,58,44,.06)}
+.dish .em{font-size:1.5rem;line-height:1;flex-shrink:0;margin-top:2px}
+.dish b{display:block;font-size:.95rem;color:var(--forest);margin-bottom:2px}
+.dish p{margin:0;font-size:.82rem;color:var(--ink-soft);line-height:1.5}
+.dtags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.dtag{font-size:.7rem;background:var(--paper);border:1px solid var(--line);
+  padding:2px 9px;border-radius:999px;color:var(--ink-soft);font-weight:600}
+.deliver{background:var(--forest);border-radius:22px;padding:30px 34px;margin-top:24px;
+  display:grid;grid-template-columns:1fr auto 1fr;gap:26px;align-items:center;color:#fff}
+@media(max-width:820px){.deliver{grid-template-columns:1fr;text-align:center;gap:18px;padding:26px 22px}}
+.deliver .dk{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:#8FAE9C;margin-bottom:7px}
+.deliver .dv{font-family:"Playfair Display",serif;font-size:1.2rem;font-weight:600}
+.deliver .dm{font-size:.85rem;color:#A8BCB0;margin-top:3px}
+.deliver .mid{text-align:center;padding:0 8px}
+.deliver .mid .t{font-family:"Playfair Display",serif;font-size:1.6rem;font-weight:600}
+.deliver .mid .s{font-size:.79rem;color:#8FAE9C;letter-spacing:.06em;text-transform:uppercase;
+  font-weight:700;margin-top:4px}
+@media(max-width:820px){.deliver .mid{border-top:1px solid rgba(255,255,255,.15);
+  border-bottom:1px solid rgba(255,255,255,.15);padding:16px 0}}
+
+/* ---------- SWIPE DECK ---------- */
+.deck-wrap{padding:34px 30px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;background:var(--cream)}
+@media(max-width:600px){.deck-wrap{padding:24px 18px}}
+.deck{position:relative;width:100%;max-width:320px;height:412px;margin-bottom:22px}
+.swipecard{position:absolute;inset:0;background:var(--paper);border:1px solid var(--line);
+  border-radius:24px;padding:26px;box-shadow:var(--shadow);cursor:grab;
+  display:flex;flex-direction:column;user-select:none;touch-action:pan-y}
+.swipecard:active{cursor:grabbing}
+.swipecard .big{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;
+  color:#fff;font-size:2rem;margin:0 auto 16px;font-family:"Hiragino Sans","Yu Gothic",sans-serif}
+.swipecard h4{font-size:1.55rem;text-align:center;margin:0 0 4px}
+.swipecard .u{text-align:center;font-size:.87rem;color:var(--ink-soft);margin:0 0 14px}
+.swipecard .tg{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.swipecard .tg span{font-size:.78rem;background:var(--line-soft);border-radius:999px;
+  padding:5px 13px;color:var(--ink)}
+.swipecard .q{font-family:"Lora",serif;font-size:.92rem;color:var(--forest);text-align:center;
+  line-height:1.55;margin:0}
+.swipecard .when{margin-top:auto;padding-top:14px;border-top:1px solid var(--line-soft);
+  display:flex;justify-content:space-between;font-size:.85rem}
+.swipecard .when span:first-child{color:var(--ink-soft)}
+.swipecard .when span:last-child{font-weight:700;color:var(--forest)}
+.stamp{position:absolute;top:22px;font-size:.82rem;font-weight:800;letter-spacing:.12em;
+  padding:7px 14px;border-radius:9px;border:3px solid;opacity:0;transition:opacity .1s}
+.stamp.yes{left:22px;color:var(--ok);border-color:var(--ok);transform:rotate(-14deg)}
+.stamp.no{right:22px;color:#C24444;border-color:#C24444;transform:rotate(14deg)}
+.deck-btns{display:flex;gap:18px;align-items:center}
+.dbtn{width:62px;height:62px;border-radius:50%;border:1.6px solid var(--line);
+  background:var(--paper);cursor:pointer;font-size:1.4rem;display:grid;place-items:center;
+  transition:all .16s;box-shadow:0 3px 12px rgba(27,58,44,.07)}
+.dbtn.no{color:#C24444}.dbtn.no:hover{border-color:#C24444;background:#FBEDED}
+.dbtn.yes{color:var(--coral);width:72px;height:72px;font-size:1.65rem}
+.dbtn.yes:hover{border-color:var(--coral);background:#FDF0EB}
+.deck-hint{font-size:.83rem;color:var(--ink-mute);margin-top:16px;text-align:center}
+.deck-empty{text-align:center;padding:40px 20px}
+.deck-empty .em{font-size:2.4rem;margin-bottom:12px}
+.deck-empty b{display:block;font-family:"Playfair Display",serif;font-size:1.3rem;
+  color:var(--forest);margin-bottom:6px}
+.deck-empty p{font-size:.9rem;color:var(--ink-soft);margin:0 0 16px}
+.viewsub{display:flex;gap:8px;justify-content:center;margin-bottom:18px}
+.viewsub button{border:1.4px solid var(--line);background:var(--paper);border-radius:999px;
+  padding:9px 20px;font-family:inherit;font-size:.87rem;font-weight:600;color:var(--ink-soft);
+  cursor:pointer;transition:all .15s}
+.viewsub button.on{background:var(--forest);border-color:var(--forest);color:#fff}
+
+/* ---------- SURVEY / AI ---------- */
+.surv{background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:40px;
+  box-shadow:var(--shadow);max-width:680px;margin:0 auto}
+@media(max-width:600px){.surv{padding:26px 20px}}
+.orb{width:96px;height:96px;border-radius:50%;margin:0 auto 20px;position:relative;
+  background:radial-gradient(circle at 35% 30%,#F3A48D,var(--coral));display:grid;place-items:center}
+.orb::after{content:"";position:absolute;inset:-9px;border-radius:50%;
+  border:2px solid rgba(232,131,106,.3)}
+.orb.live::after{animation:pulse 1.6s ease-out infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.28);opacity:0}}
+.wave{display:flex;gap:3px;align-items:center;height:26px}
+.wave i{width:3px;background:#fff;border-radius:2px;height:8px}
+.orb.live .wave i{animation:wv .9s ease-in-out infinite}
+.orb.live .wave i:nth-child(2){animation-delay:.12s}
+.orb.live .wave i:nth-child(3){animation-delay:.24s}
+.orb.live .wave i:nth-child(4){animation-delay:.36s}
+.orb.live .wave i:nth-child(5){animation-delay:.48s}
+@keyframes wv{0%,100%{height:8px}50%{height:22px}}
+.chatlog{min-height:150px;margin-bottom:20px}
+.bub{max-width:82%;padding:12px 17px;border-radius:16px;margin-bottom:10px;font-size:.94rem;
+  line-height:1.5;animation:fade .3s ease}
+.bub.ai{background:var(--line-soft);color:var(--ink);border-bottom-left-radius:5px}
+.bub.me{background:var(--forest);color:#fff;margin-left:auto;border-bottom-right-radius:5px}
+.bub .who{display:block;font-size:.7rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;opacity:.6;margin-bottom:4px}
+.hobbies{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px}
+.hob{border:1.4px solid var(--line);background:var(--cream);border-radius:999px;
+  padding:10px 18px;font-family:inherit;font-size:.88rem;font-weight:600;color:var(--ink-soft);
+  cursor:pointer;transition:all .15s}
+.hob:hover{border-color:var(--forest)}
+.hob.on{background:#F0F4F0;border-color:var(--forest);color:var(--forest)}
+.hob.on::before{content:"✓ ";font-weight:800}
+.matchcard{display:flex;gap:16px;align-items:center;border:1.5px solid var(--line);
+  border-radius:18px;padding:18px;margin-bottom:11px;background:var(--cream);
+  animation:fade .35s ease}
+.matchcard.top{border-color:var(--forest);background:#F0F4F0}
+.matchcard .av{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+  color:#fff;font-size:1.2rem;flex-shrink:0;font-family:"Hiragino Sans","Yu Gothic",sans-serif}
+.matchcard b{display:block;font-size:1.05rem;color:var(--forest);
+  font-family:"Playfair Display",serif;font-weight:600}
+.matchcard .sh{font-size:.84rem;color:var(--ink-soft)}
+.pct{margin-left:auto;text-align:right;flex-shrink:0}
+.pct .n{font-family:"Playfair Display",serif;font-size:1.5rem;font-weight:600;color:var(--forest)}
+.pct .l{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);
+  font-weight:700}
+
+/* ---------- MAP ---------- */
+/* view toggle */
+.viewtabs{display:inline-flex;background:var(--line-soft);border-radius:999px;padding:5px;
+  margin:0 auto 26px;gap:4px}
+.viewtabs button{border:none;background:none;border-radius:999px;padding:12px 28px;
+  font-family:inherit;font-size:.94rem;font-weight:600;color:var(--ink-soft);cursor:pointer;
+  display:flex;align-items:center;gap:9px;transition:all .18s}
+.viewtabs button.on{background:var(--paper);color:var(--forest);
+  box-shadow:0 2px 8px rgba(27,58,44,.1)}
+.tabwrap{display:flex;justify-content:center}
+@media(max-width:560px){.viewtabs{width:100%;flex-direction:column}
+  .viewtabs button{justify-content:center}}
+
+/* availability strip */
+.avail-strip{background:var(--paper);border:1px solid var(--line);border-radius:18px;
+  padding:22px 26px;margin-bottom:20px;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.avail-strip .as-t{flex-shrink:0}
+.avail-strip .as-t b{display:block;font-size:.97rem;color:var(--forest);font-weight:700}
+.avail-strip .as-t span{font-size:.85rem;color:var(--ink-soft)}
+.slots{display:flex;gap:9px;flex-wrap:wrap}
+.slot{border:1.4px solid var(--line);background:var(--cream);border-radius:999px;
+  padding:9px 18px;font-size:.86rem;font-weight:600;color:var(--ink-soft);cursor:pointer;
+  font-family:inherit;transition:all .15s}
+.slot:hover{border-color:var(--sage-dk)}
+.slot.on{background:#E7EFE9;border-color:var(--sage-dk);color:var(--ok)}
+.slot.on::before{content:"✓ ";font-weight:700}
+.as-count{margin-left:auto;font-size:.86rem;color:var(--ink-soft)}
+.as-count b{color:var(--forest)}
+
+/* request meta */
+.reqlist{list-style:none;padding:0;margin:0 0 26px}
+.reqlist li{display:flex;gap:11px;align-items:flex-start;font-size:.93rem;
+  color:var(--ink-soft);margin-bottom:10px}
+.reqlist .d{width:6px;height:6px;border-radius:50%;background:var(--coral);
+  flex-shrink:0;margin-top:9px}
+.askbox{background:var(--note-bg);border-radius:14px;padding:18px 20px;margin-bottom:26px}
+.askbox .nk{font-size:.71rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:10px}
+.askbox p{margin:0;font-size:.93rem;color:var(--ink);line-height:1.6}
+.btn-row{display:grid;grid-template-columns:1fr auto;gap:12px;margin-top:auto}
+@media(max-width:420px){.btn-row{grid-template-columns:1fr}}
+
+/* state cards */
+.state{margin-top:auto;border-radius:18px;padding:24px;text-align:center}
+.state.pending{background:#FBF1DE;border:1px solid #EFDFB4}
+.state.matched{background:var(--ok-bg);border:1px solid #C8DECF}
+.state .si{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  margin:0 auto 14px;font-size:1.2rem}
+.state.pending .si{background:#EFDFB4;color:#8A6420}
+.state.matched .si{background:var(--ok);color:#fff}
+.state b{display:block;font-size:1.1rem;color:var(--forest);margin-bottom:5px;
+  font-family:"Playfair Display",serif;font-weight:600}
+.state p{font-size:.9rem;color:var(--ink-soft);margin:0 0 16px}
+.simlink{background:none;border:none;font-family:inherit;font-size:.84rem;font-weight:600;
+  color:var(--rust);cursor:pointer;text-decoration:underline;padding:0}
+
+.map-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  margin-bottom:22px;flex-wrap:wrap}
+.chips{display:flex;gap:11px;flex-wrap:wrap}
+.chip{background:var(--paper);border:1.4px solid var(--line);border-radius:999px;
+  padding:11px 26px;font-size:.92rem;font-weight:600;color:var(--ink);cursor:pointer;
+  font-family:inherit;transition:all .16s}
+.chip:hover{border-color:var(--forest)}
+.chip.on{background:var(--forest);border-color:var(--forest);color:#fff}
+.chip-static{background:var(--paper);border:1.4px solid var(--line);border-radius:999px;
+  padding:11px 26px;font-size:.92rem;font-weight:600;color:var(--ink);
+  display:inline-flex;align-items:center;gap:9px}
+.browse{display:grid;grid-template-columns:1.05fr .95fr;background:var(--paper);
+  border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow)}
+@media(max-width:940px){.browse{grid-template-columns:1fr}}
+.mapbox{position:relative;background:#E9E5DA;min-height:490px}
+.mapbox svg{position:absolute;inset:0;width:100%;height:100%}
+.park-label{position:absolute;left:11%;top:19%;text-align:center;pointer-events:none;
+  color:#5C6B58;font-size:.79rem;line-height:1.4}
+.park-label b{display:block;font-weight:600;font-size:.85rem}
+.pin{position:absolute;transform:translate(-50%,-50%);border:none;background:none;
+  cursor:pointer;padding:0;font-family:inherit;z-index:3}
+.pin .av{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+  color:#fff;font-size:1.18rem;border:3px solid #fff;
+  box-shadow:0 3px 10px rgba(27,58,44,.22);transition:transform .16s,box-shadow .16s;
+  font-family:"Hiragino Sans","Yu Gothic",sans-serif}
+.pin:hover .av{transform:scale(1.07)}
+.pin.on .av{box-shadow:0 0 0 3px var(--forest),0 3px 12px rgba(27,58,44,.3)}
+.pin .tm{margin-top:7px;background:#fff;border-radius:8px;padding:3px 10px;font-size:.75rem;
+  font-weight:700;color:var(--ink);box-shadow:0 2px 6px rgba(27,58,44,.13);white-space:nowrap}
+.you{position:absolute;transform:translate(-50%,-50%);text-align:center;z-index:2}
+.you .dot{width:32px;height:32px;border-radius:50%;background:var(--forest);
+  display:grid;place-items:center;color:#fff;font-size:.82rem;margin:0 auto}
+.you span{display:block;margin-top:6px;font-size:.79rem;font-weight:700;color:var(--forest)}
+.panel{padding:42px;display:flex;flex-direction:column}
+@media(max-width:600px){.panel{padding:28px 22px}}
+.panel-top{display:flex;gap:20px;align-items:flex-start}
+.panel .av-lg{width:80px;height:80px;border-radius:50%;display:grid;place-items:center;
+  color:#fff;font-size:1.7rem;flex-shrink:0;font-family:"Hiragino Sans","Yu Gothic",sans-serif}
+.avail{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ok);display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.avail::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok)}
+.panel h3{font-size:2.05rem;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+.verified{width:21px;height:21px;border-radius:50%;background:var(--sage);color:#fff;
+  display:grid;place-items:center;font-size:.68rem;flex-shrink:0}
+.panel .uni{color:var(--ink-soft);font-size:.94rem;margin:0}
+.heart{margin-left:auto;width:44px;height:44px;border-radius:50%;border:1.4px solid var(--line);
+  background:var(--paper);cursor:pointer;font-size:1.1rem;color:var(--ink-soft);
+  display:grid;place-items:center;flex-shrink:0;transition:all .16s}
+.heart:hover{border-color:var(--coral);color:var(--coral)}
+.heart.on{background:var(--coral);border-color:var(--coral);color:#fff}
+.tags{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 24px}
+.tag{background:var(--line-soft);border-radius:999px;padding:8px 18px;font-size:.86rem;color:var(--ink)}
+.quote{border-left:3px solid var(--coral);padding:2px 0 2px 20px;margin:0 0 28px;
+  font-family:"Lora",serif;font-size:1.08rem;line-height:1.55;color:var(--forest)}
+.rule{height:1px;background:var(--line);margin:0 0 24px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+.two>div+div{border-left:1px solid var(--line);padding-left:24px}
+.lbl{font-size:.71rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-mute);margin-bottom:9px}
+.val{font-weight:700;font-size:1.05rem;color:var(--forest);margin:0 0 3px}
+.sub{font-size:.87rem;color:var(--ink-soft);margin:0}
+.panel .btn{width:100%;margin-top:auto}
+.price-note{text-align:center;font-size:.85rem;color:var(--ink-mute);margin:15px 0 0}
+
+/* ---------- CHECK-IN STEPPER ---------- */
+.stepper{display:flex;justify-content:center;gap:10px;margin-bottom:34px;flex-wrap:wrap}
+.stepper button{display:flex;align-items:center;gap:11px;background:var(--paper);
+  border:1.5px solid var(--line);border-radius:999px;padding:11px 22px 11px 12px;
+  font-family:inherit;font-size:.92rem;font-weight:600;color:var(--ink-soft);cursor:pointer;
+  transition:all .18s}
+.stepper button:hover{border-color:var(--forest)}
+.stepper button.on{border-color:var(--forest);background:var(--forest);color:#fff}
+.stepper .n{width:26px;height:26px;border-radius:50%;background:var(--line-soft);
+  color:var(--ink-soft);display:grid;place-items:center;font-size:.78rem;font-weight:700;flex-shrink:0}
+.stepper button.on .n{background:rgba(255,255,255,.22);color:#fff}
+.flowcard{background:var(--paper);border:1px solid var(--line);border-radius:26px;
+  padding:40px;box-shadow:var(--shadow);max-width:660px;margin:0 auto}
+@media(max-width:600px){.flowcard{padding:26px 20px}}
+.fc-head{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.fc-head .who{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  font-size:1.15rem;flex-shrink:0}
+.fc-head h3{font-size:1.5rem;margin:0}
+.fc-sub{font-size:.9rem;color:var(--ink-soft);margin:0 0 26px}
+.stage{display:none}
+.stage.on{display:block;animation:fade .3s ease}
+
+.askrow{display:flex;gap:13px;align-items:flex-start;padding:14px 0;
+  border-bottom:1px solid var(--line-soft);cursor:pointer}
+.askrow:last-of-type{border-bottom:none}
+.askrow input{width:auto;flex-shrink:0;margin:4px 0 0;accent-color:var(--forest);
+  width:19px;height:19px;cursor:pointer}
+.askrow span{font-size:.97rem;color:var(--ink)}
+.customq{margin-top:18px}
+.customq label{display:flex;align-items:center;gap:8px}
+
+.optrow{padding:16px 0;border-bottom:1px solid var(--line-soft)}
+.optrow:last-of-type{border-bottom:none}
+.optrow .ol{font-size:.94rem;color:var(--ink);margin-bottom:11px;display:flex;
+  align-items:center;gap:9px;font-weight:500}
+.opts{display:flex;gap:9px;flex-wrap:wrap}
+.opt{border:1.4px solid var(--line);background:var(--cream);border-radius:999px;
+  padding:9px 20px;font-size:.87rem;font-weight:600;color:var(--ink-soft);cursor:pointer;
+  font-family:inherit;transition:all .15s}
+.opt:hover{border-color:var(--forest)}
+.opt.on{background:var(--forest);border-color:var(--forest);color:#fff}
+.opt.on.warn{background:var(--gold);border-color:var(--gold);color:#5C4406}
+
+.rrow{display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:13px 0;border-bottom:1px solid var(--line-soft);font-size:.95rem}
+.rrow:last-of-type{border-bottom:none}
+.rrow .rl{display:flex;align-items:center;gap:10px;color:var(--ink-soft)}
+.rrow .rv{font-weight:700;color:var(--forest);text-align:right}
+.rrow .rv.warn{color:#8A6420}
+.verdict{display:flex;gap:13px;align-items:center;border-radius:15px;
+  padding:16px 20px;margin:22px 0 0}
+.verdict.good{background:var(--ok-bg)}
+.verdict.note{background:#FBF1DE}
+.verdict .vi{width:29px;height:29px;border-radius:50%;display:grid;place-items:center;
+  font-size:.84rem;font-weight:700;flex-shrink:0}
+.verdict.good .vi{background:var(--ok);color:#fff}
+.verdict.note .vi{background:#E0AC4A;color:#fff}
+.verdict b{font-size:.98rem;color:var(--forest);font-family:"Inter",sans-serif}
+.fc-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;
+  margin-top:28px;flex-wrap:wrap}
+.fc-foot .meta{font-size:.85rem;color:var(--ink-mute)}
+
+/* ---------- SAFETY TIMELINE ---------- */
+.safety-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;align-items:start}
+@media(max-width:980px){.safety-grid{grid-template-columns:1fr;gap:14px}}
+.timeline{position:relative;padding-left:4px}
+.tl-phase{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-mute);margin:0 0 18px 4px}
+
+/* ---------- TRIPTYCH ---------- */
+.tripstep{display:flex;justify-content:center;align-items:center;gap:0;margin-bottom:38px;
+  flex-wrap:wrap}
+.tstep{display:flex;align-items:center;gap:11px}
+.tstep .c{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:var(--line);color:var(--ink-mute);font-size:.85rem;font-weight:700;
+  transition:all .3s;flex-shrink:0}
+.tstep.done .c{background:var(--forest);color:#fff}
+.tstep .t{font-size:.93rem;font-weight:600;color:var(--ink-mute);transition:color .3s}
+.tstep.done .t{color:var(--forest)}
+.tline{width:88px;height:1.5px;background:var(--line);margin:0 16px}
+@media(max-width:820px){.tline{width:26px;margin:0 8px}.tstep .t{display:none}}
+.tripbox{background:var(--beige);border-radius:28px;padding:38px;
+  display:grid;grid-template-columns:.85fr 1.25fr .9fr;gap:34px;align-items:start}
+@media(max-width:1040px){.tripbox{grid-template-columns:1fr;gap:34px;padding:26px 20px}}
+.trip-lab{display:flex;align-items:center;gap:9px;font-size:.71rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:16px}
+.phoneframe{background:var(--forest);border-radius:34px;padding:9px;box-shadow:var(--shadow)}
+.phonescr{background:var(--cream);border-radius:26px;overflow:hidden;min-height:472px;
+  display:flex;flex-direction:column}
+.phbar{display:flex;justify-content:space-between;align-items:center;padding:13px 18px 11px;
+  border-bottom:1px solid var(--line-soft);font-size:.76rem;color:var(--ink-soft)}
+.phbar .lg{font-family:"Playfair Display",serif;font-size:1.05rem;font-weight:600;color:var(--forest)}
+.phbody{padding:26px 22px;text-align:center;flex:1;display:flex;flex-direction:column;
+  justify-content:center}
+.tabframe{background:var(--forest);border-radius:26px;padding:9px;box-shadow:var(--shadow)}
+.tabscr{background:#fff;border-radius:19px;overflow:hidden;min-height:472px;
+  display:flex;flex-direction:column}
+.tabbar{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;
+  border-bottom:1px solid var(--line-soft);font-size:.82rem;color:var(--ink-soft)}
+.tabbar .lg{font-family:"Playfair Display",serif;font-size:1.25rem;font-weight:600;color:var(--forest)}
+.tabbody{padding:34px 28px;text-align:center;flex:1;display:flex;flex-direction:column;
+  justify-content:center}
+.feed{background:#fff;border:1px solid var(--line);border-radius:19px;overflow:hidden;
+  min-height:472px}
+.feedhead{display:flex;justify-content:space-between;align-items:flex-start;
+  padding:20px 22px;border-bottom:1px solid var(--line-soft)}
+.feedhead b{display:block;font-size:1.02rem;color:var(--forest);font-weight:700}
+.feedhead span{font-size:.82rem;color:var(--ink-soft)}
+.feedhead .chip2{background:var(--line-soft);border-radius:999px;padding:6px 15px;
+  font-size:.79rem;font-weight:600;color:var(--ink-soft)}
+.fitem{display:flex;gap:14px;padding:20px 22px;border-bottom:1px solid var(--line-soft);
+  animation:fade .35s ease}
+.fitem .fi{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  color:#fff;font-size:.8rem;flex-shrink:0;margin-top:3px}
+.fitem .tm2{font-size:.79rem;color:var(--ink-mute);margin-bottom:2px}
+.fitem h5{font-family:"Playfair Display",serif;font-size:1.18rem;font-weight:600;
+  color:var(--forest);margin:0 0 5px}
+.fitem p{font-size:.87rem;color:var(--ink-soft);margin:0 0 10px;line-height:1.5}
+.fchip{display:inline-block;background:var(--line-soft);border-radius:999px;padding:5px 13px;
+  font-size:.78rem;color:var(--ink-soft);font-weight:500}
+.fli{font-size:.87rem;color:var(--ok);margin-bottom:5px}
+.fli.warn{color:#B08324}
+.feed-empty{padding:56px 24px;text-align:center;color:var(--ink-mute);font-size:.88rem}
+.bigtick{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;
+  margin:0 auto 20px;font-size:2.3rem;color:#fff}
+.bigtick.g{background:#6E8F7A;box-shadow:0 0 0 11px #E4EDE6}
+.bigtick.b{background:#6A8CA6;box-shadow:0 0 0 11px #E2EAF0}
+.vc-kick{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:10px}
+.vc-title{font-family:"Playfair Display",serif;font-size:1.55rem;font-weight:600;
+  color:var(--forest);margin:0 0 8px;line-height:1.2}
+.vc-sub{font-size:.9rem;color:var(--ink-soft);margin:0}
+.vc-verif{display:inline-flex;align-items:center;gap:8px;background:var(--ok-bg);
+  border-radius:11px;padding:11px 18px;font-size:.85rem;color:var(--ok);font-weight:600;
+  margin:20px auto 0}
+.qr2{width:150px;height:150px;margin:0 auto 16px;background:#fff;border-radius:14px;
+  padding:10px;box-shadow:0 3px 14px rgba(27,58,44,.1)}
+.qr2 svg{width:100%;height:100%;display:block}
+.scanbox{width:150px;height:150px;margin:0 auto 16px;border-radius:16px;position:relative;
+  background:#EDE9E1}
+.scanbox i{position:absolute;width:26px;height:26px;border:3px solid var(--forest)}
+.scanbox i:nth-child(1){top:12px;left:12px;border-right:0;border-bottom:0;border-radius:7px 0 0 0}
+.scanbox i:nth-child(2){top:12px;right:12px;border-left:0;border-bottom:0;border-radius:0 7px 0 0}
+.scanbox i:nth-child(3){bottom:12px;left:12px;border-right:0;border-top:0;border-radius:0 0 0 7px}
+.scanbox i:nth-child(4){bottom:12px;right:12px;border-left:0;border-top:0;border-radius:0 0 7px 0}
+.scanbox em{position:absolute;left:12px;right:12px;height:2px;background:var(--coral);
+  top:50%;animation:scan 1.8s ease-in-out infinite}
+@keyframes scan{0%,100%{top:22%}50%{top:78%}}
+.tripnav{display:flex;justify-content:center;gap:12px;margin-top:30px;flex-wrap:wrap}
+.tl-item{position:relative;display:flex;gap:22px;align-items:flex-start;padding-bottom:26px}
+.tl-item::before{content:"";position:absolute;left:23px;top:48px;bottom:-4px;width:2px;
+  background:var(--line)}
+.tl-item.last::before{display:none}
+.tl-ic{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;
+  flex-shrink:0;position:relative;z-index:2;border:3px solid var(--paper)}
+.tl-item h4{font-size:1.1rem;margin:9px 0 5px;font-family:"Playfair Display",serif}
+.tl-item p{font-size:.93rem;color:var(--ink-soft);margin:0;line-height:1.6;max-width:44ch}
+
+/* phone mock */
+.phone-wrap{position:sticky;top:100px}
+@media(max-width:980px){.phone-wrap{position:static;max-width:340px;margin:0 auto}}
+.phone{background:var(--forest);border-radius:38px;padding:12px;box-shadow:var(--shadow)}
+.phone-screen{background:var(--cream);border-radius:28px;padding:26px 22px;text-align:center;
+  min-height:430px;display:flex;flex-direction:column;justify-content:center}
+.ph-kick{font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-mute);margin-bottom:8px}
+.ph-title{font-family:"Playfair Display",serif;font-size:1.3rem;color:var(--forest);
+  margin:0 0 6px;font-weight:600}
+.ph-sub{font-size:.87rem;color:var(--ink-soft);margin:0 0 20px}
+.qr{width:168px;height:168px;margin:0 auto 20px;background:#fff;border-radius:16px;
+  padding:12px;box-shadow:0 3px 14px rgba(27,58,44,.1)}
+.qr svg{width:100%;height:100%;display:block}
+.ph-badge{display:inline-flex;align-items:center;gap:9px;border-radius:999px;
+  padding:9px 18px;font-size:.83rem;font-weight:700;margin-bottom:18px}
+.ph-badge.live{background:var(--ok-bg);color:var(--ok)}
+.ph-badge.done{background:#EDE9E2;color:var(--ink-soft)}
+.ph-big{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;
+  margin:0 auto 20px;font-size:1.9rem}
+.ph-row{display:flex;justify-content:space-between;font-size:.87rem;padding:9px 0;
+  border-bottom:1px solid var(--line-soft)}
+.ph-row:last-of-type{border-bottom:none}
+.ph-row span:first-child{color:var(--ink-soft)}
+.ph-row span:last-child{font-weight:700;color:var(--forest)}
+.ph-notif{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 15px;
+  display:flex;gap:11px;align-items:flex-start;text-align:left;margin-top:16px}
+.ph-notif .ic{width:26px;height:26px;border-radius:50%;background:var(--coral);color:#fff;
+  display:grid;place-items:center;font-size:.72rem;flex-shrink:0;margin-top:1px}
+.ph-notif b{display:block;font-size:.83rem;color:var(--forest)}
+.ph-notif span{font-size:.79rem;color:var(--ink-soft)}
+.ph-btn{margin-top:20px}
+.ph-state{display:none}
+.ph-state.on{display:block;animation:fade .3s ease}
+
+/* ---------- REPORT SPLIT ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:76px;align-items:center}
+@media(max-width:940px){.split{grid-template-columns:1fr;gap:48px}}
+.split h2{font-size:clamp(2rem,4.4vw,3rem);margin-bottom:22px}
+.split .kicker{margin-bottom:18px}
+.split .body{color:var(--ink-soft);font-size:1.06rem;margin-bottom:32px;max-width:44ch;
+  font-family:"Lora",serif;line-height:1.7}
+.ticks{list-style:none;padding:0;margin:0 0 36px}
+.ticks li{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px;font-size:1rem}
+.ticks .t{width:25px;height:25px;border-radius:50%;background:var(--ok-bg);color:var(--ok);
+  display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.report{background:var(--paper);border:1px solid var(--line);border-radius:26px;
+  padding:36px;box-shadow:var(--shadow)}
+@media(max-width:600px){.report{padding:24px}}
+.rep-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.rep-head .av{width:56px;height:56px;border-radius:50%;background:var(--coral);color:#fff;
+  display:grid;place-items:center;font-size:1.25rem;flex-shrink:0;
+  font-family:"Hiragino Sans","Yu Gothic",sans-serif}
+.rep-kick{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:10px}
+.report h3{font-size:1.85rem;margin:0 0 5px}
+.rep-when{font-size:.88rem;color:var(--ink-soft);margin:0 0 24px}
+.ok-banner{display:flex;gap:15px;align-items:flex-start;background:var(--ok-bg);
+  border-radius:15px;padding:18px 21px;margin-bottom:26px}
+.ok-banner .ic{width:31px;height:31px;border-radius:50%;background:var(--ok);color:#fff;
+  display:grid;place-items:center;font-size:.86rem;font-weight:700;flex-shrink:0}
+.ok-banner b{display:block;font-size:1.02rem;color:var(--forest);margin-bottom:2px;
+  font-family:"Inter",sans-serif;font-weight:700}
+.ok-banner span{font-size:.89rem;color:var(--ink-soft)}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:26px}
+@media(max-width:520px){.three{grid-template-columns:1fr;gap:12px}}
+.three>div+div{border-left:1px solid var(--line);padding-left:20px}
+@media(max-width:520px){.three>div+div{border-left:none;padding-left:0}}
+.three .k{font-size:.86rem;color:var(--ink-soft);margin:0 0 5px}
+.three .v{font-size:.94rem;font-weight:700;color:var(--ok);margin:0}
+.note{background:var(--note-bg);border-radius:15px;padding:21px 23px;margin-bottom:24px}
+.note .nk{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:10px}
+.note p{font-family:"Lora",serif;font-style:italic;font-size:1.02rem;color:var(--forest);
+  margin:0;line-height:1.6}
+.rep-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;
+  font-size:.86rem;color:var(--ink-mute);flex-wrap:wrap}
+.rep-foot a{color:var(--forest);text-decoration:none;font-weight:600}
+.rep-foot a:hover{text-decoration:underline}
+
+/* ---------- AUDIENCE ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+@media(max-width:900px){.cards{grid-template-columns:1fr}}
+.card{background:var(--cream);border:1px solid var(--line);border-radius:var(--r);padding:34px}
+.card .ic{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;margin-bottom:20px}
+.card h3{font-size:1.35rem;margin-bottom:10px}
+.card>p{font-size:.94rem;color:var(--ink-soft);margin:0 0 18px}
+.card ul{margin:0;padding-left:19px;font-size:.92rem;color:var(--ink-soft)}
+.card li{margin-bottom:7px}
+.card li::marker{color:var(--coral)}
+
+/* ---------- PRICING ---------- */
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:780px){.prices{grid-template-columns:1fr}}
+.price{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  padding:36px 26px;text-align:center;position:relative}
+.price.feat{border-color:var(--forest);box-shadow:0 0 0 3px rgba(27,58,44,.07)}
+.price .tg{position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  background:var(--forest);color:#fff;font-size:.69rem;font-weight:700;
+  padding:6px 16px;border-radius:999px;letter-spacing:.09em;text-transform:uppercase}
+.price h4{font-size:.88rem;color:var(--ink-soft);font-weight:600;margin-bottom:12px;
+  font-family:"Inter",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.price .amt{font-family:"Playfair Display",serif;font-size:2.5rem;font-weight:500;color:var(--forest)}
+.price .amt span{font-size:.85rem;font-weight:500;color:var(--ink-soft);font-family:"Inter",sans-serif}
+.price p{font-size:.87rem;color:var(--ink-soft);margin:12px 0 0}
+
+/* ---------- REGISTER ---------- */
+.register{background:var(--beige);border-top:1px solid var(--line)}
+.reg-box{background:var(--paper);border:1px solid var(--line);border-radius:26px;
+  padding:46px;box-shadow:var(--shadow);max-width:660px;margin:0 auto}
+@media(max-width:600px){.reg-box{padding:28px 20px}}
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:30px}
+@media(max-width:560px){.roles{grid-template-columns:1fr}}
+.role{border:1.5px solid var(--line);background:var(--cream);border-radius:16px;
+  padding:20px 12px;text-align:center;cursor:pointer;transition:all .16s;font-family:inherit}
+.role:hover{border-color:var(--forest)}
+.role.on{border-color:var(--forest);background:#F0F4F0;box-shadow:0 0 0 3px rgba(27,58,44,.07)}
+.role .em{font-size:1.7rem;display:block;margin-bottom:8px}
+.role .t{font-weight:700;font-size:.93rem;display:block;color:var(--forest)}
+.role .s{font-size:.77rem;color:var(--ink-soft)}
+.field{margin-bottom:19px}
+label{display:block;font-weight:600;font-size:.88rem;margin-bottom:8px;color:var(--forest)}
+input,select,textarea{width:100%;padding:14px 16px;border-radius:13px;
+  border:1.5px solid var(--line);font-size:.95rem;font-family:inherit;
+  background:var(--paper);color:var(--ink);transition:all .16s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--forest);
+  box-shadow:0 0 0 3px rgba(27,58,44,.08)}
+textarea{resize:vertical;min-height:88px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:520px){.two-col{grid-template-columns:1fr}}
+.hint{font-size:.8rem;color:var(--ink-mute);margin-top:6px}
+.role-fields{display:none}
+.role-fields.on{display:block;animation:fade .26s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.consent{display:flex;gap:11px;align-items:flex-start;font-size:.86rem;
+  color:var(--ink-soft);margin:24px 0 26px;font-weight:400}
+.consent input{width:auto;margin-top:3px;flex-shrink:0}
+.demo-flag{background:#FBF1DE;border:1px solid #EFDFB4;color:#8A6420;
+  border-radius:13px;padding:13px 16px;font-size:.84rem;margin-bottom:28px}
+.ok-state{display:none;text-align:center;padding:30px 8px}
+.ok-state.on{display:block;animation:fade .3s ease}
+.ok-state .big{font-size:2.8rem;margin-bottom:14px}
+.ok-state h3{font-size:1.7rem;margin-bottom:10px}
+.ok-state p{color:var(--ink-soft);font-size:.96rem;margin:0 0 22px}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--forest);color:#B9CCC1;padding:60px 0 46px;text-align:center}
+footer .brand{justify-content:center;margin-bottom:18px}
+footer .brand .mark{background:rgba(255,255,255,.13)}
+footer .brand .wm{color:#fff}
+footer p{font-size:.9rem;margin:0 0 7px;color:#A2B8AB}
+footer .jp{font-size:.84rem;color:#82998C}
+
+/* ---------- CJK TYPE SUPPORT (JA / KO / ZH) ---------- */
+:root{
+  --ui:"Inter",-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic","Noto Sans JP","Noto Sans KR","Noto Sans SC",sans-serif;
+  --disp:"Playfair Display",Georgia,"Hiragino Mincho ProN","Noto Serif JP","Noto Serif KR","Noto Serif SC",serif;
+  --bodyf:"Lora",Georgia,"Noto Serif JP","Noto Serif KR","Noto Serif SC",serif;
+  --kana:"Hiragino Sans","Yu Gothic","Noto Sans JP","Noto Sans KR","Noto Sans SC",sans-serif;
+}
+body,input,select,textarea,button,.btn,.chip,.slot,.opt,.hob,.dish,.role,.dtag,.cui button{font-family:var(--ui)}
+h1,h2,h3,h4,.brand .wm,.deliver .dv,.deliver .mid .t,.price .amt,.vc-title,.ph-title,
+.fitem h5,.phbar .lg,.tabbar .lg,.state b,.pk-head b,.swipecard h4,.matchcard b{font-family:var(--disp)}
+.serif,.hero .lead,.quote,.note p,.split .body,.swipecard .q{font-family:var(--bodyf)}
+.stack span,.pk-head .av,.swipecard .big,.matchcard .av,.pin .av,.panel .av-lg,
+.rep-head .av,.fc-head .who,.role .em{font-family:var(--kana)}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="zh"] h1,html[lang="zh"] h2{letter-spacing:0}
+
+/* ---------- COUNTRY SELECTOR ---------- */
+.ctry{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.ctry .cl{font-size:.71rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-mute);margin-right:2px}
+.cbtn{display:inline-flex;align-items:center;gap:8px;border:1.4px solid var(--line);
+  background:var(--paper);border-radius:999px;padding:9px 17px;font-family:var(--ui);
+  font-size:.87rem;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:all .16s}
+.cbtn:hover{border-color:var(--forest)}
+.cbtn.on{background:var(--forest);border-color:var(--forest);color:#fff}
+.cbtn .fl{font-size:1.02rem;line-height:1}
+.hero .ctry .cl{flex-basis:100%;margin:0 0 3px}
+.nav .ctry{margin:0;gap:6px}
+.nav .cbtn{padding:7px 12px;font-size:.82rem}
+.nav .cbtn .cn{display:none}
+.nav .cbtn[data-c="en"] .cn{display:inline}
+@media(max-width:900px){.nav-end .lg{display:none}}
+@media(max-width:640px){.nav .cbtn[data-c="en"] .cn{display:none}}
+@media(max-width:430px){.nav .ctry{display:none}}
+
+/* ---------- MEALS + MATCH, SIDE BY SIDE ---------- */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+@media(max-width:1080px){.duo{grid-template-columns:1fr;gap:78px}}
+.duo .sec-head{text-align:left;max-width:none;margin:0 0 30px}
+.duo .sec-head p{margin-left:0;margin-right:0;font-size:.98rem}
+.duo .sec-head h2{font-size:clamp(1.7rem,2.6vw,2.15rem)}
+.duo .sec-head .kicker{margin-bottom:14px}
+.duo .mealgrid{grid-template-columns:1fr;gap:18px}
+.duo .deliver{grid-template-columns:1fr;text-align:center;gap:16px;padding:24px 22px}
+.duo .deliver .mid{border-top:1px solid rgba(255,255,255,.15);
+  border-bottom:1px solid rgba(255,255,255,.15);padding:14px 0}
+.duo .deliver>div:last-child{text-align:center !important}
+.duo .browse{grid-template-columns:1fr}
+.duo .mapbox{min-height:330px}
+.duo .panel{padding:30px 26px}
+.duo .panel h3{font-size:1.7rem}
+.duo .tabwrap{justify-content:flex-start}
+.duo .viewtabs{margin-left:0}
+.duo .avail-strip{padding:18px 20px;gap:16px}
+.duo .two{gap:16px}
+.duo .two>div+div{padding-left:16px}
+.duo-col{min-width:0}
+
+/* ---------- VERIFICATION GATE ---------- */
+.gate{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:0 auto 30px;max-width:900px}
+@media(max-width:760px){.gate{grid-template-columns:1fr}}
+.gstep{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px 22px;
+  position:relative}
+.gstep .gn{width:30px;height:30px;border-radius:50%;background:var(--forest);color:#fff;
+  display:grid;place-items:center;font-size:.82rem;font-weight:700;margin-bottom:14px}
+.gstep b{display:block;font-family:var(--disp);font-size:1.08rem;color:var(--forest);margin-bottom:6px}
+.gstep p{margin:0;font-size:.89rem;color:var(--ink-soft);line-height:1.55}
+.gate-note{display:flex;gap:13px;align-items:flex-start;background:var(--note-bg);
+  border-radius:15px;padding:17px 20px;max-width:900px;margin:0 auto 46px}
+.gate-note .gi{width:28px;height:28px;border-radius:50%;background:var(--rust);color:#fff;
+  display:grid;place-items:center;font-size:.8rem;font-weight:700;flex-shrink:0}
+.gate-note p{margin:0;font-size:.91rem;color:var(--ink);line-height:1.6}
+.gate-note b{color:var(--forest)}
+.eligible{list-style:none;padding:0;margin:14px 0 0;display:flex;gap:8px;flex-wrap:wrap}
+.eligible li{font-size:.83rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:999px;padding:6px 14px;color:var(--forest);font-weight:600}
+
+/* ---------- AUTO-MATCH FLOW ---------- */
+.autobox{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:26px;
+  box-shadow:var(--shadow);margin-bottom:20px}
+@media(max-width:600px){.autobox{padding:20px}}
+.autohead{display:flex;align-items:center;gap:11px;margin-bottom:6px}
+.autohead .ai{width:34px;height:34px;border-radius:50%;background:var(--coral-lt);
+  display:grid;place-items:center;font-size:.95rem;flex-shrink:0}
+.autohead b{font-family:var(--disp);font-size:1.12rem;color:var(--forest);font-weight:600}
+.autosub{font-size:.86rem;color:var(--ink-soft);margin:0 0 18px}
+.autoflow{display:flex;flex-direction:column;gap:0}
+.aline{display:flex;gap:14px;align-items:flex-start;position:relative;padding-bottom:16px}
+.aline:last-child{padding-bottom:0}
+.aline::before{content:"";position:absolute;left:14px;top:31px;bottom:2px;width:2px;background:var(--line)}
+.aline:last-child::before{display:none}
+.aline .an{width:30px;height:30px;border-radius:50%;background:var(--line-soft);
+  color:var(--ink-soft);display:grid;place-items:center;font-size:.78rem;font-weight:700;
+  flex-shrink:0;position:relative;z-index:2;transition:all .3s}
+.aline.done .an{background:var(--ok);color:#fff}
+.aline .at{font-size:.93rem;color:var(--ink-soft);padding-top:4px;transition:color .3s}
+.aline.done .at{color:var(--ink)}
+.aline .at b{color:var(--forest)}
+.autobtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.autobtns .btn{flex:1;min-width:140px}
+.autoresult{margin-top:18px;border-radius:16px;padding:20px;text-align:center;display:none}
+.autoresult.on{display:block;animation:fade .3s ease}
+.autoresult.book{background:var(--ok-bg);border:1px solid #C8DECF}
+.autoresult.pass{background:#FBF1DE;border:1px solid #EFDFB4}
+.autoresult b{display:block;font-family:var(--disp);font-size:1.12rem;color:var(--forest);margin-bottom:4px}
+.autoresult p{margin:0;font-size:.89rem;color:var(--ink-soft)}
+
+/* ---------- CONSENT ROW ---------- */
+.consent-card{display:flex;gap:15px;align-items:flex-start;background:var(--beige);
+  border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin-top:26px}
+.consent-card .ci{width:32px;height:32px;border-radius:50%;background:var(--sage);color:#fff;
+  display:grid;place-items:center;font-size:.85rem;flex-shrink:0}
+.consent-card b{display:block;font-size:.99rem;color:var(--forest);margin-bottom:3px;font-weight:700}
+.consent-card span{font-size:.89rem;color:var(--ink-soft);line-height:1.55}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top">
+      <span class="mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M4 15c2.5 0 3-4 5.5-4S13 15 15.5 15 20 11 20 11" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/>
+      </svg></span>
+      <span class="wm">musubi</span>
+    </a>
+    <div class="nav-mid">
+      <a href="#how">How it works</a>
+      <a href="#families">For families</a>
+      <a href="#safety">Safety</a>
+    </div>
+    <div class="nav-end">
+      <div class="ctry">
+        <button class="cbtn on" data-c="en" onclick="setCountry('en')"><span class="fl">🌐</span><span class="cn">EN</span></button>
+        <button class="cbtn" data-c="jp" onclick="setCountry('jp')"><span class="fl">🇯🇵</span><span class="cn">日本</span></button>
+        <button class="cbtn" data-c="kr" onclick="setCountry('kr')"><span class="fl">🇰🇷</span><span class="cn">한국</span></button>
+        <button class="cbtn" data-c="cn" onclick="setCountry('cn')"><span class="fl">🇨🇳</span><span class="cn">中国</span></button>
+      </div>
+      <a href="#register" class="lg">Student login</a>
+      <a href="#duo" class="btn btn-dark btn-sm">Find a visit</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ PART 1 — INTRODUCTION ============ -->
+<div id="top">
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="ctry">
+          <span class="cl">Choose your country</span>
+          <button class="cbtn" data-c="jp" onclick="setCountry('jp')"><span class="fl">🇯🇵</span><span class="cn">日本 Japan</span></button>
+          <button class="cbtn" data-c="kr" onclick="setCountry('kr')"><span class="fl">🇰🇷</span><span class="cn">한국 Korea</span></button>
+          <button class="cbtn" data-c="cn" onclick="setCountry('cn')"><span class="fl">🇨🇳</span><span class="cn">中国 China</span></button>
+          <button class="cbtn on" data-c="en" onclick="setCountry('en')"><span class="fl">🌐</span><span class="cn">English</span></button>
+        </div>
+        <div class="badge"><span class="dot"></span> <span id="badgeCity">Now welcoming families in Tokyo, Seoul and Shanghai</span></div>
+        <h1>A good meal is better <em>shared.</em></h1>
+        <p class="lead">
+          Musubi brings verified care-students to an older neighbour&rsquo;s own table —
+          dinner at home, no journey to make, and families gently kept in the loop.
+        </p>
+        <div class="hero-cta">
+          <a href="#duo" class="btn btn-dark btn-lg">Find a dinner companion <span class="ar">→</span></a>
+          <a href="#how" class="btn btn-outline btn-lg">See how it works <span class="ar">↘</span></a>
+        </div>
+        <div class="proof">
+          <div class="stack">
+            <span style="background:#E8836A">は</span>
+            <span style="background:#8CAA97">れ</span>
+            <span style="background:#E9BC5C">め</span>
+          </div>
+          <div>
+            <div class="rate">4.9 <span class="stars">★★★★★</span></div>
+            <p class="sub">from 280+ shared meals</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="illo">
+        <svg viewBox="0 0 640 540" role="img" aria-label="Illustration of a student and an older person sharing dinner">
+          <defs>
+            <clipPath id="blob">
+              <path d="M170 0 H588 A52 52 0 0 1 640 52 V468 A52 52 0 0 1 588 520 H52 A52 52 0 0 1 0 468 V170 A170 170 0 0 1 170 0 Z"/>
+            </clipPath>
+          </defs>
+          <g clip-path="url(#blob)">
+            <rect width="640" height="520" fill="#EFD8D0"/>
+            <circle cx="596" cy="66" r="122" fill="#E9BC5C"/>
+            <!-- window -->
+            <g stroke="#FBF3EE" stroke-width="11" fill="none" stroke-linecap="round">
+              <path d="M286 336 V196 A67 67 0 0 1 420 196 V336"/>
+              <path d="M353 336 V132"/>
+            </g>
+            <!-- sage dots -->
+            <circle cx="58" cy="252" r="19" fill="#6E8F7A"/>
+            <circle cx="58" cy="306" r="19" fill="#6E8F7A"/>
+            <circle cx="58" cy="360" r="19" fill="#6E8F7A"/>
+            <!-- chair back left -->
+            <rect x="86" y="356" width="66" height="120" rx="22" fill="#C4653F"/>
+            <!-- figures -->
+            <g>
+              <!-- elderly -->
+              <path d="M196 452 v-52 a62 62 0 0 1 124 0 v52 Z" fill="#7E9C88"/>
+              <circle cx="258" cy="344" r="45" fill="#DBA477"/>
+              <path d="M213 342 a45 45 0 0 1 90 0 q-45 -22 -90 0 Z" fill="#DEDAD1"/>
+              <!-- student -->
+              <path d="M414 452 v-52 a62 62 0 0 1 124 0 v52 Z" fill="#D9705A"/>
+              <circle cx="476" cy="340" r="45" fill="#C98D62"/>
+              <path d="M431 338 a45 45 0 0 1 90 0 q-45 -26 -90 0 Z" fill="#1B3A2C"/>
+            </g>
+            <!-- table -->
+            <path d="M104 424 H616 A28 28 0 0 1 644 452 V520 H76 V452 A28 28 0 0 1 104 424 Z" fill="#C4653F"/>
+            <!-- plates -->
+            <g>
+              <ellipse cx="258" cy="454" rx="58" ry="16" fill="#FBF6F1"/>
+              <ellipse cx="452" cy="454" rx="58" ry="16" fill="#FBF6F1"/>
+              <g stroke="#5C4436" stroke-width="2.4" fill="none" stroke-linecap="round">
+                <path d="M248 458 q4 -5 0 -10 q-4 -5 0 -10"/>
+                <path d="M258 458 q4 -5 0 -10 q-4 -5 0 -10"/>
+                <path d="M268 458 q4 -5 0 -10 q-4 -5 0 -10"/>
+                <path d="M442 458 q4 -5 0 -10 q-4 -5 0 -10"/>
+                <path d="M452 458 q4 -5 0 -10 q-4 -5 0 -10"/>
+                <path d="M462 458 q4 -5 0 -10 q-4 -5 0 -10"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+        <div class="toast">
+          <svg class="h" viewBox="0 0 24 24" fill="none">
+            <path d="M12 20s-7-4.5-7-9.5A4.2 4.2 0 0 1 12 7a4.2 4.2 0 0 1 7 3.5c0 5-7 9.5-7 9.5Z"
+              stroke="#E8836A" stroke-width="1.9" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <b>Tonight, 6:30 PM</b>
+            <span>Hana is coming for dinner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="how" class="sec-beige">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">How musubi works</div>
+      <h2>From “what’s for dinner?”<br>to “how was your evening?”</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="top">
+          <div class="circ" style="background:#E8836A">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round">
+              <circle cx="12" cy="12" r="5.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+            </svg>
+          </div>
+          <div class="no">01</div>
+        </div>
+        <h3>Get matched</h3>
+        <p>Both sides post when they are free. Musubi suggests care-students nearby who share your interests.</p>
+      </div>
+      <div class="step">
+        <div class="top">
+          <div class="circ" style="background:#E9BC5C">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round">
+              <path d="M8 14c1.5-1.6 0-3.2 0-4.8S9.5 6 9.5 6"/>
+              <path d="M12 14c1.5-1.6 0-3.2 0-4.8S13.5 6 13.5 6"/>
+              <path d="M16 14c1.5-1.6 0-3.2 0-4.8S17.5 6 17.5 6"/>
+              <path d="M4.5 16.5h15"/>
+            </svg>
+          </div>
+          <div class="no">02</div>
+        </div>
+        <h3>Choose two meals</h3>
+        <p>Everyone chooses their own dinner. Both meals arrive fresh, together.</p>
+      </div>
+      <div class="step">
+        <div class="top">
+          <div class="circ" style="background:#8CAA97">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round">
+              <path d="M12 20s-7-4.5-7-9.5A4.2 4.2 0 0 1 12 7a4.2 4.2 0 0 1 7 3.5c0 5-7 9.5-7 9.5Z"/>
+            </svg>
+          </div>
+          <div class="no">03</div>
+        </div>
+        <h3>Share the table at home</h3>
+        <p>The student comes to them. 45–60 minutes of food and unhurried conversation, no journey to make.</p>
+      </div>
+      <div class="step">
+        <div class="top">
+          <div class="circ" style="background:#1B3A2C">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12.5 10 17.5 19 7"/>
+            </svg>
+          </div>
+          <div class="no">04</div>
+        </div>
+        <h3>Family gets an update</h3>
+        <p>A short, thoughtful check-in is shared after every visit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEFORE YOU SIGN UP / ELIGIBILITY GATE ============ -->
+<section id="survey" class="sec-paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Before you sign up</div>
+      <h2>We only accept care students</h2>
+      <p>Musubi does not recruit students at large. Every visiting student is enrolled on a
+        recognised elderly-care, welfare, nursing or rehabilitation programme — and we confirm
+        that with their school before they are given access to anything.</p>
+    </div>
+
+    <div class="gate">
+      <div class="gstep"><div class="gn">1</div>
+        <b>Upload two IDs</b>
+        <p>A government photo ID and a current student ID card, submitted in the app.</p></div>
+      <div class="gstep"><div class="gn">2</div>
+        <b>We verify with the school</b>
+        <p>We confirm directly with the institution that the applicant is an officially enrolled
+          student on an approved programme.</p></div>
+      <div class="gstep"><div class="gn">3</div>
+        <b>Only then does the app open</b>
+        <p>Until that check passes there is no access — no browsing, no requests, no addresses.</p></div>
+    </div>
+
+    <div class="gate-note">
+      <div class="gi">!</div>
+      <div>
+        <p><b>Who is eligible.</b></p>
+        <p style="margin-bottom:0">Students aged 18 and over enrolled in elderly care, care welfare, social welfare, nursing, rehabilitation or a closely related subject.</p>
+        <ul class="eligible" id="progList"></ul>
+      </div>
+    </div>
+
+    <div class="sec-head" style="margin-top:70px">
+      <div class="kicker">And for everyone</div>
+      <h2>A two-minute conversation</h2>
+      <p>Before anyone is matched we ask a few things about hobbies and preferences, then match
+        on what people actually have in common. Students fill in a short form. Older members can
+        simply talk to musubi — no typing, no small print.</p>
+    </div>
+
+    <div class="tabwrap">
+      <div class="viewtabs">
+        <button class="on" data-sv="elderly" onclick="setSv(this)">🌼 Elderly · voice</button>
+        <button data-sv="student" onclick="setSv(this)">🎓 Student · form</button>
+      </div>
+    </div>
+
+    <div class="surv">
+      <!-- ELDERLY: VOICE -->
+      <div id="svE">
+        <div class="orb" id="orb">
+          <div class="wave"><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <p style="text-align:center;font-size:.87rem;color:var(--ink-soft);margin-bottom:24px"
+           id="orbLabel">Tap start — musubi will ask a few questions out loud.</p>
+
+        <div class="chatlog" id="chat"></div>
+
+        <div id="svResult" style="display:none">
+          <div class="rule" style="margin-bottom:20px"></div>
+          <p style="font-size:.87rem;color:var(--ink-soft);margin-bottom:12px">
+            <b style="color:var(--forest)">What we heard:</b></p>
+          <div class="hobbies" id="heardTags"></div>
+          <div class="matchcard top">
+            <div class="av" style="background:#8CAA97" id="svMatchAv">れ</div>
+            <div><b id="svMatchName">Ren</b><span class="sh" id="svMatchSh">Also gardens · plays piano · free Wed evenings</span></div>
+            <div class="pct"><div class="n">94%</div><div class="l">match</div></div>
+          </div>
+        </div>
+
+        <div style="text-align:center;margin-top:24px">
+          <button class="btn btn-dark btn-lg" id="voiceBtn" onclick="playVoice()">
+            Start the conversation <span class="ar">→</span></button>
+        </div>
+      </div>
+
+      <!-- STUDENT: FORM -->
+      <div id="svS" style="display:none">
+        <p style="font-size:.95rem;color:var(--ink-soft);margin-bottom:8px">
+          <b style="color:var(--forest);font-size:1.05rem;display:block;margin-bottom:4px;
+          font-family:'Playfair Display',serif">What are you into?</b>
+          Pick a few — we match on shared ground, not just distance.</p>
+        <div class="hobbies" id="hobList" style="margin-top:18px"></div>
+
+        <div class="two-col">
+          <div class="field"><label for="svProg">Your programme</label>
+            <select id="svProg"></select></div>
+          <div class="field"><label for="svFreq">How often could you visit?</label>
+            <select id="svFreq"><option>Once a week</option><option>Twice a week</option>
+            <option>Once a fortnight</option><option>Whenever I&rsquo;m free</option></select></div>
+        </div>
+
+        <button class="btn btn-dark btn-lg" style="width:100%" onclick="findMatches()">
+          Find my matches <span class="ar">→</span></button>
+
+        <div id="svMatches" style="margin-top:26px"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEALS + MATCH, SIDE BY SIDE ============ -->
+<section id="duo">
+  <div class="wrap">
+    <div class="duo">
+      <div class="duo-col" id="meals">
+    <div class="sec-head">
+      <div class="kicker">Choose two meals</div>
+      <h2>Everyone chooses their own dinner</h2>
+      <p>A small, curated menu with softer options built for older appetites. Each person picks
+        whatever they feel like, and both meals arrive fresh at the door, together, just before
+        the visit starts.</p>
+    </div>
+
+    <div class="mealgrid">
+      <div class="picker">
+        <div class="pk-head">
+          <div class="av" style="background:#C4653F" id="mealAvK">け</div>
+          <div><b id="mealNameK">Keiko is choosing</b><span>Low sodium · soft options shown first</span></div>
+        </div>
+        <div class="cui" id="cuiK"></div>
+        <div id="dishK"></div>
+      </div>
+
+      <div class="picker">
+        <div class="pk-head">
+          <div class="av" style="background:#E8836A" id="mealAvH">は</div>
+          <div><b id="mealNameH">Hana is choosing</b><span>Her meal is free — included in the visit</span></div>
+        </div>
+        <div class="cui" id="cuiH"></div>
+        <div id="dishH"></div>
+      </div>
+    </div>
+
+    <div class="deliver">
+      <div>
+        <div class="dk" id="dkK">Keiko’s meal</div>
+        <div class="dv" id="delK">Salmon teishoku</div>
+        <div class="dm" id="delKc">和食 Washoku</div>
+      </div>
+      <div class="mid">
+        <div class="t">18:20</div>
+        <div class="s">Both arrive together</div>
+      </div>
+      <div style="text-align:right">
+        <div class="dk" id="dkH">Hana’s meal</div>
+        <div class="dv" id="delH">Katsu curry</div>
+        <div class="dm" id="delHc">洋食 Yōshoku</div>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--ink-mute);font-size:.88rem;margin-top:22px" id="delivNote">
+      Delivered to Keiko’s door at 18:20 · dinner starts at 18:30 · one payment covers both
+    </p>
+      </div>
+
+      <div class="duo-col" id="browse">
+    <div class="sec-head">
+      <div class="kicker">Find a match</div>
+      <h2>Matched on when you are free</h2>
+      <p>Both sides enter their availability in advance. Musubi suggests a match on hobbies,
+        times and interests, and sends the request for you — the other person approves or declines.</p>
+    </div>
+
+    <div class="autobox">
+      <div class="autohead"><div class="ai">✦</div><b>Automatic matching</b></div>
+      <p class="autosub">How a booking is made without anyone searching.</p>
+      <div class="autoflow" id="autoFlow">
+        <div class="aline done"><div class="an">1</div><div class="at">Both sides enter their availability ahead of time.</div></div>
+        <div class="aline"><div class="an">2</div><div class="at">Musubi suggests a match on shared hobbies, times and interests.</div></div>
+        <div class="aline"><div class="an">3</div><div class="at">The request is sent automatically to the other person.</div></div>
+        <div class="aline"><div class="an">4</div><div class="at">They approve or decline — nothing is ever forced.</div></div>
+        <div class="aline"><div class="an">5</div><div class="at">Both approve, and the mealtime is booked.</div></div>
+      </div>
+      <div class="autobtns">
+        <button class="btn btn-dark btn-sm" id="autoBtn" onclick="autoStep()">Run the match <span class="ar">→</span></button>
+        <button class="btn btn-ghost btn-sm" onclick="autoDecline()">Show a decline</button>
+      </div>
+      <div class="autoresult" id="autoRes"></div>
+    </div>
+
+    <p style="font-size:.88rem;color:var(--ink-mute);margin:0 0 20px">
+      Prefer to look for yourself? You can still browse everyone free nearby.
+    </p>
+
+    <div class="tabwrap">
+      <div class="viewtabs">
+        <button class="on" data-view="elderly" onclick="setView(this)">🌼 Looking for company</button>
+        <button data-view="student" onclick="setView(this)">🎓 I’m a student</button>
+      </div>
+    </div>
+
+    <!-- student-only availability strip -->
+    <div class="avail-strip" id="availStrip" style="display:none">
+      <div class="as-t">
+        <b>Your availability this week</b>
+        <span>Tap the evenings you’re free — neighbours can then request you.</span>
+      </div>
+      <div class="slots">
+        <button class="slot on" onclick="tog(this)">Mon eve</button>
+        <button class="slot" onclick="tog(this)">Tue eve</button>
+        <button class="slot on" onclick="tog(this)">Wed eve</button>
+        <button class="slot" onclick="tog(this)">Thu eve</button>
+        <button class="slot on" onclick="tog(this)">Fri eve</button>
+        <button class="slot" onclick="tog(this)">Sat lunch</button>
+        <button class="slot" onclick="tog(this)">Sun lunch</button>
+      </div>
+      <div class="as-count"><b id="slotN">3</b> slots posted</div>
+    </div>
+
+    <div class="map-bar">
+      <div class="chips">
+        <button class="chip on" data-day="tonight" onclick="setDay(this)">Tonight</button>
+        <button class="chip" data-day="tomorrow" onclick="setDay(this)">Tomorrow</button>
+        <button class="chip" data-day="week" onclick="setDay(this)">This week</button>
+      </div>
+      <div class="chip-static">⊕ Within 3 km</div>
+    </div>
+
+    <div class="browse">
+      <div class="mapbox">
+        <svg viewBox="0 0 640 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="640" height="480" fill="#E9E5DA"/>
+          <path d="M556 0 L640 0 L640 480 L520 480 Z" fill="#B7CFD6" opacity=".75"/>
+          <path d="M556 0 L575 0 L540 480 L520 480 Z" fill="#A9C5CD" opacity=".5"/>
+          <ellipse cx="118" cy="112" rx="98" ry="62" fill="#C4D8C0"/>
+          <g stroke="#D6D1C3" stroke-width="7" stroke-linecap="round">
+            <path d="M-20 120 L660 300"/><path d="M200 -20 L330 500"/><path d="M-20 400 L400 -20"/>
+          </g>
+          <g stroke="#FFFFFF" stroke-width="15" stroke-linecap="round">
+            <path d="M-20 250 L660 175"/><path d="M95 500 L250 -20"/><path d="M-20 330 L660 415"/>
+          </g>
+          <g stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" opacity=".9">
+            <path d="M420 -20 L500 500"/>
+          </g>
+        </svg>
+        <div class="park-label"><b>代々木公園</b>Yoyogi Park</div>
+
+        <!-- students (seen by elderly) -->
+        <button class="pin pin-e on" data-id="ren" style="left:44%;top:56%" onclick="show('ren',this)">
+          <div class="av" style="background:#8CAA97">れ</div><div class="tm">19:00</div></button>
+        <button class="pin pin-e" data-id="haru" style="left:60%;top:34%" onclick="show('haru',this)">
+          <div class="av" style="background:#E8836A">は</div><div class="tm">18:30</div></button>
+        <button class="pin pin-e" data-id="mei" style="left:70%;top:66%" onclick="show('mei',this)">
+          <div class="av" style="background:#E9BC5C">め</div><div class="tm">19:30</div></button>
+
+        <!-- elderly requests (seen by students) -->
+        <button class="pin pin-s on" data-id="keiko" style="left:47%;top:40%" onclick="show('keiko',this)">
+          <div class="av" style="background:#C4653F">け</div><div class="tm">18:30</div></button>
+        <button class="pin pin-s" data-id="haruo" style="left:66%;top:60%" onclick="show('haruo',this)">
+          <div class="av" style="background:#6E8F7A">た</div><div class="tm">19:00</div></button>
+        <button class="pin pin-s" data-id="aiko" style="left:57%;top:74%" onclick="show('aiko',this)">
+          <div class="av" style="background:#B5563A">あ</div><div class="tm">18:00</div></button>
+
+        <div class="you" style="left:33%;top:78%"><div class="dot">⌂</div><span>You</span></div>
+      </div>
+
+      <!-- ELDERLY: SWIPE DECK -->
+      <div class="deck-wrap" id="panelSwipe">
+        <div class="viewsub">
+          <button class="on" onclick="setSub(this,'swipe')">💚 Swipe</button>
+          <button onclick="setSub(this,'detail')">📋 Full profile</button>
+        </div>
+        <div class="deck" id="deck"></div>
+        <div class="deck-btns" id="deckBtns">
+          <button class="dbtn no" onclick="swipeTop(-1)" title="Not for me">✕</button>
+          <button class="dbtn yes" onclick="swipeTop(1)" title="Yes please">♥</button>
+        </div>
+        <p class="deck-hint">Drag the card, or tap ✕ and ♥. Swiping right sends a request.</p>
+      </div>
+
+      <!-- ELDERLY VIEW PANEL -->
+      <div class="panel" id="panelE" style="display:none">
+        <div class="panel-top">
+          <div class="av-lg" id="pAv" style="background:#8CAA97">れ</div>
+          <div style="min-width:0">
+            <div class="avail" id="pAvail">Available tonight</div>
+            <h3><span id="pName">Ren</span><span class="verified">✓</span></h3>
+            <p class="uni" id="pUni">Keio University · 12 min away</p>
+          </div>
+          <button class="heart" id="pHeart" onclick="this.classList.toggle('on')" title="Favourite">♡</button>
+        </div>
+        <div class="tags" id="pTags"></div>
+        <p class="quote" id="pQuote"></p>
+        <div class="rule"></div>
+        <div class="two">
+          <div><div class="lbl">They’re free</div>
+            <p class="val" id="pTime">19:00–19:30</p><p class="sub" id="pDate">Tonight, Aug 20</p></div>
+          <div><div class="lbl">Their meal pick</div>
+            <p class="val" id="pMeal">Chicken soboro bowl</p><p class="sub">Student meal included</p></div>
+        </div>
+
+        <div id="eIdle">
+          <button class="btn btn-dark btn-lg" style="width:100%" onclick="sendRequest()">
+            <span id="reqBtnTxt">Request Ren for dinner</span> <span class="ar">→</span></button>
+          <p class="price-note" id="priceNote">From ¥4,800 · includes both meals and the visit</p>
+        </div>
+
+        <div class="state pending" id="ePending" style="display:none">
+          <div class="si">⏳</div>
+          <b>Request sent</b>
+          <p id="ePendTxt"></p>
+          <button class="simlink" id="eDemoBtn" onclick="acceptFromStudent()"></button>
+        </div>
+
+        <div class="state matched" id="eMatched" style="display:none">
+          <div class="si">✓</div>
+          <b>It’s a match!</b>
+          <p id="eMatchTxt"></p>
+          <button class="simlink" onclick="resetMatch()">Start over</button>
+        </div>
+      </div>
+
+      <!-- STUDENT VIEW PANEL -->
+      <div class="panel" id="panelS" style="display:none">
+        <div class="panel-top">
+          <div class="av-lg" id="sAv" style="background:#C4653F">け</div>
+          <div style="min-width:0">
+            <div class="avail" id="sAvail">Requesting tonight</div>
+            <h3><span id="sName">Keiko</span><span class="verified">✓</span></h3>
+            <p class="uni" id="sArea">Setagaya-ku · 600 m away</p>
+          </div>
+        </div>
+
+        <ul class="reqlist" id="sMeta"></ul>
+
+        <div class="askbox">
+          <div class="nk">What her family asks you to notice</div>
+          <p id="sAsk"></p>
+        </div>
+
+        <div class="rule"></div>
+        <div class="two">
+          <div><div class="lbl">Dinner time</div>
+            <p class="val" id="sTime">18:30–19:30</p><p class="sub" id="sDate">Tonight, Aug 20</p></div>
+          <div><div class="lbl">You receive</div>
+            <p class="val" id="sMeal">Free meal + 1 hour</p><p class="sub">Logged to your hours record</p></div>
+        </div>
+
+        <div id="sIdle">
+          <div class="btn-row">
+            <button class="btn btn-dark btn-lg" onclick="studentAccept()">Accept this visit <span class="ar">→</span></button>
+            <button class="btn btn-ghost btn-lg" onclick="studentDecline()">Not this time</button>
+          </div>
+          <p class="price-note">Your meal is free · 60 verified minutes added to your hours record</p>
+        </div>
+
+        <div class="state matched" id="sMatched" style="display:none">
+          <div class="si">✓</div>
+          <b>It’s a match!</b>
+          <p id="sMatchTxt"></p>
+          <button class="simlink" onclick="resetMatch()">Start over</button>
+        </div>
+
+        <div class="state pending" id="sDeclined" style="display:none">
+          <div class="si">–</div>
+          <b>Declined</b>
+          <p>No problem — this request goes back out to other students nearby.</p>
+          <button class="simlink" onclick="resetMatch()">Start over</button>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAMILY REPORT ============ -->
+<section id="families" class="sec-paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Personalized family check-in</div>
+      <h2>Stay close — even when you live far away.</h2>
+      <p>You choose what matters. The student answers it in under a minute. You get the
+        answer the same evening — no chasing, no awkward messages.</p>
+    </div>
+
+    <div class="stepper">
+      <button class="on" data-st="0" onclick="setStage(this)"><span class="n">1</span> Family asks</button>
+      <button data-st="1" onclick="setStage(this)"><span class="n">2</span> Student answers</button>
+      <button data-st="2" onclick="setStage(this)"><span class="n">3</span> Family receives</button>
+    </div>
+
+    <div class="flowcard">
+      <!-- STAGE 1 -->
+      <div class="stage on" id="st0">
+        <div class="fc-head">
+          <div class="who" style="background:#F6E2DA">👩</div>
+          <h3>Check-in requests for Mum</h3>
+        </div>
+        <p class="fc-sub">Tick what you’d like Hana to notice or ask about tonight.</p>
+        <div id="askList"></div>
+        <div class="customq">
+          <label>📝 <span>Anything else?</span></label>
+          <input id="customQ" type="text" value="Can you see if she’s having trouble using her new phone?">
+          <div class="hint">Your student sees this before they arrive.</div>
+        </div>
+        <div class="fc-foot">
+          <span class="meta"><b id="askN">5</b> requests · sent to Hana</span>
+          <button class="btn btn-dark" onclick="go(1)">See what Hana gets <span class="ar">→</span></button>
+        </div>
+      </div>
+
+      <!-- STAGE 2 -->
+      <div class="stage" id="st1">
+        <div class="fc-head">
+          <div class="who" style="background:#E8836A;color:#fff">は</div>
+          <h3>Hana’s check-in form</h3>
+        </div>
+        <p class="fc-sub">Takes 30–60 seconds, filled in on the way home.</p>
+        <div id="optList"></div>
+        <div class="customq">
+          <label>📝 <span>Anything else you noticed?</span></label>
+          <textarea id="note">She seemed happy today and talked a lot about her garden.</textarea>
+        </div>
+        <div class="fc-foot">
+          <span class="meta">Visit completed · 6:03–7:01 PM</span>
+          <button class="btn btn-dark" onclick="go(2)">Submit check-in <span class="ar">→</span></button>
+        </div>
+      </div>
+
+      <!-- STAGE 3 -->
+      <div class="stage" id="st2">
+        <div class="fc-head">
+          <div class="who" style="background:#E7EFE9">✓</div>
+          <h3>Mum’s dinner check-in</h3>
+        </div>
+        <p class="fc-sub">Aug 20 · Hana visited from 6:03–7:01 PM</p>
+        <div id="repList"></div>
+        <div class="note" style="margin-top:22px">
+          <div class="nk">Hana’s note</div>
+          <p id="repNote"></p>
+        </div>
+        <div class="verdict good" id="verdict">
+          <div class="vi">✓</div><b>No concerns reported.</b>
+        </div>
+        <div class="fc-foot">
+          <span class="meta" id="sharedWith">Shared with Ayumi &amp; Kenji · approved by Keiko</span>
+          <button class="btn btn-ghost" onclick="go(0)">← Change my requests</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="consent-card" style="max-width:660px;margin-left:auto;margin-right:auto">
+      <div class="ci">✓</div>
+      <div>
+        <b>Your parent decides what you see</b>
+        <span>Even when an adult child is paying, nothing about the older person&rsquo;s condition
+          leaves their home without their consent. They approve each kind of information before
+          it is shared, and can withdraw any of it at any time.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHO IT'S FOR ============ -->
+<section id="who" class="sec-beige">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Who it’s for</div>
+      <h2>Everyone gets something real</h2>
+      <p>An honest exchange between three people who each need something the others can give.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="ic" style="background:#F6E2DA">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B5563A" stroke-width="1.7" stroke-linecap="round">
+            <circle cx="12" cy="12" r="3.4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M18 6l-2 2M6 18l2-2M18 18l-2-2"/></svg>
+        </div>
+        <h3>For elderly parents</h3>
+        <p>Company at your own table — somebody to eat with, not a delivery driver at the door.</p>
+        <ul><li>Real conversation over a hot meal</li>
+        <li>It happens at home — you never have to go out</li>
+        <li>Choose your own food, every time</li>
+        <li>Favourite a student so the same face returns</li>
+        <li>You decide what is shared with your family</li></ul>
+      </div>
+      <div class="card">
+        <div class="ic" style="background:#E7EFE9">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3F7355" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M3 8.5 12 4l9 4.5-9 4.5-9-4.5Z"/><path d="M7 11v4.5c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5V11"/></svg>
+        </div>
+        <h3>For care students</h3>
+        <p>Real time with older people, outside the classroom and outside placement hours.</p>
+        <ul><li>Your meal is completely free</li>
+        <li>Volunteering hours, logged automatically</li>
+        <li>A record of your hours you can submit to your programme</li>
+        <li>Experience with real people, not case studies</li>
+        <li>Something worth putting on a CV</li></ul>
+      </div>
+      <div class="card">
+        <div class="ic" style="background:#FBF0DC">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B08324" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20s-7-4.5-7-9.5A4.2 4.2 0 0 1 12 7a4.2 4.2 0 0 1 7 3.5c0 5-7 9.5-7 9.5Z"/></svg>
+        </div>
+        <h3>For adult children</h3>
+        <p>Stop wondering how Mum is doing between your calls, when you live too far to drop in.</p>
+        <ul><li>Tell us exactly what to check on</li><li>A clear report after every visit</li>
+        <li>Flagged straight away if something’s off</li>
+        <li>Only ever what your parent has agreed to share</li>
+        <li>Works from another city, or country</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAFETY ============ -->
+<section id="safety">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Safety system</div>
+      <h2>Trust, built into every visit</h2>
+      <p>Someone is coming into a home. We treat that seriously — nobody gets in without being
+        verified by their school, the address is held back until they are on their way, and every
+        visit is opened and closed at the door.</p>
+    </div>
+
+    <div class="safety-grid">
+      <div class="timeline">
+        <div class="tl-phase">Before they can use musubi at all</div>
+
+        <div class="tl-item">
+          <div class="tl-ic" style="background:#F6E2DA">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B5563A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="11" r="2.2"/>
+              <path d="M5.5 16.5c.8-1.6 2-2.3 3.5-2.3s2.7.7 3.5 2.3M15 10h4M15 13.5h3"/></svg>
+          </div>
+          <div>
+            <h4>Two IDs, uploaded</h4>
+            <p>Every applicant submits a government photo ID and a current student ID card. There
+              are no anonymous accounts anywhere on the platform.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-ic" style="background:#F6E2DA">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B5563A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3.5 3 8l9 4.5L21 8Z"/><path d="M7 10.5V16c0 1.6 2.4 2.8 5 2.8s5-1.2 5-2.8v-5.5"/></svg>
+          </div>
+          <div>
+            <h4>Verified with the school</h4>
+            <p>We contact the institution directly to confirm the applicant is an officially
+              enrolled student on an approved care, welfare, nursing or rehabilitation programme.</p>
+          </div>
+        </div>
+
+        <div class="tl-item last">
+          <div class="tl-ic" style="background:#F6E2DA">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B5563A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/>
+              <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+          </div>
+          <div>
+            <h4>No access until it passes</h4>
+            <p>Until that verification comes back, the app stays locked. No browsing, no requests,
+              no profiles, no addresses.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-phase">On the way &amp; at the door</div>
+
+        <div class="tl-item">
+          <div class="tl-ic" style="background:#E7EFE9">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3F7355" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21s-6.5-5.6-6.5-10.2A6.5 6.5 0 0 1 18.5 10.8C18.5 15.4 12 21 12 21Z"/>
+              <circle cx="12" cy="10.5" r="2.4"/></svg>
+          </div>
+          <div>
+            <h4>The address stays hidden</h4>
+            <p>A student only ever sees the neighbourhood. The exact address is released at the
+              moment they set off for the visit — never before.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-ic" style="background:#E7EFE9">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3F7355" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 1.8"/></svg>
+          </div>
+          <div>
+            <h4>Live location, 10 minutes out</h4>
+            <p>Location sharing starts ten minutes before the student is due to arrive, so both
+              the household and the family can see them approaching.</p>
+          </div>
+        </div>
+
+        <div class="tl-item last">
+          <div class="tl-ic" style="background:#E7EFE9">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3F7355" stroke-width="1.8" stroke-linejoin="round">
+              <rect x="3.5" y="3.5" width="7" height="7" rx="1.4"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.4"/>
+              <rect x="3.5" y="13.5" width="7" height="7" rx="1.4"/><path d="M13.5 13.5h3v3h-3zM20.5 13.5v3M17 20.5h3.5"/></svg>
+          </div>
+          <div>
+            <h4>QR scan starts the session</h4>
+            <p>A temporary code appears on the older person&rsquo;s device. Nothing begins until the
+              student scans it at the door — so a visit can only start if the right person is really there.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-phase">During &amp; afterwards</div>
+
+        <div class="tl-item">
+          <div class="tl-ic" style="background:#FBF0DC">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B08324" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 9a6 6 0 1 0-12 0c0 5-2 6-2 6h16s-2-1-2-6ZM10.3 20a2 2 0 0 0 3.4 0"/></svg>
+          </div>
+          <div>
+            <h4>Family notified, visit closed</h4>
+            <p>The scan tells the family the visit has started. A second scan on the way out
+              timestamps the end, so its length is recorded rather than self-reported.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-ic" style="background:#FBF0DC">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B08324" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3.5h8L18.5 8v12.5H6Z"/><path d="M13.5 3.5V8h5M9 12.5h6M9 16h4"/></svg>
+          </div>
+          <div>
+            <h4>Visit report &amp; hours record</h4>
+            <p>The check-in the family asked for is delivered automatically, and the verified
+              minutes are added to the student&rsquo;s hours record for their programme.</p>
+          </div>
+        </div>
+
+        <div class="tl-item last">
+          <div class="tl-ic" style="background:#FBF0DC">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B08324" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3.5 19 6v5.5c0 4.2-2.9 7.4-7 9-4.1-1.6-7-4.8-7-9V6Z"/><path d="M9 12l2 2 4-4.2"/></svg>
+          </div>
+          <div>
+            <h4>Ratings, blocking &amp; reporting</h4>
+            <p>Both sides rate each other after every visit, and either can block or report the
+              other. Reports are reviewed by a person, not a queue.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THREE SCREENS ============ -->
+<section id="screens" class="sec-paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">One visit, three screens</div>
+      <h2>Everyone sees the same visit</h2>
+      <p>Follow one lunch from the moment the address is released to the family&rsquo;s phone.
+        Step through it below.</p>
+    </div>
+
+    <div class="tripstep" id="tripStep">
+      <div class="tstep done"><div class="c">1</div><div class="t">On the way</div></div>
+      <div class="tline"></div>
+      <div class="tstep"><div class="c">2</div><div class="t">Verify</div></div>
+      <div class="tline"></div>
+      <div class="tstep"><div class="c">3</div><div class="t">Visit</div></div>
+      <div class="tline"></div>
+      <div class="tstep"><div class="c">4</div><div class="t">Complete</div></div>
+    </div>
+
+    <div class="tripbox">
+      <div>
+        <div class="trip-lab">✦ Student app</div>
+        <div class="phoneframe"><div class="phonescr">
+          <div class="phbar"><span id="phTime">12:01</span><span class="lg">musubi</span><span>•••</span></div>
+          <div class="phbody" id="phBody"></div>
+        </div></div>
+      </div>
+
+      <div>
+        <div class="trip-lab">⌂ Keiko&rsquo;s device</div>
+        <div class="tabframe"><div class="tabscr">
+          <div class="tabbar"><span class="lg">musubi</span><span>Today · Aug 20</span></div>
+          <div class="tabbody" id="tabBody"></div>
+        </div></div>
+      </div>
+
+      <div>
+        <div class="trip-lab">♡ Family updates</div>
+        <div class="feed">
+          <div class="feedhead">
+            <div><b>Mum&rsquo;s visit</b><span>Live updates</span></div>
+            <div class="chip2">Today</div>
+          </div>
+          <div id="feedBody"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tripnav">
+      <button class="btn btn-ghost" onclick="trip(-1)">← Back</button>
+      <button class="btn btn-dark" id="tripNext" onclick="trip(1)">Next step <span class="ar">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Pricing</div>
+      <h2>Pay once, or pay less every time</h2>
+      <p>One price covers the visit and both meals — including the student&rsquo;s. The more regular
+        the visits, the cheaper each one gets.</p>
+    </div>
+    <div class="prices">
+      <div class="price"><h4>Single visit</h4>
+        <div class="amt"><span id="pr1">¥4,800</span><span> /visit</span></div>
+        <p>Try it once, no commitment.</p></div>
+      <div class="price feat"><div class="tg">Most popular</div><h4>Monthly</h4>
+        <div class="amt"><span id="pr2">¥16,800</span><span> /month</span></div>
+        <p>Four visits · <span id="pr2e">¥4,200</span> each · cancel anytime</p></div>
+      <div class="price"><h4>Yearly</h4>
+        <div class="amt"><span id="pr3">¥179,000</span><span> /year</span></div>
+        <p>Weekly visits · <span id="pr3e">¥3,440</span> each · best value</p></div>
+    </div>
+    <p style="text-align:center;color:var(--ink-mute);font-size:.88rem;margin-top:34px">
+      Every plan includes both meals, the visit, and unlimited family check-in reports.
+    </p>
+  </div>
+</section>
+</div>
+
+<!-- ============ PART 2 — REGISTRATION ============ -->
+<section id="register" class="register">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Get started</div>
+      <h2>Join musubi</h2>
+      <p>Tell us who you are and we’ll set up the right account for you.</p>
+    </div>
+
+    <div class="reg-box">
+      <div id="formWrap">
+        <div class="demo-flag">⚠️ This is a prototype — the form doesn’t save anything or send real emails yet.</div>
+
+        <label style="margin-bottom:12px">I’m signing up as…</label>
+        <div class="roles">
+          <button type="button" class="role on" data-role="family" onclick="pick(this)">
+            <span class="em">👨‍👩‍👧</span><span class="t">Family member</span><span class="s">For my parent</span></button>
+          <button type="button" class="role" data-role="elderly" onclick="pick(this)">
+            <span class="em">🌼</span><span class="t">For myself</span><span class="s">I’d like company</span></button>
+          <button type="button" class="role" data-role="student" onclick="pick(this)">
+            <span class="em">🎓</span><span class="t">Care student</span><span class="s">I want to visit</span></button>
+        </div>
+
+        <form onsubmit="return done(event)">
+          <div class="two-col">
+            <div class="field"><label for="fn">First name</label>
+              <input id="fn" type="text" placeholder="Toshinori" required></div>
+            <div class="field"><label for="ln">Last name</label>
+              <input id="ln" type="text" placeholder="Esaka" required></div>
+          </div>
+          <div class="field"><label for="em">Email address</label>
+            <input id="em" type="email" placeholder="you@example.com" required></div>
+          <div class="field"><label for="ph">Phone number</label>
+            <input id="ph" type="tel" placeholder="090-1234-5678" required></div>
+
+          <div class="role-fields on" data-fields="family">
+            <div class="field"><label for="pname">Your parent’s name</label>
+              <input type="text" id="pname" placeholder="Yoko Yamada"></div>
+            <div class="field"><label for="parea">Where do they live?</label>
+              <input type="text" id="parea" placeholder="Setagaya-ku, Tokyo">
+              <div class="hint">We’ll match them with students studying nearby.</div></div>
+            <div class="field"><label for="concerns">What should we check on?</label>
+              <textarea id="concerns" placeholder="Whether she’s taking her blood pressure medication, if she’s leaving the house, how she seems in herself…"></textarea>
+              <div class="hint">You can change this any time before a visit.</div></div>
+          </div>
+
+          <div class="role-fields" data-fields="elderly">
+            <div class="field"><label for="earea">Your neighbourhood</label>
+              <input type="text" id="earea" placeholder="Setagaya-ku, Tokyo"></div>
+            <div class="field"><label for="diet">Any dietary needs?</label>
+              <select id="diet"><option>No special requirements</option><option>Low sodium</option>
+              <option>Diabetic-friendly</option><option>Soft / easy to chew</option>
+              <option>Vegetarian</option><option>Something else — I’ll explain later</option></select></div>
+            <div class="field"><label for="when">When would you like company?</label>
+              <select id="when"><option>Weekday evenings</option><option>Weekday lunchtimes</option>
+              <option>Weekends</option><option>I’m flexible</option></select></div>
+          </div>
+
+          <div class="role-fields" data-fields="student">
+            <div class="field"><label for="uni">Your school</label>
+              <input type="text" id="uni" placeholder="東京福祉専門学校">
+              <div class="hint">We contact your school directly to confirm you are enrolled.</div></div>
+            <div class="field"><label for="prog">Your programme</label>
+              <select id="prog"></select>
+              <div class="hint" id="progHint">Only elderly care, care welfare, social welfare, nursing and
+                rehabilitation programmes are eligible.</div></div>
+            <div class="two-col">
+              <div class="field"><label for="yr">Year of study</label>
+                <select id="yr"><option>1st year</option><option>2nd year</option>
+                <option>3rd year</option><option>Final year</option></select></div>
+              <div class="field"><label for="lang">Languages</label>
+                <input type="text" id="lang" placeholder="Japanese, English"></div>
+            </div>
+            <div class="field"><label for="why">Why do you want to do this?</label>
+              <textarea id="why" placeholder="A sentence or two — this is shown to families when they choose a student."></textarea>
+              <div class="hint">You will be asked to upload a government photo ID and your student ID
+                card. The app stays locked until your school confirms your enrolment.</div></div>
+          </div>
+
+          <label class="consent"><input type="checkbox" required>
+            <span>I agree to the Terms of Service and Privacy Policy, and consent to identity and
+              enrolment verification where required.</span></label>
+
+          <button type="submit" class="btn btn-dark btn-lg" style="width:100%">Create my account</button>
+          <p class="hint" style="text-align:center;margin-top:16px">Already registered? <a href="#top">Log in</a></p>
+        </form>
+      </div>
+
+      <div class="ok-state" id="okState">
+        <div class="big">🍱</div>
+        <h3>Welcome to musubi</h3>
+        <p id="okMsg">We’ve saved your details.</p>
+        <button class="btn btn-ghost" onclick="reset_()">Register someone else</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top" style="pointer-events:none">
+      <span class="mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M4 15c2.5 0 3-4 5.5-4S13 15 15.5 15 20 11 20 11" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/>
+      </svg></span>
+      <span class="wm">musubi</span>
+    </a>
+    <p>Shared meals. Real company. Peace of mind.</p>
+    <p class="jp">むすび — to tie together</p>
+    <p style="margin-top:18px;font-size:.8rem;color:#75897C" id="footLoc">Prototype concept · Japan · Korea · China</p>
+  </div>
+</footer>
+
+<script>
+var STUDENTS = {}, NEIGHBOURS = {};
+var DAY_LABEL = { tonight:'Tonight, Aug 20', tomorrow:'Tomorrow, Aug 21', week:'This week' };
+function txt(id, v){ var e = document.getElementById(id); if (e) e.textContent = v; }
+var day = 'tonight';
+var view = 'elderly';
+
+function show(id, pinEl){
+  document.querySelectorAll('.pin').forEach(function(p){ p.classList.toggle('on', p === pinEl); });
+  resetMatch(true);
+  if (view === 'elderly') {
+    var s = STUDENTS[id];
+    var av = document.getElementById('pAv');
+    av.textContent = s.kana; av.style.background = s.colour;
+    document.getElementById('pName').textContent = s.name;
+    document.getElementById('pUni').textContent = s.uni;
+    document.getElementById('pQuote').textContent = s.quote;
+    document.getElementById('pTime').textContent = s.time;
+    document.getElementById('pMeal').textContent = s.meal;
+    document.getElementById('pDate').textContent = DAY_LABEL[day];
+    document.getElementById('pAvail').textContent =
+      day === 'tonight' ? 'Available tonight' : (day === 'tomorrow' ? 'Available tomorrow' : 'Available this week');
+    document.getElementById('pHeart').classList.remove('on');
+    var t = document.getElementById('pTags'); t.innerHTML = '';
+    s.tags.forEach(function(x){
+      var e = document.createElement('span'); e.className = 'tag'; e.textContent = x; t.appendChild(e);
+    });
+    txt('reqBtnTxt', fmt(CO.L.requestBtn, { n:s.name }));
+    txt('ePendTxt',  fmt(CO.L.pending,    { n:s.name }));
+    txt('eDemoBtn',  fmt(CO.L.demoAccept, { n:s.name }));
+    txt('eMatchTxt', fmt(CO.L.matched,    { n:s.name }));
+  } else {
+    var n = NEIGHBOURS[id];
+    var a = document.getElementById('sAv');
+    a.textContent = n.kana; a.style.background = n.colour;
+    document.getElementById('sName').textContent = n.name;
+    document.getElementById('sArea').textContent = n.area;
+    document.getElementById('sAsk').textContent = n.ask;
+    document.getElementById('sTime').textContent = n.time;
+    document.getElementById('sDate').textContent = DAY_LABEL[day];
+    document.getElementById('sAvail').textContent =
+      day === 'tonight' ? 'Requesting tonight' : (day === 'tomorrow' ? 'Requesting tomorrow' : 'Requesting this week');
+    var m = document.getElementById('sMeta'); m.innerHTML = '';
+    n.meta.forEach(function(x){
+      var li = document.createElement('li');
+      li.innerHTML = '<span class="d"></span><span></span>';
+      li.lastChild.textContent = x; m.appendChild(li);
+    });
+    txt('sMatchTxt', fmt(CO.L.sMatched, { n:n.name }));
+  }
+}
+function fmt(s, vars){
+  return String(s).replace(/\{(\w+)\}/g, function(m, k){ return (k in vars) ? vars[k] : m; });
+}
+
+var sub = 'swipe';
+function setView(btn){
+  view = btn.dataset.view;
+  document.querySelectorAll('.viewtabs button').forEach(function(b){ b.classList.toggle('on', b === btn); });
+  applyPanels();
+  refreshPins();
+  if (view === 'elderly' && sub === 'swipe') buildDeck();
+}
+function setSub(btn, s){
+  sub = s;
+  document.querySelectorAll('.viewsub button').forEach(function(b){ b.classList.toggle('on', b === btn); });
+  applyPanels();
+  if (s === 'swipe') buildDeck();
+}
+function applyPanels(){
+  var isStu = view === 'student';
+  document.getElementById('panelS').style.display = isStu ? 'flex' : 'none';
+  document.getElementById('availStrip').style.display = isStu ? 'flex' : 'none';
+  document.getElementById('panelSwipe').style.display = (!isStu && sub === 'swipe') ? 'flex' : 'none';
+  document.getElementById('panelE').style.display = (!isStu && sub === 'detail') ? 'flex' : 'none';
+}
+
+/* ---------- swipe deck ---------- */
+var queue = [];
+function buildDeck(){
+  queue = Object.keys(STUDENTS).filter(function(k){
+    return STUDENTS[k].days.indexOf(day) !== -1; });
+  document.getElementById('deckBtns').style.display = 'flex';
+  paintDeck();
+}
+function paintDeck(){
+  var d = document.getElementById('deck'); d.innerHTML = '';
+  if (!queue.length){
+    document.getElementById('deckBtns').style.display = 'none';
+    d.innerHTML = '<div class="swipecard" style="cursor:default;justify-content:center">' +
+      '<div class="deck-empty"><div class="em">🍵</div><b>That’s everyone nearby</b>' +
+      '<p>We’ll let you know as more students post their evenings.</p>' +
+      '<button class="btn btn-ghost btn-sm" onclick="buildDeck()">Start again</button></div></div>';
+    return;
+  }
+  queue.slice(0, 3).reverse().forEach(function(id, i, arr){
+    var s = STUDENTS[id];
+    var top = (i === arr.length - 1);
+    var c = document.createElement('div');
+    c.className = 'swipecard'; c.dataset.id = id;
+    var depth = arr.length - 1 - i;
+    c.style.transform = 'translateY(' + (depth * 9) + 'px) scale(' + (1 - depth * .035) + ')';
+    c.style.zIndex = i + 1;
+    c.innerHTML =
+      '<div class="stamp yes">MATCH</div><div class="stamp no">PASS</div>' +
+      '<div class="big" style="background:' + s.colour + '">' + s.kana + '</div>' +
+      '<h4></h4><p class="u"></p><div class="tg"></div><p class="q"></p>' +
+      '<div class="when"><span>' + CO.L.free[day] + '</span><span>' + s.time + '</span></div>';
+    c.querySelector('h4').textContent = s.name;
+    c.querySelector('.u').textContent = s.uni;
+    c.querySelector('.q').textContent = s.quote;
+    var tg = c.querySelector('.tg');
+    s.tags.forEach(function(t){ var e = document.createElement('span'); e.textContent = t; tg.appendChild(e); });
+    if (top) drag(c);
+    d.appendChild(c);
+  });
+  var topId = queue[0];
+  document.querySelectorAll('.pin-e').forEach(function(p){ p.classList.toggle('on', p.dataset.id === topId); });
+}
+function drag(card){
+  var sx = 0, dx = 0, down = false;
+  card.addEventListener('pointerdown', function(e){
+    down = true; sx = e.clientX; card.setPointerCapture(e.pointerId);
+    card.style.transition = 'none';
+  });
+  card.addEventListener('pointermove', function(e){
+    if (!down) return;
+    dx = e.clientX - sx;
+    card.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx / 22) + 'deg)';
+    card.querySelector('.stamp.yes').style.opacity = dx > 30 ? Math.min(1, dx / 110) : 0;
+    card.querySelector('.stamp.no').style.opacity = dx < -30 ? Math.min(1, -dx / 110) : 0;
+  });
+  function end(){
+    if (!down) return; down = false;
+    card.style.transition = 'transform .3s ease, opacity .3s ease';
+    if (Math.abs(dx) > 95) { fly(card, dx > 0 ? 1 : -1); }
+    else {
+      card.style.transform = '';
+      card.querySelector('.stamp.yes').style.opacity = 0;
+      card.querySelector('.stamp.no').style.opacity = 0;
+    }
+    dx = 0;
+  }
+  card.addEventListener('pointerup', end);
+  card.addEventListener('pointercancel', end);
+}
+function fly(card, dir){
+  card.style.transition = 'transform .34s ease, opacity .34s ease';
+  card.style.transform = 'translateX(' + (dir * 620) + 'px) rotate(' + (dir * 26) + 'deg)';
+  card.style.opacity = '0';
+  var id = card.dataset.id;
+  setTimeout(function(){
+    queue.shift();
+    if (dir > 0) { matchFromSwipe(id); } else { paintDeck(); }
+  }, 300);
+}
+function swipeTop(dir){
+  var cards = document.querySelectorAll('#deck .swipecard');
+  var top = cards[cards.length - 1];
+  if (!top || !top.dataset.id) return;
+  top.querySelector('.stamp.' + (dir > 0 ? 'yes' : 'no')).style.opacity = 1;
+  fly(top, dir);
+}
+function matchFromSwipe(id){
+  var s = STUDENTS[id];
+  document.getElementById('deck').innerHTML =
+    '<div class="swipecard" style="cursor:default;justify-content:center;text-align:center">' +
+    '<div class="big" style="background:' + s.colour + ';margin-bottom:18px">' + s.kana + '</div>' +
+    '<h4></h4>' +
+    '<p class="u" style="margin-bottom:18px"></p>' +
+    '<button class="btn btn-dark btn-sm" style="margin:0 auto 10px" onclick="swipeAccepted(\'' + id + '\')"></button>' +
+    '<button class="btn btn-ghost btn-sm" style="margin:0 auto" onclick="paintDeck()">Keep looking</button></div>';
+  var d = document.getElementById('deck');
+  d.querySelector('h4').textContent = fmt(CO.L.reqSent, { n:s.name });
+  d.querySelector('.u').textContent = CO.L.confirmSoon;
+  d.querySelector('.btn-dark').textContent = fmt(CO.L.demoAcc2, { n:s.name });
+  document.getElementById('deckBtns').style.display = 'none';
+}
+function swipeAccepted(id){
+  var s = STUDENTS[id];
+  document.getElementById('deck').innerHTML =
+    '<div class="swipecard" style="cursor:default;justify-content:center;text-align:center">' +
+    '<div class="big" style="background:var(--ok);margin-bottom:18px">✓</div>' +
+    '<h4>It’s a match!</h4><p class="u"></p>' +
+    '<button class="btn btn-ghost btn-sm" style="margin:16px auto 0" onclick="buildDeck()">Start over</button></div>';
+  document.querySelector('#deck .u').textContent = fmt(CO.L.swipeMatched, { n:s.name, t:s.time });
+  document.getElementById('deckBtns').style.display = 'none';
+}
+
+function refreshPins(){
+  var isStu = view === 'student';
+  var data = isStu ? NEIGHBOURS : STUDENTS;
+  var first = null;
+  document.querySelectorAll('.pin').forEach(function(p){
+    var mine = p.classList.contains(isStu ? 'pin-s' : 'pin-e');
+    var vis = mine && data[p.dataset.id].days.indexOf(day) !== -1;
+    p.style.display = vis ? '' : 'none';
+    if (vis && !first) first = p;
+  });
+  if (first) show(first.dataset.id, first);
+}
+
+function setDay(btn){
+  day = btn.dataset.day;
+  document.querySelectorAll('.chip').forEach(function(c){ c.classList.toggle('on', c === btn); });
+  refreshPins();
+  if (view === 'elderly' && sub === 'swipe') buildDeck();
+}
+
+/* --- request / match flow --- */
+function swap(showId){
+  ['eIdle','ePending','eMatched','sIdle','sMatched','sDeclined'].forEach(function(id){
+    document.getElementById(id).style.display = 'none';
+  });
+  if (showId) document.getElementById(showId).style.display = 'block';
+}
+function sendRequest(){ swap('ePending'); }
+function acceptFromStudent(){ swap('eMatched'); }
+function studentAccept(){ swap('sMatched'); }
+function studentDecline(){ swap('sDeclined'); }
+function resetMatch(quiet){
+  swap(view === 'student' ? 'sIdle' : 'eIdle');
+  if (!quiet) return;
+}
+
+/* availability slots */
+function tog(b){
+  b.classList.toggle('on');
+  document.getElementById('slotN').textContent = document.querySelectorAll('.slot.on').length;
+}
+
+
+/* ---------- meal plans ---------- */
+var CUISINES = [];
+var pickK = { c:0, i:0 }, pickH = { c:1, i:0 };
+
+function renderMeals(who){
+  var st = who === 'K' ? pickK : pickH;
+  var cw = document.getElementById('cui' + who), dw = document.getElementById('dish' + who);
+  cw.innerHTML = '';
+  CUISINES.forEach(function(cu, ci){
+    var b = document.createElement('button'); b.type = 'button';
+    b.className = ci === st.c ? 'on' : '';
+    b.innerHTML = '<span class="jp"></span><span></span>';
+    b.firstChild.textContent = cu.jp; b.lastChild.textContent = cu.en;
+    b.onclick = function(){ st.c = ci; st.i = 0; renderMeals(who); };
+    cw.appendChild(b);
+  });
+  dw.innerHTML = '';
+  CUISINES[st.c].items.forEach(function(d, di){
+    var b = document.createElement('button'); b.type = 'button';
+    b.className = 'dish' + (di === st.i ? ' on' : '');
+    var em = document.createElement('div'); em.className = 'em'; em.textContent = d.em;
+    var box = document.createElement('div');
+    var nm = document.createElement('b'); nm.textContent = d.n;
+    var ds = document.createElement('p'); ds.textContent = d.d;
+    box.appendChild(nm); box.appendChild(ds);
+    if (d.t.length){
+      var tr = document.createElement('div'); tr.className = 'dtags';
+      d.t.forEach(function(t){ var s = document.createElement('span'); s.className = 'dtag';
+        s.textContent = t; tr.appendChild(s); });
+      box.appendChild(tr);
+    }
+    b.appendChild(em); b.appendChild(box);
+    b.onclick = function(){ st.i = di; renderMeals(who); };
+    dw.appendChild(b);
+  });
+  var cu = CUISINES[st.c], it = cu.items[st.i];
+  document.getElementById('del' + who).textContent = it.n;
+  document.getElementById('del' + who + 'c').textContent = cu.jp + ' ' + cu.en;
+}
+
+/* ---------- QR check-in demo (decorative code, not a real QR) ---------- */
+function drawQR(el, seed){
+  var N = 25, s = 0, i;
+  for (i = 0; i < seed.length; i++) s = (s * 31 + seed.charCodeAt(i)) >>> 0;
+  function rnd(){ s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }
+  var m = [], r, c;
+  for (r = 0; r < N; r++){ m[r] = []; for (c = 0; c < N; c++) m[r][c] = rnd() > .52 ? 1 : 0; }
+  function finder(rr, cc){
+    for (var y = -1; y <= 7; y++) for (var x = -1; x <= 7; x++){
+      var R = rr + y, C = cc + x;
+      if (R < 0 || C < 0 || R >= N || C >= N) continue;
+      var on = (y >= 0 && y <= 6 && x >= 0 && x <= 6) &&
+               (y === 0 || y === 6 || x === 0 || x === 6 || (y >= 2 && y <= 4 && x >= 2 && x <= 4));
+      m[R][C] = on ? 1 : 0;
+    }
+  }
+  finder(0, 0); finder(0, N - 7); finder(N - 7, 0);
+  var p = '';
+  for (r = 0; r < N; r++) for (c = 0; c < N; c++)
+    if (m[r][c]) p += 'M' + c + ' ' + r + 'h1v1h-1z';
+  el.innerHTML = '<svg viewBox="0 0 ' + N + ' ' + N + '" shape-rendering="crispEdges">' +
+    '<path d="' + p + '" fill="#1B3A2C"/></svg>';
+}
+/* ---------- three-screen walkthrough ---------- */
+var TRIP = [];
+var tripI = 0;
+function paintTrip(){
+  var t = TRIP[tripI];
+  document.getElementById('phTime').textContent = t.time;
+  document.getElementById('phBody').innerHTML = t.ph;
+  document.getElementById('tabBody').innerHTML = t.tab;
+  document.getElementById('feedBody').innerHTML = t.feed;
+  document.querySelectorAll('#tripStep .tstep').forEach(function(s, i){
+    s.classList.toggle('done', i <= tripI);
+  });
+  var live = document.getElementById('qrLive');
+  if (live) drawQR(live, 'musubi-checkin-keiko-1202');
+  document.getElementById('tripNext').innerHTML = tripI === TRIP.length - 1
+    ? 'Replay from the door' : 'Next step <span class="ar">→</span>';
+}
+function trip(d){
+  tripI += d;
+  if (tripI >= TRIP.length) tripI = 0;
+  if (tripI < 0) tripI = TRIP.length - 1;
+  paintTrip();
+}
+
+/* ---------- personalized check-in flow ---------- */
+var ITEMS = [
+  { id:'meal',  ask:'Did she eat most of her meal?',            lbl:'Meal',       ic:'🍚',
+    opts:[{t:'Ate most',c:0},{t:'Some',c:1},{t:'Very little',c:1}] },
+  { id:'sleep', ask:'Ask if she has been sleeping okay',        lbl:'Sleep',      ic:'😴',
+    opts:[{t:'Sleeping fine',c:0},{t:'So-so',c:1},{t:'Poorly',c:1}] },
+  { id:'hall',  ask:'Check whether the hallway is still cluttered', lbl:'Hallway',ic:'🏠',
+    opts:[{t:'Clear',c:0},{t:'Clutter noticed',c:1}] },
+  { id:'med',   ask:'Remind her about her medication',          lbl:'Medication', ic:'💊',
+    opts:[{t:'Reminder given',c:0},{t:'Not requested',c:0}] },
+  { id:'groc',  ask:'Ask whether she needs groceries',          lbl:'Groceries',  ic:'🛒',
+    opts:[{t:'Not needed',c:0},{t:'Yes, needs some',c:1}] }
+];
+var MOOD = { id:'mood', lbl:'Mood', ic:'😊',
+  opts:[{t:'Good',c:0},{t:'Okay',c:0},{t:'Seemed different',c:1}] };
+var checked = {}, answers = {};
+ITEMS.forEach(function(i){ checked[i.id] = true; answers[i.id] = 0; });
+answers.mood = 0;
+var customA = 'Helped her with LINE';
+
+function renderAsk(){
+  var w = document.getElementById('askList'); w.innerHTML = '';
+  ITEMS.forEach(function(i){
+    var l = document.createElement('label'); l.className = 'askrow';
+    var c = document.createElement('input'); c.type = 'checkbox'; c.checked = checked[i.id];
+    c.onchange = function(){ checked[i.id] = c.checked; countAsk(); };
+    var s = document.createElement('span'); s.textContent = i.ask;
+    l.appendChild(c); l.appendChild(s); w.appendChild(l);
+  });
+  countAsk();
+}
+function countAsk(){
+  var n = ITEMS.filter(function(i){ return checked[i.id]; }).length;
+  if (document.getElementById('customQ').value.trim()) n++;
+  document.getElementById('askN').textContent = n;
+}
+
+function activeItems(){ return ITEMS.filter(function(i){ return checked[i.id]; }); }
+
+function renderOpts(){
+  var w = document.getElementById('optList'); w.innerHTML = '';
+  activeItems().concat([MOOD]).forEach(function(i){
+    var row = document.createElement('div'); row.className = 'optrow';
+    var lab = document.createElement('div'); lab.className = 'ol';
+    lab.innerHTML = '<span>' + i.ic + '</span>';
+    var txt = document.createElement('span'); txt.textContent = i.lbl; lab.appendChild(txt);
+    var box = document.createElement('div'); box.className = 'opts';
+    i.opts.forEach(function(o, idx){
+      var b = document.createElement('button'); b.type = 'button';
+      b.className = 'opt' + (answers[i.id] === idx ? ' on' : '') + (o.c ? ' warn' : '');
+      b.textContent = o.t;
+      b.onclick = function(){ answers[i.id] = idx; renderOpts(); };
+      box.appendChild(b);
+    });
+    row.appendChild(lab); row.appendChild(box); w.appendChild(row);
+  });
+  var q = document.getElementById('customQ').value.trim();
+  if (q) {
+    var row = document.createElement('div'); row.className = 'optrow';
+    var lab = document.createElement('div'); lab.className = 'ol';
+    lab.innerHTML = '<span>📱</span>';
+    var t = document.createElement('span'); t.textContent = q; lab.appendChild(t);
+    var inp = document.createElement('input'); inp.type = 'text'; inp.value = customA;
+    inp.oninput = function(){ customA = inp.value; };
+    row.appendChild(lab); row.appendChild(inp); w.appendChild(row);
+  }
+}
+
+function renderReport(){
+  var w = document.getElementById('repList'); w.innerHTML = '';
+  var concerns = 0;
+  activeItems().concat([MOOD]).forEach(function(i){
+    var o = i.opts[answers[i.id]];
+    if (o.c) concerns++;
+    var r = document.createElement('div'); r.className = 'rrow';
+    var l = document.createElement('div'); l.className = 'rl';
+    l.innerHTML = '<span>' + i.ic + '</span>';
+    var lt = document.createElement('span'); lt.textContent = i.lbl; l.appendChild(lt);
+    var v = document.createElement('div'); v.className = 'rv' + (o.c ? ' warn' : '');
+    v.textContent = o.t;
+    r.appendChild(l); r.appendChild(v); w.appendChild(r);
+  });
+  var q = document.getElementById('customQ').value.trim();
+  if (q) {
+    var r = document.createElement('div'); r.className = 'rrow';
+    var l = document.createElement('div'); l.className = 'rl';
+    l.innerHTML = '<span>📱</span>';
+    var lt = document.createElement('span'); lt.textContent = 'Your request'; l.appendChild(lt);
+    var v = document.createElement('div'); v.className = 'rv';
+    v.textContent = (customA || '—') + ' ✓';
+    r.appendChild(l); r.appendChild(v); w.appendChild(r);
+  }
+  document.getElementById('repNote').textContent = '“' + document.getElementById('note').value + '”';
+  var vd = document.getElementById('verdict');
+  vd.className = 'verdict ' + (concerns ? 'note' : 'good');
+  vd.innerHTML = concerns
+    ? '<div class="vi">!</div><b>' + concerns + (concerns > 1 ? ' things' : ' thing') + ' worth a look.</b>'
+    : '<div class="vi">✓</div><b>No concerns reported.</b>';
+}
+
+function setStage(btn){ go(+btn.dataset.st); }
+function go(n){
+  document.querySelectorAll('.stepper button').forEach(function(b){
+    b.classList.toggle('on', +b.dataset.st === n); });
+  ['st0','st1','st2'].forEach(function(id, i){
+    document.getElementById(id).classList.toggle('on', i === n); });
+  if (n === 1) renderOpts();
+  if (n === 2) renderReport();
+  document.getElementById('families').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+document.getElementById('customQ').addEventListener('input', countAsk);
+
+/* ---------- survey + AI matching ---------- */
+function setSv(btn){
+  var s = btn.dataset.sv;
+  document.querySelectorAll('#survey .viewtabs button').forEach(function(b){
+    b.classList.toggle('on', b === btn); });
+  document.getElementById('svE').style.display = s === 'elderly' ? 'block' : 'none';
+  document.getElementById('svS').style.display = s === 'student' ? 'block' : 'none';
+}
+
+var SCRIPT = [
+  { w:'musubi', t:'Good afternoon, Keiko-san. May I ask you a few things, so we can find you good company?' },
+  { w:'Keiko',  t:'Yes, of course.' },
+  { w:'musubi', t:'What do you enjoy doing these days?' },
+  { w:'Keiko',  t:'I still garden every morning. And I taught piano for thirty years.' },
+  { w:'musubi', t:'Lovely. Is there anything you would rather not talk about?' },
+  { w:'Keiko',  t:'Nothing in particular. I just like a bit of conversation over a meal.' },
+  { w:'musubi', t:'Thank you. I have found three students nearby who garden too — shall I show you?' }
+];
+var HEARD = ['Gardening', 'Piano & music', 'Morning person', 'Enjoys conversation'];
+var playing = false;
+function playVoice(){
+  if (playing) return;
+  playing = true;
+  var chat = document.getElementById('chat'); chat.innerHTML = '';
+  document.getElementById('svResult').style.display = 'none';
+  var orb = document.getElementById('orb');
+  var btn = document.getElementById('voiceBtn');
+  btn.disabled = true; btn.textContent = 'Listening…';
+  document.getElementById('orbLabel').textContent = 'Listening to the answers…';
+  var i = 0;
+  (function step(){
+    if (i >= SCRIPT.length){
+      orb.classList.remove('live');
+      document.getElementById('orbLabel').textContent = 'All done — that took 1 minute 40 seconds.';
+      var tw = document.getElementById('heardTags'); tw.innerHTML = '';
+      HEARD.forEach(function(h){
+        var b = document.createElement('span'); b.className = 'hob on'; b.textContent = h;
+        tw.appendChild(b);
+      });
+      document.getElementById('svResult').style.display = 'block';
+      btn.disabled = false; btn.innerHTML = 'Play it again <span class="ar">↻</span>';
+      playing = false;
+      return;
+    }
+    var line = SCRIPT[i];
+    var ai = line.w === 'musubi';
+    orb.classList.toggle('live', ai);
+    var b = document.createElement('div');
+    b.className = 'bub ' + (ai ? 'ai' : 'me');
+    var w = document.createElement('span'); w.className = 'who'; w.textContent = line.w;
+    var t = document.createElement('span'); t.textContent = line.t;
+    b.appendChild(w); b.appendChild(t);
+    chat.appendChild(b);
+    i++;
+    setTimeout(step, ai ? 1900 : 1500);
+  })();
+}
+
+var HOBBIES = ['Cooking','Gardening','Music','Sport','Films','Languages','Photography','Art','Travel','Games'];
+var chosen = { Gardening:1, Music:1, Films:1 };
+var PEOPLE = [];
+function renderHobbies(){
+  var w = document.getElementById('hobList'); w.innerHTML = '';
+  HOBBIES.forEach(function(h){
+    var b = document.createElement('button'); b.type = 'button';
+    b.className = 'hob' + (chosen[h] ? ' on' : ''); b.textContent = h;
+    b.onclick = function(){
+      if (chosen[h]) delete chosen[h]; else chosen[h] = 1;
+      renderHobbies();
+    };
+    w.appendChild(b);
+  });
+}
+function findMatches(){
+  var mine = Object.keys(chosen);
+  var out = PEOPLE.map(function(p){
+    var shared = p.likes.filter(function(l){ return chosen[l]; });
+    var pct = mine.length
+      ? Math.round(52 + (shared.length / p.likes.length) * 44)
+      : 52;
+    return { p:p, shared:shared, pct:pct };
+  }).sort(function(a, b){ return b.pct - a.pct; });
+
+  var w = document.getElementById('svMatches'); w.innerHTML = '';
+  var h = document.createElement('p');
+  h.style.cssText = 'font-size:.87rem;color:var(--ink-soft);margin-bottom:12px';
+  h.innerHTML = '<b style="color:var(--forest)">Neighbours near your campus</b>';
+  w.appendChild(h);
+  out.forEach(function(m, i){
+    var c = document.createElement('div');
+    c.className = 'matchcard' + (i === 0 ? ' top' : '');
+    c.innerHTML = '<div class="av" style="background:' + m.p.colour + '">' + m.p.kana + '</div>' +
+      '<div><b></b><span class="sh"></span></div>' +
+      '<div class="pct"><div class="n">' + m.pct + '%</div><div class="l">match</div></div>';
+    c.querySelector('b').textContent = m.p.name + ', ' + m.p.age;
+    c.querySelector('.sh').textContent = m.shared.length
+      ? 'You both like ' + m.shared.join(', ').toLowerCase()
+      : 'No shared interests yet — still nearby';
+    w.appendChild(c);
+  });
+}
+
+var role = 'family';
+function pick(btn){
+  role = btn.dataset.role;
+  document.querySelectorAll('.role').forEach(function(b){ b.classList.toggle('on', b === btn); });
+  document.querySelectorAll('.role-fields').forEach(function(f){
+    f.classList.toggle('on', f.dataset.fields === role);
+  });
+}
+function done(e){
+  e.preventDefault();
+  document.getElementById('okMsg').textContent = {
+    family:  'We’ve saved your details. Next, we’ll help you set up your parent’s profile and the check-ins you’d like.',
+    elderly: 'We’ve saved your details. Our local team will call you to arrange your first dinner.',
+    student: 'We’ve saved your details. Next you’ll upload your government ID and student ID card — your account unlocks once your school confirms your enrolment.'
+  }[role];
+  document.getElementById('formWrap').style.display = 'none';
+  document.getElementById('okState').classList.add('on');
+  document.getElementById('register').scrollIntoView({behavior:'smooth'});
+  return false;
+}
+function reset_(){
+  document.getElementById('okState').classList.remove('on');
+  document.getElementById('formWrap').style.display = 'block';
+  document.querySelectorAll('#formWrap input, #formWrap textarea').forEach(function(i){
+    if(i.type === 'checkbox'){ i.checked = false; } else { i.value = ''; }
+  });
+}
+
+/* =========================================================================
+   COUNTRY + LANGUAGE
+   English is the default overview. Choosing a country translates the whole
+   page and filters every service, name, school, currency and menu to it.
+   ========================================================================= */
+
+var C_EN = {
+  lang:'en', label:'EN',
+  badge:'Now welcoming families in Tokyo, Seoul and Shanghai',
+  foot:'Prototype concept · Japan · Korea · China',
+  park:{ a:'代々木公園', b:'Yoyogi Park' },
+  phone:'090-1234-5678',
+  areaPH:'Setagaya-ku, Tokyo',
+  schoolPH:'Tokyo Welfare College',
+  programs:['Elderly care','Care welfare','Social welfare','Nursing','Rehabilitation','Occupational therapy','Physical therapy'],
+  price:{ one:'¥4,800', mon:'¥16,800', mone:'¥4,200', yr:'¥179,000', yre:'¥3,440',
+          from:'From ¥4,800 · includes both meals and the visit' },
+  family:'Ayumi & Kenji',
+  addr:'3-14-2 Setagaya · flat 402',
+  days:{ tonight:'Tonight, Aug 20', tomorrow:'Tomorrow, Aug 21', week:'This week' },
+  L:{ choosing:'{n} is choosing', meal:'{n}’s meal',
+      deliv:'Delivered to {n}’s door at 18:20 · dinner starts at 18:30 · one payment covers both',
+      shared:'Shared with {f} · approved by {n}',
+      onway:'{n} is on the way', showto:'Show this to {n}', thanks:'Thank you, {n}',
+      checkedin:'{n} checked in at 12:03 PM.',
+      started:'{n} successfully checked in with your mother.',
+      released:'Address released to {n}. Live location sharing starts now.',
+      booked:'{a} and {b} both approved. Dinner at {t}, both meals arriving just before.',
+      hi:'Good afternoon, {n}. May I ask you a few things, so we can find you good company?',
+      yes:'Yes, of course.',
+      q1:'What do you enjoy doing these days?',
+      a1:'I still garden every morning. And I taught piano for thirty years.',
+      q2:'Lovely. Is there anything you would rather not talk about?',
+      a2:'Nothing in particular. I just like a bit of conversation over a meal.',
+      q3:'Thank you. I have found three care students nearby who garden too — shall I show you?',
+      heard:['Gardening','Piano & music','Morning person','Enjoys conversation'],
+      shmatch:'Also gardens · plays piano · free Wed evenings',
+      requestBtn:'Request {n} for dinner',
+      pending:'Waiting for {n} to confirm. You’ll be notified either way.',
+      demoAccept:'Demo: let {n} accept →',
+      matched:'{n} accepted. Dinner is confirmed — both meals will arrive just before.',
+      sMatched:'You’re having dinner with {n}. Pick your meal any time before 17:00.',
+      reqSent:'Request sent to {n}',
+      confirmSoon:'They’ll confirm shortly — you’ll be told either way.',
+      demoAcc2:'Demo: {n} accepts →',
+      swipeMatched:'{n} is coming for dinner at {t}. Both meals will arrive just before.',
+      free:{ tonight:'Free tonight', tomorrow:'Free tomorrow', week:'Free this week' },
+      },
+  students:{
+    ren:  { kana:'れ', name:'Ren', colour:'#8CAA97', uni:'Tokyo Welfare College, care worker programme · 12 min away',
+            tags:['Gardening','Baseball'],
+            quote:'“I am training as a care worker, and the best part of my week is sitting down with someone over a proper meal.”',
+            time:'19:00–19:30', meal:'Chicken soboro bowl', days:['tonight','week'] },
+    haru: { kana:'は', name:'Hana', colour:'#E8836A', uni:'Tokyo Welfare College, care welfare programme · 8 min away',
+            tags:['Cooking','Calligraphy'],
+            quote:'“My own grandmother lives in Hokkaido, so I know how much a shared dinner can mean.”',
+            time:'18:30–19:20', meal:'Salmon teishoku', days:['tonight','tomorrow','week'] },
+    mei:  { kana:'め', name:'Mei', colour:'#E9BC5C', uni:'Yomiuri Medical Welfare College, nursing · 15 min away',
+            tags:['Music','Photography'],
+            quote:'“I study nursing, so I am comfortable noticing the small things families worry about.”',
+            time:'19:30–20:25', meal:'Vegetable curry', days:['tomorrow','week'] }
+  },
+  neighbours:{
+    keiko: { kana:'け', name:'Keiko', colour:'#C4653F', area:'Setagaya-ku · 600 m away',
+             meta:['78 years old, lives alone','Loves gardening and old films','Has hosted 12 dinners on musubi'],
+             ask:'Please remind her about the blood-pressure tablet after dinner, and let us know if she seems steady on her feet.',
+             time:'18:30–19:30', days:['tonight','week'] },
+    haruo: { kana:'た', name:'Haruo', colour:'#6E8F7A', area:'Yoyogi · 1.2 km away',
+             meta:['82 years old, widowed last year','Former baseball coach — still watches every game','First dinner on musubi'],
+             ask:'We mostly want to know how his mood seems, and whether he is actually eating properly.',
+             time:'19:00–20:00', days:['tonight','tomorrow','week'] },
+    aiko:  { kana:'あ', name:'Aiko', colour:'#B5563A', area:'Shibuya-ku · 450 m away',
+             meta:['75 years old, lives with a small dog','Speaks some English, happy to practise','Has hosted 4 dinners on musubi'],
+             ask:'Just check she has taken her evening medication and that the flat feels warm enough.',
+             time:'18:00–19:00', days:['tomorrow','week'] }
+  },
+  menu:[
+    { jp:'和食', en:'Washoku', items:[
+      { em:'🐟', n:'Salmon teishoku', d:'Grilled salmon, rice, miso soup, pickles.', t:['Low sodium'] },
+      { em:'🍚', n:'Chicken soboro bowl', d:'Minced chicken and egg over warm rice.', t:['Popular'] },
+      { em:'🍜', n:'Udon set', d:'Soft noodles in light broth with tempura.', t:['Soft'] },
+      { em:'🍙', n:'Saba shioyaki set', d:'Salted grilled mackerel with seasonal sides.', t:[] } ] },
+    { jp:'洋食', en:'Yōshoku', items:[
+      { em:'🍛', n:'Katsu curry', d:'Crispy pork cutlet with curry rice.', t:['Hearty'] },
+      { em:'🍳', n:'Omurice', d:'Soft omelette over ketchup rice.', t:['Soft'] },
+      { em:'🥘', n:'Cream stew', d:'Chicken and vegetables in a gentle white sauce.', t:['Soft','Low sodium'] },
+      { em:'🍤', n:'Ebi fry plate', d:'Fried prawns, salad and buttered rice.', t:[] } ] },
+    { jp:'中華', en:'Chūka', items:[
+      { em:'🌶️', n:'Mapo tofu set', d:'Mild version with rice and soup.', t:['Soft'] },
+      { em:'🥟', n:'Gyoza set', d:'Six dumplings, rice and pickled cabbage.', t:['Popular'] },
+      { em:'🍲', n:'Chūka don', d:'Stir-fried vegetables and pork over rice.', t:[] },
+      { em:'🍜', n:'Shoyu ramen', d:'Clear soy broth, chashu and egg.', t:['Hearty'] } ] },
+    { jp:'やわらか', en:'Soft & light', items:[
+      { em:'🥚', n:'Chawanmushi set', d:'Savoury steamed egg custard with rice.', t:['Soft','Easy swallow'] },
+      { em:'🍚', n:'Okayu set', d:'Rice porridge with umeboshi and grilled fish.', t:['Soft','Light'] },
+      { em:'🍜', n:'Soft udon', d:'Extra-tender noodles in a mild dashi.', t:['Easy swallow'] },
+      { em:'🍱', n:'Tofu bento', d:'Small portions, diabetic-friendly.', t:['Small portion'] } ] }
+  ]
+};
+
+var C_JP = {
+  lang:'ja', label:'日本',
+  badge:'Now welcoming families in Tokyo',
+  foot:'Prototype concept · Tokyo, Japan',
+  park:{ a:'代々木公園', b:'Yoyogi Park' },
+  phone:'090-1234-5678',
+  areaPH:'東京都 世田谷区',
+  schoolPH:'東京福祉専門学校',
+  programs:['介護福祉科','介護福祉学科','介護福祉士科','社会福祉科','看護学科','理学療法学科','作業療法学科'],
+  price:{ one:'¥4,800', mon:'¥16,800', mone:'¥4,200', yr:'¥179,000', yre:'¥3,440',
+          from:'¥4,800〜 · 二人分の食事と訪問を含みます' },
+  family:'あゆみさん・けんじさん',
+  addr:'世田谷区 3-14-2 · 402号室',
+  days:{ tonight:'今夜 8月20日', tomorrow:'明日 8月21日', week:'今週' },
+  L:{ choosing:'{n}さんが選んでいます', meal:'{n}さんの食事',
+      deliv:'18:20 に{n}さんのお宅へお届け · 18:30 に食事開始 · お支払いは一度だけ',
+      shared:'{f}に共有 · {n}さんが承認済み',
+      onway:'{n}さんが向かっています', showto:'{n}さんに見せてください', thanks:'{n}さん、ありがとうございました',
+      checkedin:'{n}さんが 12:03 にチェックインしました。',
+      started:'{n}さんがお母さまのお宅で無事チェックインしました。',
+      released:'{n}さんに住所が開示されました。位置情報の共有を開始します。',
+      booked:'{a}さんと{b}さんの双方が承認しました。{t} に食事、二人分の食事は直前に届きます。',
+      hi:'こんにちは、{n}さん。よい相手をお探しするために、いくつかうかがってもよろしいですか。',
+      yes:'ええ、どうぞ。',
+      q1:'最近はどんなことを楽しんでいらっしゃいますか。',
+      a1:'今も毎朝、庭いじりをしています。ピアノも三十年教えていました。',
+      q2:'すてきですね。話したくないことはありますか。',
+      a2:'特にありません。食事をしながら少し話せればそれで十分です。',
+      q3:'ありがとうございます。近くに園芸が好きな介護学生が三人います。ご覧になりますか。',
+      heard:['園芸','ピアノ・音楽','朝型','会話が好き'],
+      shmatch:'園芸が趣味 · ピアノを弾く · 水曜の夜が空いています',
+      requestBtn:'{n}さんに食事をリクエスト',
+      pending:'{n}さんの返事を待っています。結果はどちらでもお知らせします。',
+      demoAccept:'デモ：{n}さんが承認する →',
+      matched:'{n}さんが承認しました。食事が確定し、二人分が直前に届きます。',
+      sMatched:'{n}さんと食事をご一緒します。17:00 までに食事をお選びください。',
+      reqSent:'{n}さんにリクエストを送りました',
+      confirmSoon:'まもなく返事が届きます。結果はどちらでもお知らせします。',
+      demoAcc2:'デモ：{n}さんが承認 →',
+      swipeMatched:'{n}さんが {t} に食事に来ます。二人分の食事は直前に届きます。',
+      free:{ tonight:'今夜あいています', tomorrow:'明日あいています', week:'今週あいています' },
+      },
+  students:{
+    ren:  { kana:'れ', name:'蓮', colour:'#8CAA97', uni:'東京福祉専門学校 介護福祉士学科 · 徒歩12分',
+            tags:['園芸','野球'],
+            quote:'「介護福祉士を目指して学んでいます。誰かときちんと食卓を囲む時間が、一週間でいちばん好きです。」',
+            time:'19:00–19:30', meal:'鶏そぼろ丼', days:['tonight','week'] },
+    haru: { kana:'は', name:'遥', colour:'#E8836A', uni:'東京福祉専門学校 介護福祉科 · 徒歩8分',
+            tags:['料理','書道'],
+            quote:'「祖母が北海道にいるので、いっしょに食べる夕食がどれほど大きいか知っています。」',
+            time:'18:30–19:20', meal:'鮭の定食', days:['tonight','tomorrow','week'] },
+    mei:  { kana:'め', name:'芽依', colour:'#E9BC5C', uni:'読売理工医療福祉専門学校 看護学科 · 徒歩15分',
+            tags:['音楽','写真'],
+            quote:'「看護を学んでいるので、ご家族が気にされる小さな変化にも気づけます。」',
+            time:'19:30–20:25', meal:'野菜カレー', days:['tomorrow','week'] }
+  },
+  neighbours:{
+    keiko: { kana:'け', name:'恵子', colour:'#C4653F', area:'世田谷区 · 600m',
+             meta:['78歳・ひとり暮らし','園芸と古い映画がお好き','musubi で12回の食事をご一緒しています'],
+             ask:'食後に血圧のお薬をひとこと声かけしてください。足元がしっかりしているかも教えてください。',
+             time:'18:30–19:30', days:['tonight','week'] },
+    haruo: { kana:'た', name:'治男', colour:'#6E8F7A', area:'代々木 · 1.2km',
+             meta:['82歳・昨年に奥さまを亡くされました','元野球のコーチ。今も全試合を観ています','musubi では初めての食事です'],
+             ask:'ご機嫌の様子と、きちんと食事をとられているかを知りたいです。',
+             time:'19:00–20:00', days:['tonight','tomorrow','week'] },
+    aiko:  { kana:'あ', name:'愛子', colour:'#B5563A', area:'渋谷区 · 450m',
+             meta:['75歳・小型犬と暮らしています','英語も少し話せます。練習したいそうです','musubi で4回の食事をご一緒しています'],
+             ask:'夜のお薬を飲まれたか、お部屋が十分に暖かいかを確認してください。',
+             time:'18:00–19:00', days:['tomorrow','week'] }
+  },
+  menu:[
+    { jp:'和食', en:'Washoku', items:[
+      { em:'🐟', n:'鮭の定食', d:'焼き鮭、ごはん、味噌汁、お漬物。', t:['減塩'] },
+      { em:'🍚', n:'鶏そぼろ丼', d:'鶏そぼろと卵を温かいごはんの上に。', t:['人気'] },
+      { em:'🍜', n:'うどんセット', d:'やわらかい麺を薄味のだしで、天ぷら添え。', t:['やわらか'] },
+      { em:'🍙', n:'鯖の塩焼き膳', d:'鯖の塩焼きと季節の小鉢。', t:[] } ] },
+    { jp:'洋食', en:'Yōshoku', items:[
+      { em:'🍛', n:'カツカレー', d:'さくさくのとんかつとカレーライス。', t:['ボリューム'] },
+      { em:'🍳', n:'オムライス', d:'ふんわり卵とケチャップライス。', t:['やわらか'] },
+      { em:'🥘', n:'クリームシチュー', d:'鶏肉と野菜をやさしいホワイトソースで。', t:['やわらか','減塩'] },
+      { em:'🍤', n:'海老フライ', d:'海老フライ、サラダ、バターライス。', t:[] } ] },
+    { jp:'中華', en:'Chūka', items:[
+      { em:'🌶️', n:'麻婆豆腐セット', d:'辛さ控えめ、ごはんとスープ付き。', t:['やわらか'] },
+      { em:'🥟', n:'餃子セット', d:'餃子6個、ごはん、漬物。', t:['人気'] },
+      { em:'🍲', n:'中華丼', d:'野菜と豚肉の炒めをごはんの上に。', t:[] },
+      { em:'🍜', n:'醤油ラーメン', d:'澄んだ醤油スープ、チャーシューと卵。', t:['ボリューム'] } ] },
+    { jp:'やわらか', en:'Soft & light', items:[
+      { em:'🥚', n:'茶碗蒸しセット', d:'なめらかな茶碗蒸しとごはん。', t:['やわらか','飲み込みやすい'] },
+      { em:'🍚', n:'おかゆセット', d:'梅干しと焼き魚を添えたおかゆ。', t:['やわらか','軽め'] },
+      { em:'🍜', n:'やわらかうどん', d:'よりやわらかい麺をやさしいだしで。', t:['飲み込みやすい'] },
+      { em:'🍱', n:'豆腐弁当', d:'少量ずつ、糖尿病の方にも。', t:['少量'] } ] }
+  ]
+};
+
+var C_KR = {
+  lang:'ko', label:'한국',
+  badge:'Now welcoming families in Seoul',
+  foot:'Prototype concept · Seoul, Korea',
+  park:{ a:'서울숲', b:'Seoul Forest' },
+  phone:'010-1234-5678',
+  areaPH:'서울시 마포구',
+  schoolPH:'삼육보건대학교',
+  programs:['사회복지학과','간호학과','노인복지과','물리치료과','작업치료과','요양보호 관련 학과'],
+  price:{ one:'₩46,000', mon:'₩160,000', mone:'₩40,000', yr:'₩1,720,000', yre:'₩33,000',
+          from:'₩46,000부터 · 두 사람분 식사와 방문 포함' },
+  family:'지원 님과 민호 님',
+  addr:'마포구 성산동 14-2 · 402호',
+  days:{ tonight:'오늘 저녁, 8월 20일', tomorrow:'내일, 8월 21일', week:'이번 주' },
+  L:{ choosing:'{n} 님이 고르는 중', meal:'{n} 님의 식사',
+      deliv:'18:20에 {n} 님 댁으로 배달 · 18:30 식사 시작 · 결제는 한 번만',
+      shared:'{f}에게 공유 · {n} 님이 승인함',
+      onway:'{n} 학생이 가는 중입니다', showto:'{n} 학생에게 보여주세요', thanks:'{n} 학생, 고맙습니다',
+      checkedin:'{n} 학생이 12:03에 체크인했습니다.',
+      started:'{n} 학생이 어머님 댁에서 무사히 체크인했습니다.',
+      released:'{n} 학생에게 주소가 공개되었습니다. 실시간 위치 공유가 시작됩니다.',
+      booked:'{a} 학생과 {b} 님이 모두 수락했습니다. {t}에 식사하며, 두 끼는 직전에 도착합니다.',
+      hi:'안녕하세요, {n} 님. 좋은 말벗을 찾아드리기 위해 몇 가지 여쭤봐도 될까요?',
+      yes:'네, 그럼요.',
+      q1:'요즘은 어떤 걸 즐겨 하시나요?',
+      a1:'지금도 아침마다 정원을 가꿔요. 피아노도 삼십 년 가르쳤고요.',
+      q2:'멋지네요. 이야기하고 싶지 않은 주제가 있으실까요?',
+      a2:'특별히 없어요. 식사하면서 조금 이야기 나누면 그걸로 충분합니다.',
+      q3:'감사합니다. 근처에 정원 가꾸기를 좋아하는 돌봄 전공 학생이 세 명 있어요. 보여드릴까요?',
+      heard:['원예','피아노·음악','아침형','대화를 좋아함'],
+      shmatch:'원예를 좋아함 · 피아노를 침 · 수요일 저녁 가능',
+      requestBtn:'{n} 학생에게 식사 요청하기',
+      pending:'{n} 학생의 답을 기다리는 중입니다. 어느 쪽이든 알려드립니다.',
+      demoAccept:'데모: {n} 학생이 수락 →',
+      matched:'{n} 학생이 수락했습니다. 식사가 확정되었고, 두 끼는 직전에 도착합니다.',
+      sMatched:'{n} 님과 함께 식사합니다. 17:00 전까지 원하는 식사를 고르세요.',
+      reqSent:'{n} 학생에게 요청을 보냈습니다',
+      confirmSoon:'곧 답이 옵니다. 어느 쪽이든 알려드립니다.',
+      demoAcc2:'데모: {n} 학생이 수락 →',
+      swipeMatched:'{n} 학생이 {t}에 식사하러 옵니다. 두 끼는 직전에 도착합니다.',
+      free:{ tonight:'오늘 저녁 가능', tomorrow:'내일 가능', week:'이번 주 가능' },
+      },
+  students:{
+    ren:  { kana:'지', name:'지훈', colour:'#8CAA97', uni:'삼육보건대학교 사회복지학과 · 도보 12분',
+            tags:['원예','야구'],
+            quote:'"사회복지를 공부하고 있어요. 누군가와 제대로 마주 앉아 밥을 먹는 시간이 한 주 중 가장 좋습니다."',
+            time:'19:00–19:30', meal:'닭죽', days:['tonight','week'] },
+    haru: { kana:'서', name:'서연', colour:'#E8836A', uni:'삼육보건대학교 노인복지과 · 도보 8분',
+            tags:['요리','서예'],
+            quote:'"할머니가 강원도에 계셔서, 함께하는 저녁 한 끼가 얼마나 큰지 잘 압니다."',
+            time:'18:30–19:20', meal:'갈비탕 정식', days:['tonight','tomorrow','week'] },
+    mei:  { kana:'민', name:'민준', colour:'#E9BC5C', uni:'서일대학교 간호학과 · 도보 15분',
+            tags:['음악','사진'],
+            quote:'"간호를 전공해서, 가족들이 걱정하시는 작은 변화도 잘 알아차립니다."',
+            time:'19:30–20:25', meal:'야채비빔밥', days:['tomorrow','week'] }
+  },
+  neighbours:{
+    keiko: { kana:'영', name:'영자', colour:'#C4653F', area:'마포구 · 600m',
+             meta:['78세, 혼자 지내십니다','원예와 옛날 영화를 좋아하십니다','musubi에서 12번 식사를 함께하셨습니다'],
+             ask:'식사 후 혈압약을 한 번 말씀드려 주세요. 걸음이 안정적인지도 알려주시면 좋겠습니다.',
+             time:'18:30–19:30', days:['tonight','week'] },
+    haruo: { kana:'성', name:'성호', colour:'#6E8F7A', area:'성동구 · 1.2km',
+             meta:['82세, 지난해 배우자와 사별하셨습니다','전 야구 코치 — 지금도 전 경기를 보십니다','musubi에서 처음 하는 식사입니다'],
+             ask:'기분이 어떠신지, 식사를 제대로 하고 계신지 가장 알고 싶습니다.',
+             time:'19:00–20:00', days:['tonight','tomorrow','week'] },
+    aiko:  { kana:'미', name:'미숙', colour:'#B5563A', area:'서대문구 · 450m',
+             meta:['75세, 작은 강아지와 지내십니다','영어를 조금 하시고 연습하고 싶어 하십니다','musubi에서 4번 식사를 함께하셨습니다'],
+             ask:'저녁 약을 드셨는지, 집이 충분히 따뜻한지만 확인해 주세요.',
+             time:'18:00–19:00', days:['tomorrow','week'] }
+  },
+  menu:[
+    { jp:'한식', en:'Hansik', items:[
+      { em:'🐟', n:'고등어구이 정식', d:'고등어구이, 밥, 된장국, 반찬.', t:['저염'] },
+      { em:'🍚', n:'닭죽', d:'부드러운 닭죽에 참기름 한 방울.', t:['부드러움'] },
+      { em:'🍲', n:'갈비탕 정식', d:'맑은 갈비탕과 밥.', t:['인기'] },
+      { em:'🍜', n:'칼국수', d:'손칼국수를 순한 육수에.', t:['부드러움'] } ] },
+    { jp:'양식', en:'Yangsik', items:[
+      { em:'🍛', n:'돈가스 정식', d:'바삭한 돈가스에 밥과 샐러드.', t:['든든함'] },
+      { em:'🍳', n:'오므라이스', d:'부드러운 달걀과 케첩밥.', t:['부드러움'] },
+      { em:'🥘', n:'크림스튜', d:'닭고기와 채소를 순한 화이트소스에.', t:['부드러움','저염'] },
+      { em:'🍤', n:'새우튀김 플레이트', d:'새우튀김, 샐러드, 버터밥.', t:[] } ] },
+    { jp:'중식', en:'Jungsik', items:[
+      { em:'🌶️', n:'마파두부 세트', d:'맵지 않게, 밥과 국 포함.', t:['부드러움'] },
+      { em:'🥟', n:'만두 세트', d:'만두 여섯 개, 밥, 단무지.', t:['인기'] },
+      { em:'🍲', n:'짜장밥', d:'춘장 소스를 따뜻한 밥 위에.', t:[] },
+      { em:'🍜', n:'간짜장', d:'볶은 면과 소스를 따로.', t:['든든함'] } ] },
+    { jp:'부드러운 식사', en:'Soft & light', items:[
+      { em:'🥚', n:'계란찜 세트', d:'부드러운 계란찜과 밥.', t:['부드러움','삼키기 쉬움'] },
+      { em:'🍚', n:'죽 세트', d:'죽에 생선구이를 곁들여.', t:['부드러움','가벼움'] },
+      { em:'🍜', n:'부드러운 칼국수', d:'더 부드러운 면을 순한 육수에.', t:['삼키기 쉬움'] },
+      { em:'🍱', n:'두부 도시락', d:'소량씩, 당뇨식으로도 적합.', t:['소량'] } ] }
+  ]
+};
+
+var C_CN = {
+  lang:'zh', label:'中国',
+  badge:'Now welcoming families in Shanghai',
+  foot:'Prototype concept · Shanghai, China',
+  park:{ a:'静安公园', b:"Jing'an Park" },
+  phone:'138-1234-5678',
+  areaPH:'上海市 静安区',
+  schoolPH:'上海中侨职业技术学院',
+  programs:['智慧健康养老服务与管理','护理','社会工作','康复治疗技术','老年服务与管理'],
+  price:{ one:'¥240', mon:'¥840', mone:'¥210', yr:'¥8,900', yre:'¥171',
+          from:'¥240 起 · 含两份餐点与本次探访' },
+  family:'伟与玲',
+  addr:'静安区 南京西路 14-2 · 402室',
+  days:{ tonight:'今晚 8月20日', tomorrow:'明天 8月21日', week:'本周' },
+  L:{ choosing:'{n}正在点餐', meal:'{n}的餐点',
+      deliv:'18:20 送达{n}家门口 · 18:30 开饭 · 一次付费涵盖两份',
+      shared:'已分享给{f} · 经{n}同意',
+      onway:'{n}正在路上', showto:'请出示给{n}', thanks:'谢谢你，{n}',
+      checkedin:'{n}已于 12:03 签到。',
+      started:'{n}已在您母亲家顺利签到。',
+      released:'已向{n}开放地址，实时位置共享现在开始。',
+      booked:'{a}与{b}都已确认。{t} 共进晚餐，两份餐点将在此前送达。',
+      hi:'您好，{n}。为了给您找到合适的伴儿，我可以问几个问题吗？',
+      yes:'当然可以。',
+      q1:'您最近喜欢做些什么呢？',
+      a1:'我还是每天早上侍弄花草。以前教了三十年钢琴。',
+      q2:'真好。有什么不太想聊的话题吗？',
+      a2:'没有特别的。吃饭时能聊上几句就很好了。',
+      q3:'谢谢您。附近有三位同样喜欢园艺的照护专业学生，要看看吗？',
+      heard:['园艺','钢琴与音乐','早起的人','喜欢交谈'],
+      shmatch:'也爱园艺 · 会弹钢琴 · 周三晚有空',
+      requestBtn:'邀请{n}共进晚餐',
+      pending:'正在等待{n}确认，无论结果如何都会通知您。',
+      demoAccept:'演示：让{n}接受 →',
+      matched:'{n}已接受。晚餐已确认，两份餐点将在此前送达。',
+      sMatched:'您将与{n}共进晚餐。请在 17:00 前选好餐点。',
+      reqSent:'已向{n}发送邀请',
+      confirmSoon:'对方很快会回复，无论结果如何都会通知您。',
+      demoAcc2:'演示：{n}接受 →',
+      swipeMatched:'{n}将于 {t} 前来共进晚餐，两份餐点将在此前送达。',
+      free:{ tonight:'今晚有空', tomorrow:'明天有空', week:'本周有空' },
+      },
+  students:{
+    ren:  { kana:'佳', name:'佳怡', colour:'#8CAA97', uni:'上海中侨职业技术学院 智慧健康养老服务与管理 · 步行12分钟',
+            tags:['园艺','棒球'],
+            quote:'"我在学养老照护服务，一周里最喜欢的就是好好陪人吃一顿饭。"',
+            time:'19:00–19:30', meal:'鸡丝粥', days:['tonight','week'] },
+    haru: { kana:'子', name:'子豪', colour:'#E8836A', uni:'上海中侨职业技术学院 老年服务与管理 · 步行8分钟',
+            tags:['烹饪','书法'],
+            quote:'"我奶奶在安徽，所以我知道一起吃顿晚饭有多重要。"',
+            time:'18:30–19:20', meal:'清蒸鱼套餐', days:['tonight','tomorrow','week'] },
+    mei:  { kana:'思', name:'思远', colour:'#E9BC5C', uni:'上海城建职业学院 护理 · 步行15分钟',
+            tags:['音乐','摄影'],
+            quote:'"我学护理，家里人担心的那些细微变化，我比较容易看出来。"',
+            time:'19:30–20:25', meal:'蔬菜面', days:['tomorrow','week'] }
+  },
+  neighbours:{
+    keiko: { kana:'秀', name:'秀兰', colour:'#C4653F', area:'静安区 · 600米',
+             meta:['78岁，独自居住','喜欢园艺和老电影','已在 musubi 共进过 12 次晚餐'],
+             ask:'饭后请提醒她吃降压药，并告诉我们她走路是否稳当。',
+             time:'18:30–19:30', days:['tonight','week'] },
+    haruo: { kana:'建', name:'建国', colour:'#6E8F7A', area:'徐汇区 · 1.2公里',
+             meta:['82岁，去年丧偶','曾是棒球教练——如今每场必看','这是他在 musubi 的第一顿饭'],
+             ask:'我们最想知道他情绪如何，以及是否好好吃饭。',
+             time:'19:00–20:00', days:['tonight','tomorrow','week'] },
+    aiko:  { kana:'丽', name:'丽华', colour:'#B5563A', area:'长宁区 · 450米',
+             meta:['75岁，养了一只小狗','会说一点英语，很想练习','已在 musubi 共进过 4 次晚餐'],
+             ask:'只需确认她吃了晚间的药，家里是否够暖和。',
+             time:'18:00–19:00', days:['tomorrow','week'] }
+  },
+  menu:[
+    { jp:'中餐', en:'Zhongcan', items:[
+      { em:'🐟', n:'清蒸鱼套餐', d:'清蒸鱼、米饭、清汤、小菜。', t:['低钠'] },
+      { em:'🍚', n:'鸡丝粥', d:'温润米粥配鸡丝。', t:['软食'] },
+      { em:'🍜', n:'馄饨面', d:'软面配清淡高汤。', t:['软食'] },
+      { em:'🥬', n:'家常豆腐套餐', d:'红烧豆腐配时令青菜。', t:[] } ] },
+    { jp:'西餐', en:'Xican', items:[
+      { em:'🍛', n:'猪排饭', d:'酥脆猪排配米饭与沙拉。', t:['份量足'] },
+      { em:'🍳', n:'蛋包饭', d:'嫩蛋盖番茄饭。', t:['软食'] },
+      { em:'🥘', n:'奶油炖菜', d:'鸡肉与蔬菜炖入温和白酱。', t:['软食','低钠'] },
+      { em:'🍤', n:'炸虾拼盘', d:'炸虾、沙拉与黄油饭。', t:[] } ] },
+    { jp:'日料', en:'Riliao', items:[
+      { em:'🍣', n:'烤三文鱼套餐', d:'烤三文鱼配米饭与味噌汤。', t:['低钠'] },
+      { em:'🥟', n:'煎饺套餐', d:'六只煎饺、米饭与腌菜。', t:['人气'] },
+      { em:'🍲', n:'盖饭', d:'炒时蔬与猪肉盖在米饭上。', t:[] },
+      { em:'🍜', n:'酱油拉面', d:'清澈酱油汤底，配叉烧与溏心蛋。', t:['份量足'] } ] },
+    { jp:'软食', en:'Soft & light', items:[
+      { em:'🥚', n:'蒸蛋套餐', d:'滑嫩蒸蛋配米饭。', t:['软食','易吞咽'] },
+      { em:'🍚', n:'白粥套餐', d:'白粥配清蒸鱼。', t:['软食','清淡'] },
+      { em:'🍜', n:'软面', d:'更软的面条配温和汤底。', t:['易吞咽'] },
+      { em:'🍱', n:'豆腐便当', d:'小份分装，适合糖尿病。', t:['小份'] } ] }
+  ]
+};
+
+var COUNTRIES = { en:C_EN, jp:C_JP, kr:C_KR, cn:C_CN };
+
+/* default values for the free-text demo fields, per language */
+var FIELD_VALUES = {
+  en:{ q:'Can you see if she’s having trouble using her new phone?',
+       note:'She seemed happy today and talked a lot about her garden.',
+       ans:'Helped her with messaging' },
+  ja:{ q:'新しいスマートフォンで困っていないか見てもらえますか。',
+       note:'今日はご機嫌がよく、庭の話をたくさんしてくださいました。',
+       ans:'メッセージの使い方をお手伝いしました' },
+  ko:{ q:'새 휴대폰 쓰시는 데 불편은 없는지 봐주실 수 있나요?',
+       note:'오늘은 기분이 좋아 보이셨고, 정원 이야기를 많이 하셨습니다.',
+       ans:'메시지 사용법을 도와드렸습니다' },
+  zh:{ q:'能帮忙看看她用新手机有没有遇到困难吗？',
+       note:'她今天心情不错，聊了很多关于她花园的事。',
+       ans:'帮她弄了发消息的功能' }
+};
+var CO = C_EN, CKEY = 'en';
+
+/* =========================================================================
+   TRANSLATION DICTIONARY  (English source string -> ja / ko / zh)
+   ========================================================================= */
+var T = {};
+function t(en, ja, ko, zh){ T[en] = { ja:ja, ko:ko, zh:zh }; }
+
+/* nav + hero */
+t('How it works','ご利用の流れ','이용 방법','使用流程');
+t('For families','ご家族の方へ','가족을 위해','家属专区');
+t('Safety','安全対策','안전','安全保障');
+t('Student login','学生ログイン','학생 로그인','学生登录');
+t('Find a visit','訪問を探す','방문 찾기','寻找探访');
+t('Choose your country','国を選んでください','국가를 선택하세요','请选择国家');
+t('Now welcoming families in Tokyo, Seoul and Shanghai','東京・ソウル・上海でご家族の受付を開始しました','도쿄·서울·상하이에서 가족을 모시고 있습니다','现已在东京、首尔、上海接受家庭申请');
+t('Now welcoming families in Tokyo','東京でご家族の受付を開始しました','도쿄에서 가족을 모시고 있습니다','现已在东京接受家庭申请');
+t('Now welcoming families in Seoul','ソウルでご家族の受付を開始しました','서울에서 가족을 모시고 있습니다','现已在首尔接受家庭申请');
+t('Now welcoming families in Shanghai','上海でご家族の受付を開始しました','상하이에서 가족을 모시고 있습니다','现已在上海接受家庭申请');
+t('A good meal is better','おいしい食事は','좋은 식사는','美好的一餐');
+t('shared.','分かち合うともっとおいしい。','나눌 때 더 좋습니다.','分享更美味。');
+t('Musubi brings verified care-students to an older neighbour’s own table — dinner at home, no journey to make, and families gently kept in the loop.',
+  'musubi は、資格課程で学ぶ介護学生をご高齢の方のご自宅の食卓へお連れします。外出の必要はなく、ご家族にもそっと様子が届きます。',
+  'musubi는 검증된 돌봄 전공 학생을 어르신의 집 식탁으로 모십니다. 외출할 필요 없이 집에서, 가족에게도 조용히 소식이 전해집니다.',
+  'musubi 将经过审核的养老照护专业学生带到长者自己的餐桌旁——在家用餐，无需外出，家人也能安心知情。');
+t('Find a dinner companion','食事の相手を探す','함께 식사할 사람 찾기','寻找共餐伙伴');
+t('See how it works','使い方を見る','이용 방법 보기','了解使用流程');
+t('from 280+ shared meals','280回以上の食事から','280회 이상의 식사 기준','来自 280+ 次共餐');
+t('Tonight, 6:30 PM','今夜 18:30','오늘 저녁 6시 30분','今晚 18:30');
+t('Hana is coming for dinner','ハナさんが夕食に来ます','하나 학생이 저녁에 방문합니다','小花今晚来共进晚餐');
+
+/* how it works */
+t('How musubi works','musubi の仕組み','musubi 이용 방법','musubi 的运作方式');
+t('From “what’s for dinner?”','「今夜は何を食べよう？」から','"오늘 저녁 뭐 먹지?"에서','从"今晚吃什么？"');
+t('to “how was your evening?”','「今日はどうだった？」へ','"오늘 저녁 어땠어요?"까지','到"今晚过得怎么样？"');
+t('Get matched','マッチングされる','매칭되기','自动匹配');
+t('Both sides post when they are free. Musubi suggests care-students nearby who share your interests.',
+  'お互いに空いている時間を登録すると、musubi が趣味の合う近くの介護学生をご提案します。',
+  '양쪽이 가능한 시간을 등록하면, musubi가 관심사가 맞는 가까운 돌봄 전공 학생을 제안합니다.',
+  '双方登记空闲时间后，musubi 会推荐兴趣相投的附近照护专业学生。');
+t('Choose two meals','二人分の食事を選ぶ','두 사람의 식사 고르기','各自点餐');
+t('Everyone chooses their own dinner. Both meals arrive fresh, together.',
+  'それぞれが好きな食事を選びます。二人分が同時に届きます。',
+  '각자 원하는 식사를 고릅니다. 두 끼가 함께 따뜻하게 도착합니다.',
+  '各自选择喜欢的餐点，两份一起新鲜送达。');
+t('Share the table at home','ご自宅の食卓を囲む','집에서 함께 식탁에','在家共享餐桌');
+t('The student comes to them. 45–60 minutes of food and unhurried conversation, no journey to make.',
+  '学生がご自宅にうかがいます。45〜60分、ゆっくりと食事と会話を。外出の必要はありません。',
+  '학생이 집으로 찾아갑니다. 45~60분 동안 식사와 여유로운 대화를, 외출 없이.',
+  '学生上门拜访。45–60 分钟的用餐与从容交谈，无需出门。');
+t('Family gets an update','ご家族にお知らせ','가족에게 알림','家人收到更新');
+t('A short, thoughtful check-in is shared after every visit.',
+  '訪問のたびに、短くていねいな報告が届きます。',
+  '방문할 때마다 짧고 정성스러운 확인 보고가 전달됩니다.',
+  '每次探访后都会分享一份简短用心的反馈。');
+
+/* eligibility gate */
+t('Before you sign up','ご登録の前に','가입하기 전에','注册之前');
+t('We only accept care students','介護を学ぶ学生のみを受け入れています','돌봄 전공 학생만 받습니다','我们只接受照护专业学生');
+t('Musubi does not recruit students at large. Every visiting student is enrolled on a recognised elderly-care, welfare, nursing or rehabilitation programme — and we confirm that with their school before they are given access to anything.',
+  'musubi は学生を広く募集していません。訪問する学生は必ず、介護福祉・社会福祉・看護・リハビリテーションの課程に在籍しており、学校に在籍確認を取るまで一切のアクセスを許可しません。',
+  'musubi는 학생을 무작위로 모집하지 않습니다. 방문하는 학생은 반드시 노인복지·사회복지·간호·재활 관련 학과에 재학 중이며, 학교에 재학 확인을 마치기 전까지 어떤 접근 권한도 주어지지 않습니다.',
+  'musubi 不面向所有学生招募。每一位上门的学生都在养老照护、社会福利、护理或康复相关专业就读，且必须经学校确认在籍后才能获得任何权限。');
+t('Upload two IDs','2種類の身分証を提出','신분증 두 가지 제출','上传两种证件');
+t('A government photo ID and a current student ID card, submitted in the app.',
+  '公的な写真付き身分証と、有効な学生証をアプリから提出します。',
+  '정부 발급 사진 신분증과 현재 유효한 학생증을 앱에서 제출합니다.',
+  '在应用内提交政府颁发的带照片身份证件和有效学生证。');
+t('We verify with the school','学校に在籍を確認','학교에 재학 확인','向学校核实');
+t('We confirm directly with the institution that the applicant is an officially enrolled student on an approved programme.',
+  '学校に直接連絡し、対象の課程に正式に在籍していることを確認します。',
+  '해당 교육기관에 직접 연락하여 승인된 학과에 정식으로 재학 중임을 확인합니다.',
+  '我们直接联系院校，确认申请人确为认可专业的在籍学生。');
+t('Only then does the app open','確認後にアプリが使えます','확인 후에야 앱이 열립니다','通过后应用才会开放');
+t('Until that check passes there is no access — no browsing, no requests, no addresses.',
+  '確認が取れるまで、閲覧もリクエストも住所の表示も一切できません。',
+  '확인이 끝나기 전까지는 열람도, 요청도, 주소 확인도 전혀 할 수 없습니다.',
+  '在核实通过之前，无法浏览、无法申请、也看不到任何地址。');
+t('Who is eligible.','対象となる学生','지원 자격','申请资格');
+t('Students aged 18 and over enrolled in elderly care, care welfare, social welfare, nursing, rehabilitation or a closely related subject.',
+  '18歳以上で、介護福祉・社会福祉・看護・リハビリテーション、またはそれに準ずる分野を学ぶ学生。',
+  '만 18세 이상으로 노인복지, 돌봄복지, 사회복지, 간호, 재활 또는 이에 준하는 전공에 재학 중인 학생.',
+  '年满 18 周岁，就读于养老照护、照护福利、社会工作、护理、康复或相近专业的学生。');
+t('And for everyone','そしてすべての方へ','그리고 모두에게','面向所有人');
+t('A two-minute conversation','2分間の会話','2분간의 대화','两分钟的对话');
+t('Before anyone is matched we ask a few things about hobbies and preferences, then match on what people actually have in common. Students fill in a short form. Older members can simply talk to musubi — no typing, no small print.',
+  'マッチングの前に、趣味や好みをいくつかうかがい、本当に共通するところで組み合わせます。学生は短いフォームに記入し、ご高齢の方は musubi に話しかけるだけ。入力も細かい規約も不要です。',
+  '매칭 전에 취미와 선호를 몇 가지 여쭙고, 실제로 통하는 부분을 기준으로 연결합니다. 학생은 짧은 양식을 작성하고, 어르신은 musubi에 말씀만 하시면 됩니다. 타이핑도, 깨알 같은 약관도 없습니다.',
+  '匹配之前，我们会询问几个关于兴趣与偏好的问题，再按真正的共同点来配对。学生填写简短表单，长者只需与 musubi 说话即可——无需打字，没有小字条款。');
+t('🌼 Elderly · voice','🌼 高齢の方・音声','🌼 어르신 · 음성','🌼 长者 · 语音');
+t('🎓 Student · form','🎓 学生・フォーム','🎓 학생 · 양식','🎓 学生 · 表单');
+t('Tap start — musubi will ask a few questions out loud.',
+  '開始を押すと、musubi が声で質問します。',
+  '시작을 누르면 musubi가 소리로 몇 가지를 여쭙습니다.',
+  '点击开始，musubi 会用语音提问。');
+t('Start the conversation','会話を始める','대화 시작하기','开始对话');
+t('Play it again','もう一度再生','다시 듣기','再播放一次');
+t('Listening…','聞いています…','듣고 있습니다…','正在聆听…');
+t('Listening to the answers…','お話をうかがっています…','답변을 듣고 있습니다…','正在聆听回答…');
+t('Check-in requests for Mum','母への確認をお願いしたいこと','어머니께 확인해 주셨으면 하는 것','希望留意母亲的事项');
+t('Did she eat most of her meal?','食事はほとんど召し上がりましたか。','식사를 대부분 드셨나요?','她把饭菜大部分吃完了吗？');
+t('Ask if she has been sleeping okay','よく眠れているか尋ねてください','잘 주무시는지 여쭤봐 주세요','请问问她睡得好不好');
+t('Check whether the hallway is still cluttered','廊下がまだ散らかっていないか確認してください','현관과 복도가 아직 어수선한지 확인해 주세요','请看看走廊是否还堆着杂物');
+t('Remind her about her medication','お薬をひとこと声かけしてください','약 드시는 것을 알려드려 주세요','请提醒她按时服药');
+t('Ask whether she needs groceries','買い物が必要か尋ねてください','장을 봐야 하는지 여쭤봐 주세요','请问她是否需要采买');
+t('Keep looking','引き続き探す','계속 찾아보기','继续寻找');
+t('Visit started','訪問を開始しました','방문이 시작되었습니다','探访已开始');
+t('Visit completed','訪問が終了しました','방문이 완료되었습니다','探访已完成');
+t('Had lunch','昼食をとりました','점심 식사함','已用午餐');
+t('Medication check-in','服薬の確認','복약 확인','服药确认');
+t('Home safety check','室内の安全確認','집 안 안전 확인','居家安全检查');
+t('Milk is running low','牛乳が少なくなっています','우유가 거의 떨어졌습니다','牛奶快用完了');
+t('10 minutes away','到着まで約10分','약 10분 거리','约 10 分钟路程');
+t('63 verified minutes added to hours record','記録された63分を活動時間に加算','검증된 63분이 활동 시간에 기록됨','已将核实的 63 分钟计入时数记录');
+t('Address released','住所が開示されました','주소가 공개되었습니다','地址已开放');
+t('Live location sharing started','位置情報の共有を開始しました','실시간 위치 공유가 시작되었습니다','实时位置共享已开始');
+t('Arriving','到着','도착','即将到达');
+t('Scan the code at the door','玄関でコードを読み取る','문 앞에서 코드 스캔','在门口扫描二维码');
+t('Hold the camera over her screen','相手の画面にカメラをかざしてください','상대의 화면에 카메라를 대세요','将摄像头对准对方的屏幕');
+t('Code refreshes every 60 seconds','コードは60秒ごとに更新されます','코드는 60초마다 갱신됩니다','验证码每 60 秒刷新一次');
+t('Visit in progress','訪問中','방문 중','探访进行中');
+t('Checked in','チェックイン済み','체크인 완료','已签到');
+t('Enjoy your lunch','どうぞお召し上がりください','맛있게 드세요','请慢用');
+t('Thank you for sharing lunch','ごいっしょいただきありがとうございました','함께해 주셔서 고맙습니다','谢谢您一起用餐');
+t('Completed together at 1:06 PM.','13:06 にごいっしょに終了しました。','오후 1시 6분에 함께 마쳤습니다.','于 13:06 一同结束。');
+t('Started 12:03 PM','12:03 に開始','오후 12시 3분 시작','12:03 开始');
+t('✓ Start verified by QR','✓ QR で開始を確認','✓ QR로 시작 확인','✓ 已用二维码验证开始');
+t('About 10 minutes away · lunch together','到着まで約10分 · いっしょに昼食','약 10분 거리 · 함께 점심','约 10 分钟路程 · 一起用午餐');
+t('Scheduled · 12:00–1:00 PM','予定 · 12:00–13:00','예정 · 12:00–13:00','预定 · 12:00–13:00');
+t('Complete 60-sec report','60秒の報告を書く','60초 보고 작성','填写 60 秒报告');
+t('⌂ Keiko’s device','⌂ ご本人の端末','⌂ 어르신의 기기','⌂ 长者的设备');
+t('Mum’s visit','お母さまの訪問','어머님의 방문','母亲的探访');
+t('Mealtime booked','食事の予約が確定しました','식사 시간이 예약되었습니다','用餐时间已预约');
+t('Declined — and that is fine','お断り。それでかまいません','거절 — 괜찮습니다','已婉拒——这没关系');
+t('Nobody is obliged to accept. The suggestion simply goes back out, and musubi proposes the next best match.',
+  '承認の義務はありません。提案は再び他の方へ回り、musubi が次に合う相手をご提案します。',
+  '수락할 의무는 없습니다. 제안은 다시 다른 분께 전달되고, musubi가 다음으로 잘 맞는 상대를 제안합니다.',
+  '没有人必须接受。该提议会重新发出，musubi 会推荐下一个最合适的匹配。');
+t('Next step','次へ','다음 단계','下一步');
+t('Start over','最初から','처음부터','重新开始');
+t('What we heard:','うかがった内容：','들은 내용:','我们听到的：');
+t('All done — that took 1 minute 40 seconds.','完了しました。1分40秒でした。','완료되었습니다 — 1분 40초 걸렸습니다.','已完成——用时 1 分 40 秒。');
+t('What are you into?','どんなことが好きですか？','어떤 것을 좋아하시나요?','您喜欢什么？');
+t('Pick a few — we match on shared ground, not just distance.',
+  'いくつか選んでください。距離だけでなく、共通点でマッチングします。',
+  '몇 가지 골라주세요. 거리뿐 아니라 공통점으로 연결합니다.',
+  '选择几项——我们按共同点匹配，而不只看距离。');
+t('Your programme','あなたの課程','전공 과정','您的专业');
+t('How often could you visit?','どのくらいの頻度で訪問できますか？','얼마나 자주 방문할 수 있나요?','您能多久探访一次？');
+t('Once a week','週に1回','주 1회','每周一次');
+t('Twice a week','週に2回','주 2회','每周两次');
+t('Once a fortnight','2週間に1回','격주 1회','每两周一次');
+t('Whenever I’m free','空いているときはいつでも','시간 될 때 언제든','有空就去');
+t('Find my matches','マッチを探す','매칭 찾기','查找匹配');
+t('Neighbours near your campus','学校の近くにお住まいの方','학교 근처에 계신 이웃','学校附近的长者');
+t('match','マッチ','일치','匹配');
+
+/* meals */
+t('Everyone chooses their own dinner','それぞれが自分の食事を選びます','각자 자기 식사를 고릅니다','各自点自己的晚餐');
+t('A small, curated menu with softer options built for older appetites. Each person picks whatever they feel like, and both meals arrive fresh at the door, together, just before the visit starts.',
+  '厳選した小さなメニューには、やわらかい食事もそろっています。それぞれが食べたいものを選び、二人分が訪問の直前に、いっしょに玄関へ届きます。',
+  '엄선한 작은 메뉴에는 부드러운 식사도 준비되어 있습니다. 각자 원하는 것을 고르면, 두 끼가 방문 직전에 함께 문 앞으로 도착합니다.',
+  '精选的小份菜单，备有适合长者的软食选项。各自点自己想吃的，两份餐点在探访开始前一同新鲜送达门口。');
+t('Low sodium · soft options shown first','減塩・やわらかい選択肢を先に表示','저염 · 부드러운 메뉴 우선 표시','低钠 · 优先显示软食');
+t('Her meal is free — included in the visit','学生の食事は無料・訪問に含まれます','학생의 식사는 무료 — 방문에 포함','学生餐免费——已含在探访中');
+t('Both arrive together','二人分が同時に届きます','두 끼가 함께 도착','两份一同送达');
+t('Low sodium','減塩','저염','低钠');
+t('Popular','人気','인기','人气');
+t('Soft','やわらか','부드러움','软食');
+t('Hearty','ボリューム','든든함','份量足');
+t('Easy swallow','飲み込みやすい','삼키기 쉬움','易吞咽');
+t('Light','軽め','가벼움','清淡');
+t('Small portion','少量','소량','小份');
+t('Soft & light','やわらか・軽め','부드럽고 가벼운','软食清淡');
+
+/* matching */
+t('Find a match','マッチを探す','매칭 찾기','寻找匹配');
+t('Matched on when you are free','空いている時間でマッチング','가능한 시간으로 매칭','按空闲时间匹配');
+t('Both sides enter their availability in advance. Musubi suggests a match on hobbies, times and interests, and sends the request for you — the other person approves or declines.',
+  'お互いにあらかじめ空き時間を登録します。musubi が趣味・時間・関心からマッチを提案し、リクエストを自動で送ります。相手が承認するか、お断りするかを選びます。',
+  '양쪽이 미리 가능한 시간을 입력합니다. musubi가 취미·시간·관심사를 바탕으로 매칭을 제안하고 요청을 대신 보내면, 상대가 수락하거나 거절합니다.',
+  '双方提前填写空闲时间。musubi 依据兴趣、时间和关注点推荐匹配并代为发送邀请，对方可以接受或婉拒。');
+t('Automatic matching','自動マッチング','자동 매칭','自动匹配');
+t('How a booking is made without anyone searching.','検索しなくても予約が決まる流れ。','검색하지 않아도 예약이 성사되는 과정.','无需搜索也能完成预约的流程。');
+t('Both sides enter their availability ahead of time.',
+  'お互いに、空いている時間をあらかじめ登録します。',
+  '양쪽이 가능한 시간을 미리 입력합니다.',
+  '双方提前填写各自的空闲时间。');
+t('Musubi suggests a match on shared hobbies, times and interests.',
+  'musubi が共通の趣味・時間・関心をもとにマッチを提案します。',
+  'musubi가 공통 취미, 시간, 관심사를 바탕으로 매칭을 제안합니다.',
+  'musubi 依据共同的兴趣、时间与关注点推荐匹配。');
+t('The request is sent automatically to the other person.',
+  'リクエストは自動で相手に送信されます。',
+  '요청은 자동으로 상대에게 전송됩니다.',
+  '邀请会自动发送给对方。');
+t('They approve or decline — nothing is ever forced.',
+  '相手は承認するかお断りするかを選べます。強制されることはありません。',
+  '상대는 수락하거나 거절할 수 있습니다. 강요는 없습니다.',
+  '对方可以接受或婉拒——绝不勉强。');
+t('Both approve, and the mealtime is booked.',
+  '双方が承認すれば、食事の予約が確定します。',
+  '양쪽이 모두 수락하면 식사 시간이 예약됩니다.',
+  '双方都同意，用餐时间即预约成功。');
+t('Run the match','マッチを実行','매칭 실행하기','运行匹配');
+t('Show a decline','お断りの場合','거절하는 경우','查看婉拒情形');
+t('Prefer to look for yourself? You can still browse everyone free nearby.',
+  '自分で探したい方へ。近くで空いている方をそのまま見ることもできます。',
+  '직접 찾아보고 싶으신가요? 근처에서 시간이 되는 분들을 그대로 둘러볼 수 있습니다.',
+  '想自己挑选？您也可以直接浏览附近有空的人。');
+t('🌼 Looking for company','🌼 話し相手を探す','🌼 함께할 사람을 찾아요','🌼 想找人作伴');
+t('🎓 I’m a student','🎓 学生です','🎓 저는 학생입니다','🎓 我是学生');
+t('Your availability this week','今週の空き時間','이번 주 가능한 시간','您本周的空闲时间');
+t('Tap the evenings you’re free — neighbours can then request you.',
+  '空いている夜を選んでください。近所の方からリクエストが届きます。',
+  '가능한 저녁을 선택하세요. 이웃이 요청을 보낼 수 있습니다.',
+  '选择您有空的晚上，附近的长者便可向您发出邀请。');
+t('slots posted','件の時間を登録済み','개 시간대 등록됨','个时段已发布');
+t('Mon eve','月・夜','월 저녁','周一晚');
+t('Tue eve','火・夜','화 저녁','周二晚');
+t('Wed eve','水・夜','수 저녁','周三晚');
+t('Thu eve','木・夜','목 저녁','周四晚');
+t('Fri eve','金・夜','금 저녁','周五晚');
+t('Sat lunch','土・昼','토 점심','周六午');
+t('Sun lunch','日・昼','일 점심','周日午');
+t('Tonight','今夜','오늘 저녁','今晚');
+t('Tomorrow','明日','내일','明天');
+t('This week','今週','이번 주','本周');
+t('⊕ Within 3 km','⊕ 3km 以内','⊕ 3km 이내','⊕ 3 公里内');
+t('💚 Swipe','💚 スワイプ','💚 스와이프','💚 滑动');
+t('📋 Full profile','📋 プロフィール','📋 전체 프로필','📋 完整资料');
+t('Drag the card, or tap ✕ and ♥. Swiping right sends a request.',
+  'カードをドラッグするか、✕ と ♥ を押してください。右にスワイプするとリクエストを送ります。',
+  '카드를 끌거나 ✕ 와 ♥ 를 누르세요. 오른쪽으로 밀면 요청이 전송됩니다.',
+  '拖动卡片，或点击 ✕ 与 ♥。向右滑动即发送邀请。');
+t('Available tonight','今夜対応可能','오늘 저녁 가능','今晚有空');
+t('Available tomorrow','明日対応可能','내일 가능','明天有空');
+t('Available this week','今週対応可能','이번 주 가능','本周有空');
+t('Requesting tonight','今夜を希望','오늘 저녁 요청 중','希望今晚');
+t('Requesting tomorrow','明日を希望','내일 요청 중','希望明天');
+t('Requesting this week','今週を希望','이번 주 요청 중','希望本周');
+t('They’re free','空いている時間','가능한 시간','对方空闲');
+t('Their meal pick','選んだ食事','고른 식사','所选餐点');
+t('Student meal included','学生の食事は無料','학생 식사 포함','含学生餐');
+t('Dinner time','食事の時間','식사 시간','用餐时间');
+t('You receive','受け取るもの','받는 것','您将获得');
+t('Free meal + 1 hour','無料の食事 + 1時間','무료 식사 + 1시간','免费餐点 + 1 小时');
+t('Logged to your hours record','活動時間の記録に加算','활동 시간 기록에 반영','计入您的时数记录');
+t('What her family asks you to notice','ご家族から見てほしいこと','가족이 살펴봐 달라고 한 것','家人希望您留意的事');
+t('Accept this visit','この訪問を受ける','이 방문 수락하기','接受此次探访');
+t('Not this time','今回は見送る','이번에는 어렵습니다','这次不方便');
+t('Your meal is free · 60 verified minutes added to your hours record',
+  '食事は無料・記録された60分が活動時間に加算されます',
+  '식사는 무료 · 검증된 60분이 활동 시간에 기록됩니다',
+  '餐点免费 · 经核实的 60 分钟计入您的时数记录');
+t('Request sent','リクエスト送信済み','요청을 보냈습니다','邀请已发送');
+t('You’ll be notified either way.','どちらの場合もお知らせします。','어느 쪽이든 알려드립니다.','无论结果如何都会通知您。');
+t('It’s a match!','マッチしました！','매칭되었습니다!','匹配成功！');
+t('Start over','最初から','처음부터','重新开始');
+t('Declined','お断りされました','거절됨','已婉拒');
+t('No problem — this request goes back out to other students nearby.',
+  '問題ありません。このリクエストは近くの他の学生に再送されます。',
+  '괜찮습니다 — 이 요청은 근처의 다른 학생들에게 다시 전달됩니다.',
+  '没关系——该邀请会重新发送给附近的其他学生。');
+t('Keep looking','引き続き探す','계속 찾아보기','继续寻找');
+t('That’s everyone nearby','近くの方は以上です','근처에는 이분들이 전부입니다','附近的人已看完');
+t('We’ll let you know as more students post their evenings.',
+  '新しく空き時間を登録した学生がいればお知らせします。',
+  '새로 시간을 등록하는 학생이 있으면 알려드리겠습니다.',
+  '有新的学生登记空闲时间时会通知您。');
+t('Start again','もう一度','다시 시작','重新开始');
+
+/* families */
+t('Personalized family check-in','ご家族向けの確認事項','가족 맞춤 확인','家属专属回访');
+t('Stay close — even when you live far away.','遠く離れていても、そばに。','멀리 살아도 가까이 있는 것처럼.','即使相隔遥远，也如同陪伴身旁。');
+t('You choose what matters. The student answers it in under a minute. You get the answer the same evening — no chasing, no awkward messages.',
+  '気になることを選ぶだけ。学生が1分以内に答え、その日の夜のうちに届きます。催促も、気まずいやり取りもありません。',
+  '궁금한 점을 고르기만 하세요. 학생이 1분 안에 답하고, 그날 저녁에 바로 전달됩니다. 재촉할 필요도, 어색한 연락도 없습니다.',
+  '您只需选择关心的事项，学生一分钟内作答，当晚即可收到——无需催促，也不必尴尬地追问。');
+t('Family asks','ご家族が尋ねる','가족이 묻고','家人提问');
+t('Student answers','学生が答える','학생이 답하고','学生作答');
+t('Family receives','ご家族が受け取る','가족이 받습니다','家人收到');
+t('Tick what you’d like Hana to notice or ask about tonight.',
+  '今夜、学生に見てほしいこと・尋ねてほしいことを選んでください。',
+  '오늘 저녁 학생이 살펴보거나 여쭤봐 주었으면 하는 것을 선택하세요.',
+  '勾选今晚希望学生留意或询问的事项。');
+t('Anything else?','その他にありますか？','그 밖에 더 있나요?','还有别的吗？');
+t('Your student sees this before they arrive.','学生は到着前にこれを確認します。','학생이 도착 전에 이 내용을 봅니다.','学生会在到达前看到这条内容。');
+t('requests · sent to Hana','件の依頼・学生に送信','건 요청 · 학생에게 전달','项请求 · 已发送给学生');
+t('See what Hana gets','学生に届く内容を見る','학생이 받는 화면 보기','查看学生收到的内容');
+t('Takes 30–60 seconds, filled in on the way home.',
+  '帰り道に30〜60秒で記入します。',
+  '집에 가는 길에 30~60초면 작성합니다.',
+  '回程路上 30–60 秒即可填写。');
+t('Anything else you noticed?','ほかに気づいたことはありますか？','그 밖에 눈에 띈 점이 있나요?','还注意到什么吗？');
+t('Submit check-in','報告を送る','확인 보고 제출','提交回访');
+t('Hana’s note','学生からのひとこと','학생의 메모','学生留言');
+t('No concerns reported.','心配な点はありませんでした。','걱정할 만한 점은 없었습니다.','未发现需要担心的情况。');
+t('worth a look.','点、気になることがあります。','가지 살펴볼 점이 있습니다.','项值得留意。');
+t('Meal','食事','식사','用餐');
+t('Sleep','睡眠','수면','睡眠');
+t('Hallway','廊下','현관·복도','走廊');
+t('Medication','薬','약','服药');
+t('Groceries','買い物','장보기','采买');
+t('Mood','気分','기분','情绪');
+t('Your request','ご依頼','요청하신 항목','您的请求');
+t('Ate most','ほとんど食べた','대부분 드심','吃了大部分');
+t('Some','少し','조금','吃了一些');
+t('Very little','ほとんど食べていない','거의 못 드심','几乎没吃');
+t('Sleeping fine','よく眠れている','잘 주무심','睡得不错');
+t('So-so','まずまず','그저 그러심','一般');
+t('Poorly','あまり眠れていない','잘 못 주무심','睡得不好');
+t('Clear','片づいている','정돈되어 있음','通畅');
+t('Clutter noticed','散らかっていた','어수선함','有杂物');
+t('Reminder given','声かけをした','알려드렸음','已提醒');
+t('Not requested','依頼なし','요청 없음','未要求');
+t('Not needed','必要なし','필요 없음','不需要');
+t('Yes, needs some','必要あり','필요하심','需要');
+t('Good','良い','좋음','很好');
+t('Okay','ふつう','괜찮음','还行');
+t('Seemed different','いつもと違う様子','평소와 달라 보임','似乎不太一样');
+t('Your parent decides what you see','ご本人が共有する内容を決めます','어르신이 공유 범위를 정합니다','由长者决定您能看到什么');
+t('Even when an adult child is paying, nothing about the older person’s condition leaves their home without their consent. They approve each kind of information before it is shared, and can withdraw any of it at any time.',
+  'お子さまがお支払いの場合でも、ご本人の同意なしに体調に関する情報が外に出ることはありません。共有する項目はご本人が一つずつ承認し、いつでも取り消せます。',
+  '자녀가 비용을 부담하더라도, 어르신의 동의 없이는 건강 상태에 관한 어떤 정보도 집 밖으로 나가지 않습니다. 공유할 항목을 하나씩 승인하시고, 언제든 철회하실 수 있습니다.',
+  '即使由子女付费，未经长者同意，任何有关其健康状况的信息都不会外传。长者逐项批准可分享的内容，并可随时撤回。');
+
+/* who it's for */
+t('Who it’s for','こんな方へ','이런 분들을 위해','适合谁');
+t('Everyone gets something real','三者それぞれに、確かな価値を','세 사람 모두에게 진짜 필요한 것을','三方都真正有所得');
+t('An honest exchange between three people who each need something the others can give.',
+  'お互いに必要なものを持ち寄る、率直な関係です。',
+  '서로에게 필요한 것을 주고받는 정직한 관계입니다.',
+  '三个人各自需要对方能给的东西，是一次坦诚的交换。');
+t('For elderly parents','ご高齢のご家族へ','어르신을 위해','致长者');
+t('Company at your own table — somebody to eat with, not a delivery driver at the door.',
+  'ご自宅の食卓に話し相手を。玄関先の配達員ではなく、いっしょに食べる人を。',
+  '집 식탁에 함께할 사람을. 문 앞의 배달원이 아니라, 같이 식사할 사람을.',
+  '在自家餐桌旁有人作伴——是一起吃饭的人，而不是门口的送餐员。');
+t('Real conversation over a hot meal','温かい食事とほんとうの会話','따뜻한 식사와 진짜 대화','热饭菜与真实的交谈');
+t('It happens at home — you never have to go out','ご自宅で完結・外出の必要はありません','집에서 이루어집니다 — 외출하실 필요가 없습니다','就在家里进行——完全不必出门');
+t('Choose your own food, every time','毎回、自分の食事を選べます','매번 원하는 음식을 고르세요','每一次都自己点餐');
+t('Favourite a student so the same face returns','お気に入り登録で同じ学生が来ます','마음에 든 학생을 즐겨찾기하면 다시 옵니다','收藏喜欢的学生，同一个人再来');
+t('You decide what is shared with your family','ご家族に伝える内容はご本人が決めます','가족에게 전할 내용은 본인이 정합니다','由您决定分享给家人的内容');
+t('For care students','介護を学ぶ学生へ','돌봄 전공 학생을 위해','致照护专业学生');
+t('Real time with older people, outside the classroom and outside placement hours.',
+  '教室でも実習でもない、ご高齢の方との本物の時間。',
+  '강의실도 실습도 아닌, 어르신과 보내는 진짜 시간.',
+  '课堂之外、实习之外，与长者相处的真实时间。');
+t('Your meal is completely free','食事は完全無料','식사는 전액 무료','餐点完全免费');
+t('Volunteering hours, logged automatically','ボランティア時間を自動で記録','봉사 시간이 자동으로 기록됩니다','志愿服务时数自动记录');
+t('A record of your hours you can submit to your programme','学校に提出できる活動時間の証明','학교에 제출할 수 있는 활동 시간 기록','可提交给学校的时数证明');
+t('Experience with real people, not case studies','事例集ではなく、実際の人との経験','사례집이 아닌 실제 사람과의 경험','面对真人的经验，而非案例研究');
+t('Something worth putting on a CV','履歴書に書ける経験','이력서에 쓸 만한 경험','值得写进简历的经历');
+t('For adult children','離れて暮らすご家族へ','자녀를 위해','致成年子女');
+t('Stop wondering how Mum is doing between your calls, when you live too far to drop in.',
+  '電話と電話のあいだ、様子を気にしなくてすみます。すぐに立ち寄れない距離でも。',
+  '전화와 전화 사이, 부모님이 어떠신지 궁금해하지 않으셔도 됩니다. 들르기엔 너무 먼 거리라도.',
+  '两次通话之间不必再猜想父母的近况——即使远得无法顺路探望。');
+t('Tell us exactly what to check on','確認してほしいことを具体的に指定','확인해 주었으면 하는 것을 정확히 전달','明确告诉我们要留意什么');
+t('A clear report after every visit','訪問ごとにわかりやすい報告','방문할 때마다 명확한 보고','每次探访后都有清晰报告');
+t('Flagged straight away if something’s off','異変があればすぐに通知','이상이 있으면 즉시 알림','有异常立即提示');
+t('Only ever what your parent has agreed to share','ご本人が同意した内容のみ','어르신이 동의한 내용만','仅限长者同意分享的内容');
+t('Works from another city, or country','別の都市からでも、海外からでも','다른 도시에서도, 다른 나라에서도','身在异地或异国同样适用');
+
+/* safety */
+t('Safety system','安全のしくみ','안전 체계','安全体系');
+t('Trust, built into every visit','すべての訪問に、信頼を組み込む','모든 방문에 신뢰를 담습니다','把信任内建于每一次探访');
+t('Someone is coming into a home. We treat that seriously — nobody gets in without being verified by their school, the address is held back until they are on their way, and every visit is opened and closed at the door.',
+  '人の家に上がるということを、私たちは重く受け止めています。学校の在籍確認を通らない人は入れません。住所は出発するまで伏せられ、訪問は玄関で開始し、玄関で終了します。',
+  '누군가의 집에 들어가는 일입니다. 그래서 학교의 재학 확인을 통과하지 않으면 아무도 들어갈 수 없고, 주소는 출발할 때까지 공개되지 않으며, 모든 방문은 문 앞에서 시작하고 문 앞에서 끝납니다.',
+  '有人要走进别人的家门。我们对此十分慎重——未通过学校核实者不得入内，地址在出发前始终隐藏，每次探访都在门口开始、在门口结束。');
+t('Before they can use musubi at all','musubi を使い始める前に','musubi를 사용하기 전에','使用 musubi 之前');
+t('Two IDs, uploaded','2種類の身分証を提出','두 가지 신분증 제출','上传两种证件');
+t('Every applicant submits a government photo ID and a current student ID card. There are no anonymous accounts anywhere on the platform.',
+  '申請者は必ず、公的な写真付き身分証と有効な学生証を提出します。匿名のアカウントは一切ありません。',
+  '모든 지원자는 정부 발급 사진 신분증과 유효한 학생증을 함께 제출합니다. 익명 계정은 어디에도 없습니다.',
+  '每位申请人都需提交政府颁发的带照片证件和有效学生证。平台上不存在任何匿名账户。');
+t('Verified with the school','学校による在籍確認','학교 재학 확인','经学校核实');
+t('We contact the institution directly to confirm the applicant is an officially enrolled student on an approved care, welfare, nursing or rehabilitation programme.',
+  '学校に直接連絡し、介護・福祉・看護・リハビリテーションの対象課程に正式に在籍していることを確認します。',
+  '해당 교육기관에 직접 연락하여 승인된 돌봄·복지·간호·재활 학과에 정식으로 재학 중임을 확인합니다.',
+  '我们直接联系院校，确认申请人确为认可的照护、福利、护理或康复专业在籍学生。');
+t('No access until it passes','確認が取れるまで利用不可','확인 전까지 접근 불가','未通过前无法使用');
+t('Until that verification comes back, the app stays locked. No browsing, no requests, no profiles, no addresses.',
+  '確認が返ってくるまで、アプリはロックされたままです。閲覧も、リクエストも、プロフィールも、住所も見られません。',
+  '확인 결과가 오기 전까지 앱은 잠긴 상태입니다. 열람도, 요청도, 프로필도, 주소도 볼 수 없습니다.',
+  '在核实结果返回之前，应用保持锁定：无法浏览、无法申请、看不到资料、也看不到地址。');
+t('On the way &amp; at the door','移動中と玄関先で','이동 중과 문 앞에서','途中与门口');
+t('On the way & at the door','移動中と玄関先で','이동 중과 문 앞에서','途中与门口');
+t('The address stays hidden','住所は伏せられます','주소는 공개되지 않습니다','地址始终隐藏');
+t('A student only ever sees the neighbourhood. The exact address is released at the moment they set off for the visit — never before.',
+  '学生に見えるのは地域までです。正確な住所は、訪問に向けて出発した瞬間に開示されます。それより前に見えることはありません。',
+  '학생에게는 동네까지만 표시됩니다. 정확한 주소는 방문을 위해 출발하는 순간에 공개되며, 그 전에는 절대 보이지 않습니다.',
+  '学生只能看到大致街区。确切地址在其动身前往时才会开放——绝不会更早。');
+t('Live location, 10 minutes out','到着10分前から位置を共有','도착 10분 전부터 위치 공유','抵达前 10 分钟起共享位置');
+t('Location sharing starts ten minutes before the student is due to arrive, so both the household and the family can see them approaching.',
+  '到着予定の10分前から位置情報の共有が始まり、ご本人もご家族も近づいてくる様子を確認できます。',
+  '도착 예정 10분 전부터 위치 공유가 시작되어, 어르신도 가족도 다가오는 것을 확인할 수 있습니다.',
+  '在预计到达前十分钟开始共享位置，长者与家人都能看到学生正在靠近。');
+t('QR scan starts the session','QR スキャンで開始','QR 스캔으로 시작','扫码开始');
+t('A temporary code appears on the older person’s device. Nothing begins until the student scans it at the door — so a visit can only start if the right person is really there.',
+  'ご本人の端末に一時的なコードが表示されます。学生が玄関でそれを読み取るまで、何も始まりません。正しい相手が実際にその場にいる場合のみ、訪問が開始されます。',
+  '어르신의 기기에 임시 코드가 나타납니다. 학생이 문 앞에서 스캔하기 전까지는 아무것도 시작되지 않습니다. 올바른 사람이 실제로 그 자리에 있어야만 방문이 시작됩니다.',
+  '长者的设备上会显示一次性验证码。学生在门口扫码之前，一切都不会开始——只有本人确实在场，探访才能启动。');
+t('During &amp; afterwards','訪問中と訪問後','방문 중과 방문 후','探访中与探访后');
+t('During & afterwards','訪問中と訪問後','방문 중과 방문 후','探访中与探访后');
+t('Family notified, visit closed','ご家族へ通知し、訪問を終了','가족에게 알림, 방문 종료','通知家人，结束探访');
+t('The scan tells the family the visit has started. A second scan on the way out timestamps the end, so its length is recorded rather than self-reported.',
+  'スキャンと同時に、訪問開始がご家族に通知されます。帰り際にもう一度読み取ることで終了時刻が記録され、滞在時間は自己申告ではなく記録として残ります。',
+  '스캔과 동시에 방문이 시작되었음이 가족에게 전달됩니다. 나갈 때 한 번 더 스캔하면 종료 시각이 기록되어, 체류 시간은 자기 신고가 아니라 기록으로 남습니다.',
+  '扫码即刻通知家人探访已开始。离开时再扫一次记录结束时间，时长由系统记录而非自行申报。');
+t('Visit report &amp; hours record','訪問報告と活動時間の記録','방문 보고와 활동 시간 기록','探访报告与时数记录');
+t('Visit report & hours record','訪問報告と活動時間の記録','방문 보고와 활동 시간 기록','探访报告与时数记录');
+t('The check-in the family asked for is delivered automatically, and the verified minutes are added to the student’s hours record for their programme.',
+  'ご家族が依頼した確認事項は自動で届き、記録された時間は学生の課程用の活動時間に加算されます。',
+  '가족이 요청한 확인 항목은 자동으로 전달되고, 검증된 시간은 학생의 학과용 활동 시간 기록에 더해집니다.',
+  '家人要求的回访内容会自动送达，经核实的时长将计入学生用于专业的时数记录。');
+t('Ratings, blocking &amp; reporting','評価・ブロック・通報','평가, 차단, 신고','评价、屏蔽与举报');
+t('Ratings, blocking & reporting','評価・ブロック・通報','평가, 차단, 신고','评价、屏蔽与举报');
+t('Both sides rate each other after every visit, and either can block or report the other. Reports are reviewed by a person, not a queue.',
+  '訪問のたびに双方が評価し、どちらからでもブロックや通報ができます。通報は自動処理ではなく、人が確認します。',
+  '방문할 때마다 양쪽이 서로를 평가하며, 어느 쪽이든 차단하거나 신고할 수 있습니다. 신고는 대기열이 아니라 사람이 직접 검토합니다.',
+  '每次探访后双方互评，任何一方都可屏蔽或举报。举报由专人审核，而非排队自动处理。');
+
+/* three screens */
+t('One visit, three screens','ひとつの訪問、三つの画面','하나의 방문, 세 개의 화면','一次探访，三块屏幕');
+t('Everyone sees the same visit','全員が同じ訪問を見ています','모두가 같은 방문을 봅니다','所有人看到同一次探访');
+t('Follow one lunch from the moment the address is released to the family’s phone. Step through it below.',
+  '住所が開示された瞬間から、ご家族のスマートフォンに届くまでを追ってみてください。',
+  '주소가 공개되는 순간부터 가족의 휴대폰에 도착하기까지를 따라가 보세요.',
+  '跟随一次午餐，从地址开放的那一刻直到家人的手机。请在下方逐步查看。');
+t('On the way','移動中','이동 중','途中');
+t('Verify','確認','확인','验证');
+t('Visit','訪問','방문','探访');
+t('Complete','終了','완료','完成');
+t('✦ Student app','✦ 学生アプリ','✦ 학생 앱','✦ 学生端');
+t('♡ Family updates','♡ ご家族への通知','♡ 가족 알림','♡ 家人动态');
+t('Live updates','リアルタイムの更新','실시간 업데이트','实时更新');
+t('Today','今日','오늘','今天');
+t('Today · Aug 20','今日 · 8月20日','오늘 · 8월 20일','今天 · 8月20日');
+t('Live updates','リアルタイム更新','실시간 업데이트','实时更新');
+t('Arrive','到着','도착','到达');
+t('You','あなた','나','您');
+t('← Back','← 戻る','← 뒤로','← 返回');
+t('Next step','次へ','다음 단계','下一步');
+t('Replay from the door','最初から見る','처음부터 다시 보기','从头再看一次');
+
+/* pricing */
+t('Pricing','料金','요금','价格');
+t('Pay once, or pay less every time','1回ずつでも、続けるほどお得に','한 번만 이용하셔도, 자주 이용하시면 더 저렴하게','单次付费，或次次更省');
+t('One price covers the visit and both meals — including the student’s. The more regular the visits, the cheaper each one gets.',
+  '訪問と二人分の食事（学生の分を含む）が、ひとつの料金に含まれます。頻度が上がるほど1回あたりが安くなります。',
+  '방문과 두 사람분 식사(학생 몫 포함)가 하나의 요금에 모두 들어 있습니다. 자주 이용하실수록 1회 비용이 낮아집니다.',
+  '一份价格涵盖探访与两份餐点（含学生的一份）。探访越规律，每次越便宜。');
+t('Single visit','1回','1회 이용','单次探访');
+t('Try it once, no commitment.','まずは1回、契約は不要です。','부담 없이 한 번 이용해 보세요.','先试一次，无需承诺。');
+t('Most popular','人気','가장 인기','最受欢迎');
+t('Monthly','月額','월 이용권','月付');
+t('Yearly','年額','연 이용권','年付');
+t('cancel anytime','いつでも解約可能','언제든 해지 가능','随时取消');
+t('best value','いちばんお得','가장 알뜰한 선택','最超值');
+t('Every plan includes both meals, the visit, and unlimited family check-in reports.',
+  'どのプランにも、二人分の食事・訪問・ご家族への報告（回数無制限）が含まれます。',
+  '모든 요금제에 두 사람분 식사, 방문, 가족 확인 보고(횟수 제한 없음)가 포함됩니다.',
+  '所有套餐均含两份餐点、探访服务，以及不限次数的家属回访报告。');
+
+/* register */
+t('Get started','はじめる','시작하기','开始使用');
+t('Join musubi','musubi に登録する','musubi 가입하기','加入 musubi');
+t('Tell us who you are and we’ll set up the right account for you.',
+  'あなたのお立場を教えてください。それに合ったアカウントをご用意します。',
+  '어떤 분이신지 알려주시면 그에 맞는 계정을 만들어 드립니다.',
+  '告诉我们您的身份，我们会为您开设合适的账户。');
+t('⚠️ This is a prototype — the form doesn’t save anything or send real emails yet.',
+  '⚠️ これは試作版です。入力内容は保存されず、メールも送信されません。',
+  '⚠️ 이 페이지는 시제품입니다. 입력한 내용은 저장되지 않으며 메일도 발송되지 않습니다.',
+  '⚠️ 这是原型页面——表单不会保存任何内容，也不会真的发送邮件。');
+t('I’m signing up as…','登録するのは…','다음 자격으로 가입합니다…','我的身份是…');
+t('Family member','ご家族','가족','家属');
+t('For my parent','親のために','부모님을 위해','为我的父母');
+t('For myself','自分のために','저 자신을 위해','为我自己');
+t('I’d like company','話し相手がほしい','함께할 사람이 필요해요','希望有人作伴');
+t('Care student','介護を学ぶ学生','돌봄 전공 학생','照护专业学生');
+t('I want to visit','訪問したい','방문하고 싶어요','我想上门探访');
+t('First name','名','이름','名');
+t('Last name','姓','성','姓');
+t('Email address','メールアドレス','이메일 주소','电子邮箱');
+t('Phone number','電話番号','전화번호','电话号码');
+t('Your parent’s name','親御さまのお名前','부모님 성함','父母姓名');
+t('Where do they live?','お住まいの地域','어디에 사시나요?','他们住在哪里？');
+t('We’ll match them with students studying nearby.','近くで学ぶ学生とマッチングします。','근처에서 공부하는 학생과 매칭해 드립니다.','我们会为其匹配在附近就读的学生。');
+t('What should we check on?','確認してほしいことは？','무엇을 확인해 드릴까요?','希望我们留意什么？');
+t('You can change this any time before a visit.','訪問前ならいつでも変更できます。','방문 전에는 언제든지 변경할 수 있습니다.','探访前可随时修改。');
+t('Your neighbourhood','お住まいの地域','거주 지역','您所在的社区');
+t('Any dietary needs?','食事の制限はありますか？','식사에 제한이 있으신가요?','有饮食需求吗？');
+t('No special requirements','特になし','특별한 제한 없음','没有特殊要求');
+t('Diabetic-friendly','糖尿病対応','당뇨식','适合糖尿病');
+t('Soft / easy to chew','やわらかい・噛みやすい','부드럽고 씹기 편한','软质 / 易咀嚼');
+t('Vegetarian','ベジタリアン','채식','素食');
+t('Something else — I’ll explain later','その他（あとで説明します）','기타 — 나중에 설명하겠습니다','其他——稍后说明');
+t('When would you like company?','いつ来てほしいですか？','언제 함께하길 원하시나요?','希望什么时候有人作伴？');
+t('Weekday evenings','平日の夜','평일 저녁','工作日晚上');
+t('Weekday lunchtimes','平日の昼','평일 점심','工作日中午');
+t('Weekends','週末','주말','周末');
+t('I’m flexible','いつでも','언제든 좋습니다','都可以');
+t('Your school','在籍する学校','재학 중인 학교','您的学校');
+t('We contact your school directly to confirm you are enrolled.',
+  '在籍確認のため、学校に直接ご連絡します。',
+  '재학 확인을 위해 학교에 직접 연락드립니다.',
+  '我们会直接联系学校确认您的在籍状态。');
+t('Only elderly care, care welfare, social welfare, nursing and rehabilitation programmes are eligible.',
+  '対象は介護福祉・社会福祉・看護・リハビリテーションの課程に限られます。',
+  '노인복지, 돌봄복지, 사회복지, 간호, 재활 학과만 지원할 수 있습니다.',
+  '仅限养老照护、照护福利、社会工作、护理与康复专业。');
+t('Year of study','学年','학년','年级');
+t('1st year','1年','1학년','一年级');
+t('2nd year','2年','2학년','二年级');
+t('3rd year','3年','3학년','三年级');
+t('Final year','最終学年','졸업학년','毕业年级');
+t('Languages','話せる言語','사용 언어','语言');
+t('Why do you want to do this?','応募の理由を教えてください','지원하시는 이유를 알려주세요','您为什么想参与？');
+t('You will be asked to upload a government photo ID and your student ID card. The app stays locked until your school confirms your enrolment.',
+  '公的な写真付き身分証と学生証の提出をお願いします。学校が在籍を確認するまで、アプリはロックされたままです。',
+  '정부 발급 사진 신분증과 학생증을 업로드하셔야 합니다. 학교가 재학을 확인하기 전까지 앱은 잠겨 있습니다.',
+  '您需要上传政府颁发的带照片证件和学生证。在学校确认在籍之前，应用将保持锁定。');
+t('I agree to the Terms of Service and Privacy Policy, and consent to identity and enrolment verification where required.',
+  '利用規約とプライバシーポリシーに同意し、必要に応じて本人確認および在籍確認を行うことに同意します。',
+  '이용약관과 개인정보처리방침에 동의하며, 필요한 경우 신원 및 재학 확인에 동의합니다.',
+  '我同意服务条款与隐私政策，并同意在必要时进行身份与在籍核实。');
+t('Create my account','アカウントを作成','계정 만들기','创建账户');
+t('Already registered?','すでに登録済みですか？','이미 가입하셨나요?','已经注册？');
+t('Log in','ログイン','로그인','登录');
+t('Welcome to musubi','musubi へようこそ','musubi에 오신 것을 환영합니다','欢迎加入 musubi');
+t('Register someone else','別の方を登録する','다른 분 등록하기','注册其他人');
+
+/* footer */
+t('Shared meals. Real company. Peace of mind.','分かち合う食事。ほんとうの話し相手。そして安心。','함께하는 식사. 진짜 동행. 그리고 안심.','共享的餐食。真实的陪伴。安心的托付。');
+t('むすび — to tie together','むすび — 結ぶこと','무스비 — 잇는다는 뜻','musubi — 联结之意');
+t('Prototype concept · Japan · Korea · China','試作コンセプト · 日本 · 韓国 · 中国','프로토타입 컨셉 · 일본 · 한국 · 중국','原型概念 · 日本 · 韩国 · 中国');
+t('Prototype concept · Tokyo, Japan','試作コンセプト · 東京, 日本','프로토타입 컨셉 · 도쿄, 일본','原型概念 · 日本东京');
+t('Prototype concept · Seoul, Korea','試作コンセプト · ソウル, 韓国','프로토타입 컨셉 · 서울, 대한민국','原型概念 · 韩国首尔');
+t('Prototype concept · Shanghai, China','試作コンセプト · 上海, 中国','프로토타입 컨셉 · 상하이, 중국','原型概念 · 中国上海');
+
+/* hobbies + misc */
+t('Cooking','料理','요리','烹饪');
+t('Gardening','園芸','원예','园艺');
+t('Music','音楽','음악','音乐');
+t('Sport','スポーツ','스포츠','运动');
+t('Films','映画','영화','电影');
+t('Photography','写真','사진','摄影');
+t('Art','美術','미술','美术');
+t('Travel','旅行','여행','旅行');
+t('Games','ゲーム','게임','游戏');
+t('Baseball','野球','야구','棒球');
+t('Calligraphy','書道','서예','书法');
+
+/* =========================================================================
+   TRANSLATION ENGINE
+   ========================================================================= */
+var LANG = 'en';
+var ORIG = new WeakMap();
+var applying = false, queued = false;
+
+function eachText(fn){
+  var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: function(n){
+      var p = n.parentNode;
+      if (!p) return NodeFilter.FILTER_REJECT;
+      var tag = p.nodeName;
+      if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'TEXTAREA') return NodeFilter.FILTER_REJECT;
+      if (!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  var n; while ((n = w.nextNode())) fn(n);
+}
+
+var ATTRS = ['placeholder','title','aria-label'];
+var ORIGA = new WeakMap();
+
+function applyLang(){
+  applying = true;
+  eachText(function(n){
+    if (!ORIG.has(n)) ORIG.set(n, n.nodeValue);
+    var o = ORIG.get(n);
+    var raw = o.trim();
+    var key = raw.replace(/\s+/g, ' ');
+    var entry = T[key];
+    var want = (LANG !== 'en' && entry && entry[LANG]) ? o.replace(raw, entry[LANG]) : o;
+    if (n.nodeValue !== want) n.nodeValue = want;
+  });
+  var els = document.body.querySelectorAll('[placeholder],[title],[aria-label]');
+  [].forEach.call(els, function(el){
+    var store = ORIGA.get(el);
+    if (!store){ store = {}; ATTRS.forEach(function(a){ if (el.hasAttribute(a)) store[a] = el.getAttribute(a); }); ORIGA.set(el, store); }
+    ATTRS.forEach(function(a){
+      if (!(a in store)) return;
+      var o = store[a], entry = T[o.trim().replace(/\s+/g, ' ')];
+      var want = (LANG !== 'en' && entry && entry[LANG]) ? entry[LANG] : o;
+      if (el.getAttribute(a) !== want) el.setAttribute(a, want);
+    });
+  });
+  applying = false;
+}
+
+if (window.MutationObserver){
+  new MutationObserver(function(){
+    if (applying || queued) return;
+    queued = true;
+    setTimeout(function(){ queued = false; applyLang(); }, 0);
+  }).observe(document.body, { childList:true, subtree:true });
+}
+
+/* =========================================================================
+   APPLY A COUNTRY
+   ========================================================================= */
+function ph(id, v){ var e = document.getElementById(id); if (e) e.placeholder = v; }
+
+function fillSelect(id, list){
+  var s = document.getElementById(id); if (!s) return;
+  s.innerHTML = '';
+  list.forEach(function(p){ var o = document.createElement('option'); o.textContent = p; s.appendChild(o); });
+}
+
+function setCountry(key){
+  CKEY = key; CO = COUNTRIES[key]; LANG = CO.lang;
+  document.documentElement.lang = LANG;
+
+  [].forEach.call(document.querySelectorAll('.cbtn'), function(b){
+    b.classList.toggle('on', b.dataset.c === key);
+  });
+
+  STUDENTS = CO.students;
+  NEIGHBOURS = CO.neighbours;
+  CUISINES = CO.menu;
+  PEOPLE = [
+    { kana:CO.neighbours.keiko.kana, name:CO.neighbours.keiko.name, age:78, colour:'#C4653F', likes:['Gardening','Films','Cooking'] },
+    { kana:CO.neighbours.haruo.kana, name:CO.neighbours.haruo.name, age:82, colour:'#6E8F7A', likes:['Sport','Films','Travel'] },
+    { kana:CO.neighbours.aiko.kana,  name:CO.neighbours.aiko.name,  age:75, colour:'#B5563A', likes:['Music','Languages','Art'] }
+  ];
+
+  txt('badgeCity', CO.badge);
+  txt('footLoc', CO.foot);
+  txt('pr1', CO.price.one); txt('pr2', CO.price.mon); txt('pr2e', CO.price.mone);
+  txt('pr3', CO.price.yr);  txt('pr3e', CO.price.yre);
+  txt('priceNote', CO.price.from);
+
+  var pk = document.querySelector('.park-label');
+  if (pk) pk.innerHTML = '<b></b>', pk.firstChild.textContent = CO.park.a, pk.appendChild(document.createTextNode(CO.park.b));
+
+  var el = CO.neighbours.keiko.name, st = CO.students.haru.name;
+  DAY_LABEL = CO.days;
+  HEARD = CO.L.heard;
+  txt('mealNameK', fmt(CO.L.choosing, { n:el }));
+  txt('mealNameH', fmt(CO.L.choosing, { n:st }));
+  txt('mealAvK', CO.neighbours.keiko.kana);
+  txt('mealAvH', CO.students.haru.kana);
+  txt('dkK', fmt(CO.L.meal, { n:el }));
+  txt('dkH', fmt(CO.L.meal, { n:st }));
+  txt('delivNote', fmt(CO.L.deliv, { n:el }));
+  txt('sharedWith', fmt(CO.L.shared, { n:el, f:CO.family }));
+  txt('svMatchName', CO.students.ren.name);
+  txt('svMatchSh', CO.L.shmatch);
+  var sma = document.getElementById('svMatchAv'); if (sma) sma.textContent = CO.students.ren.kana;
+
+  ph('parea', CO.areaPH); ph('earea', CO.areaPH); ph('uni', CO.schoolPH); ph('ph', CO.phone);
+  fillSelect('prog', CO.programs); fillSelect('svProg', CO.programs);
+
+  var pl = document.getElementById('progList');
+  if (pl){ pl.innerHTML = ''; CO.programs.forEach(function(p){
+    var li = document.createElement('li'); li.textContent = p; pl.appendChild(li); }); }
+
+  var FV = FIELD_VALUES[LANG] || FIELD_VALUES.en;
+  var cq = document.getElementById('customQ'); if (cq) cq.value = FV.q;
+  var nt = document.getElementById('note');    if (nt) nt.value = FV.note;
+  customA = FV.ans;
+
+  buildScript(); buildTrip();
+  renderMeals('K'); renderMeals('H');
+  renderAsk(); renderHobbies();
+  refreshPins(); applyPanels(); buildDeck(); paintTrip();
+  resetAuto();
+  applyLang();
+}
+
+/* voice script + walkthrough, rebuilt per country */
+function buildScript(){
+  var el = CO.neighbours.keiko.name, L = CO.L;
+  SCRIPT = [
+    { w:'musubi', t:fmt(L.hi, { n:el }) },
+    { w:el,       t:L.yes },
+    { w:'musubi', t:L.q1 },
+    { w:el,       t:L.a1 },
+    { w:'musubi', t:L.q2 },
+    { w:el,       t:L.a2 },
+    { w:'musubi', t:L.q3 }
+  ];
+}
+
+function buildTrip(){
+  var el = CO.neighbours.keiko.name, st = CO.students.haru.name, L = CO.L;
+  var FEED_START =
+    '<div class="fitem"><div class="fi" style="background:#6E8F7A">✓</div><div>' +
+    '<div class="tm2">12:03 PM</div><h5>Visit started</h5>' +
+    '<p>' + fmt(L.started, { n:st }) + '</p>' +
+    '<span class="fchip">Scheduled · 12:00–1:00 PM</span></div></div>';
+  var FEED_WAY =
+    '<div class="fitem"><div class="fi" style="background:#E8836A">◎</div><div>' +
+    '<div class="tm2">11:51 AM</div><h5>On the way</h5>' +
+    '<p>' + fmt(L.released, { n:st }) + '</p>' +
+    '<span class="fchip">10 minutes away</span></div></div>';
+  var FEED_DONE =
+    '<div class="fitem"><div class="fi" style="background:#6A8CA6">✓</div><div>' +
+    '<div class="tm2">1:06 PM</div><h5>Visit completed</h5>' +
+    '<p>12:03–1:06 PM · 63 minutes</p>' +
+    '<div class="fli">✓ Had lunch</div><div class="fli">✓ Medication check-in</div>' +
+    '<div class="fli">✓ Home safety check</div><div class="fli warn">⚠ Milk is running low</div>' +
+    '<div style="margin-top:11px"><span class="fchip">63 verified minutes added to hours record</span></div>' +
+    '</div></div>';
+
+  TRIP = [
+    { time:'11:51',
+      ph:'<div class="vc-kick">On the way</div>' +
+         '<p class="vc-title">Address released</p>' +
+         '<p class="vc-sub">' + CO.addr + '</p>' +
+         '<div class="vc-verif">◎ Live location sharing started</div>',
+      tab:'<p class="vc-title">' + fmt(L.onway, { n:st }) + '</p>' +
+          '<p class="vc-sub">About 10 minutes away · lunch together</p>',
+      feed: FEED_WAY },
+
+    { time:'12:02',
+      ph:'<div class="vc-kick">Verify</div>' +
+         '<p class="vc-title" style="margin-bottom:16px">Scan the code at the door</p>' +
+         '<div class="scanbox"><i></i><i></i><i></i><i></i><em></em></div>' +
+         '<p class="vc-sub">Hold the camera over her screen</p>',
+      tab:'<div class="vc-kick">' + fmt(L.showto, { n:st }) + '</div>' +
+          '<div class="qr2" id="qrLive"></div>' +
+          '<p class="vc-sub">Code refreshes every 60 seconds</p>',
+      feed: FEED_WAY },
+
+    { time:'12:04',
+      ph:'<div class="bigtick g">✓</div>' +
+         '<div class="vc-kick">Visit in progress</div>' +
+         '<p class="vc-title">Checked in</p>' +
+         '<p class="vc-sub">Started 12:03 PM</p>' +
+         '<div class="vc-verif">✓ Start verified by QR</div>',
+      tab:'<div class="bigtick b">✓</div>' +
+          '<div class="vc-kick">Visit in progress</div>' +
+          '<p class="vc-title">Enjoy your lunch</p>' +
+          '<p class="vc-sub">' + fmt(L.checkedin, { n:st }) + '</p>',
+      feed: FEED_WAY + FEED_START },
+
+    { time:'1:06',
+      ph:'<div class="bigtick g">✓</div>' +
+         '<div class="vc-kick">Visit completed</div>' +
+         '<p class="vc-title">' + fmt(L.thanks, { n:st }) + '</p>' +
+         '<p class="vc-sub">12:03–1:06 PM · 63 minutes</p>' +
+         '<div class="vc-verif">✓ 63 minutes added to your hours record</div>' +
+         '<a href="#families" class="btn btn-dark" style="width:100%;margin-top:22px">' +
+         'Complete 60-sec report <span class="ar">→</span></a>',
+      tab:'<div class="bigtick b">✓</div>' +
+          '<div class="vc-kick">Visit completed</div>' +
+          '<p class="vc-title">Thank you for sharing lunch</p>' +
+          '<p class="vc-sub">Completed together at 1:06 PM.</p>',
+      feed: FEED_WAY + FEED_START + FEED_DONE }
+  ];
+  tripI = 0;
+}
+
+/* =========================================================================
+   AUTOMATIC MATCHING DEMO
+   ========================================================================= */
+var autoI = 1;
+function autoLines(){ return document.querySelectorAll('#autoFlow .aline'); }
+function resetAuto(){
+  autoI = 1;
+  autoLines().forEach(function(l, i){ l.classList.toggle('done', i === 0); });
+  var r = document.getElementById('autoRes'); if (r){ r.className = 'autoresult'; r.innerHTML = ''; }
+  var b = document.getElementById('autoBtn'); if (b) b.innerHTML = 'Run the match <span class="ar">→</span>';
+}
+function autoStep(){
+  var lines = autoLines();
+  if (autoI >= lines.length){ resetAuto(); return; }
+  lines[autoI].classList.add('done');
+  autoI++;
+  var b = document.getElementById('autoBtn');
+  if (autoI >= lines.length){
+    var s = CO.students.ren;
+    var r = document.getElementById('autoRes');
+    r.className = 'autoresult book on';
+    r.innerHTML = '<b>Mealtime booked</b><p></p>';
+    r.querySelector('p').textContent =
+      fmt(CO.L.booked, { a:s.name, b:CO.neighbours.keiko.name, t:s.time });
+    if (b) b.innerHTML = 'Start over';
+  } else if (b){
+    b.innerHTML = 'Next step <span class="ar">→</span>';
+  }
+}
+function autoDecline(){
+  var lines = autoLines();
+  lines.forEach(function(l, i){ l.classList.toggle('done', i <= 3); });
+  autoI = lines.length;
+  var r = document.getElementById('autoRes');
+  r.className = 'autoresult pass on';
+  r.innerHTML = '<b>Declined — and that is fine</b><p></p>';
+  r.querySelector('p').textContent =
+    'Nobody is obliged to accept. The suggestion simply goes back out, and musubi proposes the next best match.';
+  var b = document.getElementById('autoBtn'); if (b) b.innerHTML = 'Start over';
+}
+
+/* =========================================================================
+   GO
+   ========================================================================= */
+setCountry('en');
+
+</script>
+</body>
+</html>
